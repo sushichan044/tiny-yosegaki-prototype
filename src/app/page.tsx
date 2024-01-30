@@ -1,11 +1,11 @@
-import { Button } from "@mantine/core"
+import SignInButton from "@/features/auth/components/SignInButton"
 
 export default function Home() {
   return (
     <main>
       <div>
         <h1>top</h1>
-        <Button>Login with Twitter</Button>
+        <SignInButton redirectTo="/hello" />
       </div>
     </main>
   )

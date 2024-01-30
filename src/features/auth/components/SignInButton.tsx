@@ -9,8 +9,7 @@ type Props = {
 
 const SignInButton: React.FC<Props> = ({ redirectTo }) => {
   const handleClick = async () => {
-    const { data, error } = await signIn(redirectTo)
-    console.log(data, error)
+    await signIn(redirectTo)
   }
 
   return (

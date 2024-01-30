@@ -1,17 +1,40 @@
 "use server"
 
-import { createActionClient } from "@/lib/supabase/client/action"
-import { cookies } from "next/headers"
+import type { AuthError } from "@supabase/supabase-js"
 
-const signIn = async (redirectTo?: string | undefined) => {
+import { createActionClient } from "@/lib/supabase/client/action"
+import { getSiteUrl } from "@/utils/url"
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
+
+type SignInFunction = (
+  redirectTo?: string | undefined,
+) => Promise<AuthError | void>
+
+const signIn: SignInFunction = async (redirectTo) => {
   const cookie = cookies()
   const supabase = createActionClient(cookie)
-  return await supabase.auth.signInWithOAuth({
+
+  const authCallbackUrl = new URL(
+    "/auth/callback",
+    getSiteUrl({ addTrailingSlash: false }),
+  )
+  if (redirectTo) {
+    authCallbackUrl.searchParams.append("next", redirectTo)
+  }
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
     options: {
-      redirectTo: redirectTo,
+      redirectTo: authCallbackUrl.toString(),
     },
     provider: "twitter",
   })
+  if (error) {
+    console.error(error)
+    return error
+  }
+
+  return redirect(data.url)
 }
 
 export { signIn }
