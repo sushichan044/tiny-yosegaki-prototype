@@ -1,7 +1,7 @@
-import { users } from "@/db/schema/user"
+import { users } from "@/db/schema/users"
 import { boolean, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core"
 
-export const message = pgTable("message", {
+export const messages = pgTable("messages", {
   attachmentFileName: text("attachment_file_name"),
   content: text("content").notNull(),
   createdAt: timestamp("created_at").defaultNow(),

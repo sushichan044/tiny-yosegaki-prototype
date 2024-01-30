@@ -12,6 +12,7 @@
     "deploy:worker": "wrangler deploy --minify worker/index.ts",
     "db:generate": "dotenv -e=.env.local -- drizzle-kit generate:pg",
     "db:drop": "dotenv -e .env.local -- drizzle-kit drop",
+    "db:push": "dotenv -e .env.local -- drizzle-kit push:pg",
     "db:studio": "dotenv -e .env.local -- drizzle-kit studio",
     "lint": "next lint",
     "lint:eslint": "cross-env ESLINT_USE_FLAT_CONFIG=true eslint -c eslint.config.mjs --max-warnings 0 .",
