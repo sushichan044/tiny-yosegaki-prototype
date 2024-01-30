@@ -11,6 +11,8 @@ type SignInFunction = (
   redirectTo?: string | undefined,
 ) => Promise<AuthError | void>
 
+type SignOutFunction = () => Promise<AuthError | void>
+
 const signIn: SignInFunction = async (redirectTo) => {
   const cookie = cookies()
   const supabase = createActionClient(cookie)
@@ -37,4 +39,15 @@ const signIn: SignInFunction = async (redirectTo) => {
   return redirect(data.url)
 }
 
-export { signIn }
+const signOut: SignOutFunction = async () => {
+  const cookie = cookies()
+  const supabase = createActionClient(cookie)
+
+  const { error } = await supabase.auth.signOut()
+  if (error) {
+    console.error(error)
+    return error
+  }
+}
+
+export { signIn, signOut }
