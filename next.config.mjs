@@ -1,4 +1,7 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+// eslint-disable-next-line no-restricted-imports
+import "./src/env.mjs"
 
-export default nextConfig;
+/** @type {import('next').NextConfig} */
+const nextConfig = {}
+
+export default nextConfig

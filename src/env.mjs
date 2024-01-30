@@ -1,4 +1,6 @@
-import { createEnv } from "@t3-oss/env-core"
+//@ts-check
+
+import { createEnv } from "@t3-oss/env-nextjs"
 import { z } from "zod"
 
 export const env = createEnv({
@@ -7,13 +9,6 @@ export const env = createEnv({
     NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
     NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
   },
-
-  /**
-   * The prefix that client-side variables must have. This is enforced both at
-   * a type-level and at runtime.
-   */
-  clientPrefix: "NEXT_PUBLIC_",
-
   /**
    * By default, this library will feed the environment variables directly to
    * the Zod validator.
@@ -33,7 +28,9 @@ export const env = createEnv({
    * What object holds the environment variables at runtime. This is usually
    * `process.env` or `import.meta.env`.
    */
+  // @ts-expect-error passing process.env is allowed
   runtimeEnv: process.env,
-
-  server: {},
+  server: {
+    SUPABASE_CONNECTION_STRING: z.string().min(1),
+  },
 })

@@ -33,6 +33,7 @@
     "**/*.mts",
     "**/*.cts",
     ".next/types/**/*.ts",
+    "src/env.mjs",
   ],
   "exclude": ["node_modules"],
 }

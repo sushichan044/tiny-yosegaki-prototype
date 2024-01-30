@@ -1,6 +1,6 @@
 import type { cookies } from "next/headers"
 
-import { env } from "@/env"
+import { env } from "@/env.mjs"
 import { type CookieOptions, createServerClient } from "@supabase/ssr"
 
 export function createActionClient(cookieStore: ReturnType<typeof cookies>) {

@@ -1,6 +1,6 @@
 import type { cookies } from "next/headers"
 
-import { env } from "@/env"
+import { env } from "@/env.mjs"
 import {
   createBrowserClient as createBrowserClient_,
   createServerClient as createServerClient_,
