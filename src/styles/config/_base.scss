@@ -1,0 +1,14 @@
+@use "./mixins" as mix;
+
+@mixin base-css {
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @supports (text-size-adjust: 100%) {
+    text-size-adjust: 100%;
+  }
+
+  @include mix.budoux;
+  @include mix.smooth-scroll;
+}

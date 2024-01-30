@@ -1,0 +1,35 @@
+@use "./config/base" as base;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  @include base.base-css;
+}
+
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+body {
+  min-height: 100vh;
+
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  font-family:
+    var(--font-line-seed-jp),
+    system-ui,
+    -apple-system,
+    blinkmacsystemfont,
+    "Segoe UI",
+    oxygen,
+    ubuntu,
+    cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+
+  @supports (min-height: 100dvh) {
+    min-height: 100dvh;
+  }
+}
