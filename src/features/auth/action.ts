@@ -1,6 +1,6 @@
 "use server"
 
-import type { AuthError } from "@supabase/supabase-js"
+import type { AuthError, Session } from "@supabase/supabase-js"
 
 import { createActionClient } from "@/lib/supabase/client/action"
 import { getSiteUrl } from "@/utils/url"
@@ -12,6 +12,17 @@ type SignInFunction = (
 ) => Promise<AuthError | void>
 
 type SignOutFunction = () => Promise<AuthError | void>
+
+type GetSessionFunction = () => Promise<
+  | {
+      error: AuthError
+      session: null
+    }
+  | {
+      error: null
+      session: Session | null
+    }
+>
 
 const signIn: SignInFunction = async (redirectTo) => {
   const cookie = cookies()
@@ -50,4 +61,23 @@ const signOut: SignOutFunction = async () => {
   }
 }
 
-export { signIn, signOut }
+const getSession: GetSessionFunction = async () => {
+  const cookie = cookies()
+  const supabase = createActionClient(cookie)
+
+  const {
+    data: { session },
+    error,
+  } = await supabase.auth.getSession()
+  if (error) {
+    console.error(error)
+    return { error, session: null }
+  }
+
+  return {
+    error: null,
+    session: session,
+  }
+}
+
+export { getSession, signIn, signOut }

@@ -1,3 +1,10 @@
+import SignOutButton from "@/features/auth/components/SignOutButton"
+
 export default async function Page() {
-  return <>hello</>
+  return (
+    <>
+      <p>hello</p>
+      <SignOutButton />
+    </>
+  )
 }
