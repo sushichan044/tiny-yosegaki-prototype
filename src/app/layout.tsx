@@ -13,6 +13,10 @@ import "@/styles/globals.scss"
 export const metadata: Metadata = {
   description:
     "La prière 1st Tour 「SPLASH the TONE」 東京振替公演の開催をお祝いする記念寄せ書きWebサイトです！",
+  robots: {
+    follow: false,
+    index: false,
+  },
   title: "La prière 1st Tour記念寄せ書きWebサイト",
 }
 
