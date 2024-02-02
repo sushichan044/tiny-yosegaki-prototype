@@ -20,7 +20,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
-    "staged:eslint": "cross-env ESLINT_USE_FLAT_CONFIG=true eslint -c eslint.config.mjs --max-warnings 0",
+    "staged:eslint": "cross-env ESLINT_USE_FLAT_CONFIG=true eslint -c eslint.config.mjs --max-warnings 0 --no-warn-ignored",
     "staged:format": "prettier --check --ignore-path .gitignore",
     "ncu": "ncu -u --target minor",
     "ncu:dry": "ncu --target minor",
