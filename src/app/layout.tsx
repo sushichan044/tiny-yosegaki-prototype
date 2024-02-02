@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 
 import { FONT_VARIABLE_CLASS } from "@/lib/font"
+import { theme } from "@/theme"
 import { ColorSchemeScript, MantineProvider } from "@mantine/core"
 import { Notifications } from "@mantine/notifications"
-
 // css
 // eslint-disable-next-line perfectionist/sort-imports
 import "@mantine/core/styles.css"
@@ -31,7 +31,7 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body className={FONT_VARIABLE_CLASS}>
-        <MantineProvider>
+        <MantineProvider theme={theme}>
           <Notifications />
           {children}
         </MantineProvider>
