@@ -8,7 +8,7 @@ import Link from "next/link"
 const PostButton = () => {
   return (
     <Button color="nakuru" component={Link} href="/post">
-      投稿する
+      寄せ書きを書く
     </Button>
   )
 }
@@ -21,7 +21,9 @@ const ClientHeader: React.FC<Props> = ({ user }) => {
   return (
     <div className="flex flex-row gap-x-4 h-9 overflow-hidden">
       {user && <UserMenu user={user} />}
-      {user ? <PostButton /> : <LoginButton />}
+      <div className="max-md:hidden">
+        {user ? <PostButton /> : <LoginButton />}
+      </div>
     </div>
   )
 }
