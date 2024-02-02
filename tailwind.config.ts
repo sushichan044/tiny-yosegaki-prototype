@@ -4,6 +4,8 @@ import { withTV } from "tailwind-variants/transformer"
 
 // eslint-disable-next-line no-restricted-imports
 import { contentVisibilityPlugin, pseudoPlugin } from "./plugins/tailwind"
+// eslint-disable-next-line no-restricted-imports
+import { MEMBER_TW_COLORS } from "./src/theme"
 
 const config: Config = {
   content: [
@@ -13,7 +15,11 @@ const config: Config = {
   ],
   plugins: [contentVisibilityPlugin, pseudoPlugin],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        ...MEMBER_TW_COLORS,
+      },
+    },
   },
 }
 
