@@ -1,3 +1,4 @@
+import { upsertUser } from "@/features/messages/user"
 import { createActionClient } from "@/lib/supabase/client/action"
 import { SessionNotFoundError } from "@/lib/supabase/error"
 import { cookies } from "next/headers"
@@ -22,8 +23,23 @@ export async function GET(request: Request) {
   if (error || !session) {
     const err = error ?? new SessionNotFoundError()
     console.error(err)
-    return NextResponse.redirect(`${origin}/auth/auth-code-error`)
+    return NextResponse.redirect(`${origin}/auth/session-error`)
   }
+
+  if (!session.user) {
+    console.error("No user in session")
+    return NextResponse.redirect(`${origin}/auth/session-error`)
+  }
+
+  await upsertUser({
+    avatarUrl: session.user.user_metadata.avatar_url,
+    createdAt: new Date(session.user.created_at),
+    twitterDisplayName: session.user.user_metadata.name,
+    twitterName: session.user.user_metadata.user_name,
+    updatedAt: session.user.updated_at
+      ? new Date(session.user.updated_at)
+      : new Date(),
+  })
 
   return NextResponse.redirect(`${origin}${next}`)
 }
