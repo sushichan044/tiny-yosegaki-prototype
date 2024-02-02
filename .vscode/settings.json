@@ -60,5 +60,6 @@
   "eslint.options": {
     "overrideConfigFile": "eslint.config.mjs"
   },
-  "cSpell.words": ["supabase"]
+  "cSpell.words": ["mantine", "supabase"],
+  "eslint.lintTask.options": ". --cache"
 }
