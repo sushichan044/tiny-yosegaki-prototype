@@ -4516,6 +4516,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"drizzle-zod@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "drizzle-zod@npm:0.5.1"
+  peerDependencies:
+    drizzle-orm: ">=0.23.13"
+    zod: "*"
+  checksum: 3015d195c9e52686afcfbe458386371f1c4eff0c426ff92cb9b28d1ac899bedd95aeefe13c2cb8d71d5355f0c90029c21c0bf15562958b3f3d4024e6e20d5cba
+  languageName: node
+  linkType: hard
+
 "eastasianwidth@npm:^0.2.0":
   version: 0.2.0
   resolution: "eastasianwidth@npm:0.2.0"
@@ -7700,6 +7710,7 @@ __metadata:
     dotenv-cli: "npm:^7.3.0"
     drizzle-kit: "npm:^0.20.13"
     drizzle-orm: "npm:^0.29.3"
+    drizzle-zod: "npm:^0.5.1"
     embla-carousel-react: "npm:^8.0.0-rc21"
     eslint: "npm:^8.56.0"
     eslint-config-flat-gitignore: "npm:^0.1.2"
