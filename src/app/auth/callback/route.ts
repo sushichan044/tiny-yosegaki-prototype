@@ -1,4 +1,4 @@
-import { upsertUser } from "@/features/messages/user"
+import { upsertUser } from "@/features/auth/db"
 import { createActionClient } from "@/lib/supabase/client/action"
 import { SessionNotFoundError } from "@/lib/supabase/error"
 import { cookies } from "next/headers"
