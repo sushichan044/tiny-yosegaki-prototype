@@ -80,4 +80,16 @@ const getSession: GetSessionFunction = async () => {
   }
 }
 
-export { getSession, signIn, signOut }
+const getUser = async () => {
+  const cookie = cookies()
+  const supabase = createActionClient(cookie)
+
+  const { data, error } = await supabase.auth.getUser()
+
+  if (error) {
+    console.error(error)
+  }
+  return { data, error }
+}
+
+export { getSession, getUser, signIn, signOut }
