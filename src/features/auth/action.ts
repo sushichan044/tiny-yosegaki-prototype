@@ -1,6 +1,6 @@
 "use server"
 
-import type { AuthError, Session } from "@supabase/supabase-js"
+import type { AuthError } from "@supabase/supabase-js"
 
 import { createActionClient } from "@/lib/supabase/client/action"
 import { getSiteUrl } from "@/utils/url"
@@ -9,19 +9,18 @@ import { redirect } from "next/navigation"
 
 type SignInFunction = (
   redirectTo?: string | undefined,
-) => Promise<AuthError | void>
+) => Promise<AuthError | never>
 
-type SignOutFunction = () => Promise<AuthError | void>
+type SignOutFunction = () => ReturnType<
+  ReturnType<typeof createActionClient>["auth"]["signOut"]
+>
 
-type GetSessionFunction = () => Promise<
-  | {
-      error: AuthError
-      session: null
-    }
-  | {
-      error: null
-      session: Session | null
-    }
+type GetSessionFunction = () => ReturnType<
+  ReturnType<typeof createActionClient>["auth"]["getSession"]
+>
+
+type GetUserFunction = () => ReturnType<
+  ReturnType<typeof createActionClient>["auth"]["getUser"]
 >
 
 const signIn: SignInFunction = async (redirectTo) => {
@@ -54,42 +53,36 @@ const signOut: SignOutFunction = async () => {
   const cookie = cookies()
   const supabase = createActionClient(cookie)
 
-  const { error } = await supabase.auth.signOut()
-  if (error) {
-    console.error(error)
-    return error
+  const result = await supabase.auth.signOut()
+  if (result.error) {
+    console.error(result.error)
   }
+
+  return result
 }
 
 const getSession: GetSessionFunction = async () => {
   const cookie = cookies()
   const supabase = createActionClient(cookie)
 
-  const {
-    data: { session },
-    error,
-  } = await supabase.auth.getSession()
-  if (error) {
-    console.error(error)
-    return { error, session: null }
+  const result = await supabase.auth.getSession()
+  if (result.error) {
+    console.error(result.error)
   }
 
-  return {
-    error: null,
-    session: session,
-  }
+  return result
 }
 
-const getUser = async () => {
+const getUser: GetUserFunction = async () => {
   const cookie = cookies()
   const supabase = createActionClient(cookie)
 
-  const { data, error } = await supabase.auth.getUser()
-
-  if (error) {
-    console.error(error)
+  const result = await supabase.auth.getUser()
+  if (result.error) {
+    console.error(result.error)
   }
-  return { data, error }
+
+  return result
 }
 
 export { getSession, getUser, signIn, signOut }
