@@ -28,8 +28,12 @@ export const env = createEnv({
    * What object holds the environment variables at runtime. This is usually
    * `process.env` or `import.meta.env`.
    */
-  // @ts-expect-error passing process.env is allowed
-  runtimeEnv: process.env,
+  runtimeEnv: {
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    SUPABASE_CONNECTION_STRING: process.env.SUPABASE_CONNECTION_STRING,
+  },
   server: {
     SUPABASE_CONNECTION_STRING: z.string().min(1),
   },
