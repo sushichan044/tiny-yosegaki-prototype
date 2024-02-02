@@ -1,5 +1,4 @@
 import UserHeader from "@/components/layouts/Header/UserHeader"
-import { getUser } from "@/features/auth/action"
 import { Text } from "@mantine/core"
 import Link from "next/link"
 import { tv } from "tailwind-variants"
@@ -11,11 +10,7 @@ const styles = tv({
   },
 })()
 
-const Header = async () => {
-  const {
-    data: { user },
-  } = await getUser()
-
+const Header = () => {
   return (
     <header className={styles.wrapper()}>
       <div className={styles.innerWrapper()}>
@@ -24,7 +19,7 @@ const Header = async () => {
             よせがき
           </Text>
         </div>
-        <UserHeader user={user} />
+        <UserHeader />
       </div>
     </header>
   )

@@ -1,7 +1,6 @@
-import type { User } from "@supabase/supabase-js"
-
 import LoginButton from "@/components/layouts/Header/LoginButton"
 import UserMenu from "@/components/layouts/Header/UserMenu"
+import { getUser } from "@/features/auth/action"
 import { Button } from "@mantine/core"
 import Link from "next/link"
 
@@ -13,11 +12,11 @@ const PostButton = () => {
   )
 }
 
-type Props = {
-  user: User | null
-}
+const UserHeader = async () => {
+  const {
+    data: { user },
+  } = await getUser()
 
-const ClientHeader: React.FC<Props> = ({ user }) => {
   return (
     <div className="flex flex-row gap-x-4 h-9 overflow-hidden">
       {user && <UserMenu user={user} />}
@@ -28,4 +27,4 @@ const ClientHeader: React.FC<Props> = ({ user }) => {
   )
 }
 
-export default ClientHeader
+export default UserHeader
