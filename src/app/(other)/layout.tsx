@@ -1,4 +1,6 @@
+import Footer from "@/components/layouts/Footer"
 import Header from "@/components/layouts/Header"
+import { Container } from "@mantine/core"
 
 export default function NormalLayout({
   children,
@@ -6,10 +8,12 @@ export default function NormalLayout({
   children: React.ReactNode
 }) {
   return (
-    <main className="bg-gray-200 min-h-screen">
+    <>
       <Header />
-      {children}
-      <footer>footer</footer>
-    </main>
+      <main className="flex-1 bg-nakuru-50/50">
+        <Container>{children}</Container>
+      </main>
+      <Footer />
+    </>
   )
 }

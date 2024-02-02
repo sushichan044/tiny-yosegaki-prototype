@@ -286,6 +286,9 @@ html:has(dialog[open]) {
 
 body {
   min-height: 100vh;
+  color: #000000d1;
+  display: flex;
+  flex-flow: column nowrap;
 
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   font-family:
@@ -300,10 +303,4 @@ body {
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
-
-  @supports (min-height: 100dvh) {
-    min-height: 100dvh;
-  }
-
-  color: #000000d1;
 }
