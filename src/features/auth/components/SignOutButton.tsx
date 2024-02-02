@@ -9,7 +9,7 @@ const SignOutButton = () => {
   const [isPending, setIsPending] = useState(false)
   const handleClick = async () => {
     setIsPending(true)
-    const error = await signOut()
+    const { error } = await signOut()
     setIsPending(false)
     if (error) {
       notifications.show({
