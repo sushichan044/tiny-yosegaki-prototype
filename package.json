@@ -14,6 +14,7 @@
     "db:drop": "dotenv -e .env.local -- drizzle-kit drop",
     "db:push": "dotenv -e .env.local -- drizzle-kit push:pg",
     "db:studio": "dotenv -e .env.local -- drizzle-kit studio",
+    "tsx": "dotenv -e .env.local -- tsx",
     "lint": "next lint",
     "lint:eslint": "cross-env ESLINT_USE_FLAT_CONFIG=true eslint -c eslint.config.mjs --max-warnings 0 .",
     "format": "prettier --write --ignore-path .gitignore .",
