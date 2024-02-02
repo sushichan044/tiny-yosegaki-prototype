@@ -5,7 +5,7 @@ export default function Home() {
     <main>
       <div>
         <h1>top</h1>
-        <SignInButton redirectTo="/hello" />
+        <SignInButton redirectTo="/post" />
       </div>
     </main>
   )
