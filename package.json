@@ -42,6 +42,7 @@
     "@supabase/ssr": "^0.0.10",
     "@supabase/supabase-js": "^2.39.3",
     "@t3-oss/env-nextjs": "^0.8.0",
+    "@tabler/icons-react": "^2.47.0",
     "clsx": "^2.1.0",
     "dotenv": "^16.4.1",
     "dotenv-cli": "^7.3.0",
