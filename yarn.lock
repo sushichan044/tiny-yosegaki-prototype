@@ -2025,15 +2025,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/ssr@npm:^0.0.10":
-  version: 0.0.10
-  resolution: "@supabase/ssr@npm:0.0.10"
+"@supabase/ssr@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@supabase/ssr@npm:0.1.0"
   dependencies:
     cookie: "npm:^0.5.0"
     ramda: "npm:^0.29.0"
   peerDependencies:
     "@supabase/supabase-js": ^2.33.1
-  checksum: 86c462ce4f7cd868755533d9a719ad639a9ec708fc811d1a9ebb1df39a5f4bc0f8160d9134fb98763e866e9df8fdec8a3e5edf144daf05b1f9e8f8acb5ba8e69
+  checksum: 1ae3459cbdd06af01475dbeca7375dc2d5ac5e6534244ddfcc1fbdaae90af766a86fdc7ed660b9f205a9802265f0f04baeaab8801fd4d7cf1e74dc5218325bae
   languageName: node
   linkType: hard
 
@@ -7686,7 +7686,7 @@ __metadata:
     "@mantine/notifications": "npm:^7.5.0"
     "@mantine/nprogress": "npm:^7.5.0"
     "@radix-ui/react-slot": "npm:^1.0.2"
-    "@supabase/ssr": "npm:^0.0.10"
+    "@supabase/ssr": "npm:^0.1.0"
     "@supabase/supabase-js": "npm:^2.39.3"
     "@t3-oss/env-nextjs": "npm:^0.8.0"
     "@tabler/icons-react": "npm:^2.47.0"

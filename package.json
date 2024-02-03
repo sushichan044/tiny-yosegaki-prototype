@@ -40,7 +40,7 @@
     "@mantine/notifications": "^7.5.0",
     "@mantine/nprogress": "^7.5.0",
     "@radix-ui/react-slot": "^1.0.2",
-    "@supabase/ssr": "^0.0.10",
+    "@supabase/ssr": "^0.1.0",
     "@supabase/supabase-js": "^2.39.3",
     "@t3-oss/env-nextjs": "^0.8.0",
     "@tabler/icons-react": "^2.47.0",
