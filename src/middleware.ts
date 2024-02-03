@@ -1,4 +1,5 @@
 import { env } from "@/env.mjs"
+import { Foras, Memory, deflate, inflate } from "@hazae41/foras"
 import { type CookieOptions, createServerClient } from "@supabase/ssr"
 import { type NextRequest, NextResponse } from "next/server"
 
@@ -14,8 +15,13 @@ export async function middleware(request: NextRequest) {
     env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
       cookies: {
-        get(name: string) {
-          return request.cookies.get(name)?.value
+        async get(name: string) {
+          await Foras.initBundledOnce()
+          const raw = request.cookies.get(name)?.value
+          if (!raw) return undefined
+          const bytes = new TextEncoder().encode(raw)
+          const arr = inflate(new Memory(bytes)).copyAndDispose()
+          return new TextDecoder().decode(arr)
         },
         remove(name: string, options: CookieOptions) {
           request.cookies.set({
@@ -34,10 +40,14 @@ export async function middleware(request: NextRequest) {
             ...options,
           })
         },
-        set(name: string, value: string, options: CookieOptions) {
+        async set(name: string, value: string, options: CookieOptions) {
+          await Foras.initBundledOnce()
+          const bytes = new TextEncoder().encode(value)
+          const arr = deflate(new Memory(bytes)).copyAndDispose()
+          const compressed = new TextDecoder().decode(arr)
           request.cookies.set({
             name,
-            value,
+            value: compressed,
             ...options,
           })
           response = NextResponse.next({
@@ -47,7 +57,7 @@ export async function middleware(request: NextRequest) {
           })
           response.cookies.set({
             name,
-            value,
+            value: compressed,
             ...options,
           })
         },

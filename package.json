@@ -34,6 +34,7 @@
     ]
   },
   "dependencies": {
+    "@hazae41/foras": "^2.1.4",
     "@mantine/carousel": "^7.5.0",
     "@mantine/core": "^7.5.0",
     "@mantine/hooks": "^7.5.0",
@@ -44,6 +45,7 @@
     "@supabase/supabase-js": "^2.39.3",
     "@t3-oss/env-nextjs": "^0.8.0",
     "@tabler/icons-react": "^2.47.0",
+    "@types/cookie": "^0.6.0",
     "clsx": "^2.1.0",
     "dotenv": "^16.4.1",
     "dotenv-cli": "^7.3.0",
