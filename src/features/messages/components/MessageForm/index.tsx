@@ -1,4 +1,5 @@
-import { getUser } from "@/features/auth/action"
+import type { User } from "@supabase/supabase-js"
+
 import MessageFormInput from "@/features/messages/components/MessageForm/Form"
 import { getMessageByUser } from "@/features/messages/db"
 import { unstable_cache } from "next/cache"
@@ -9,16 +10,11 @@ const getCachedMessageByUser = (userId: string) => {
   })()
 }
 
-const MessageForm = async () => {
-  const {
-    data: { user },
-  } = await getUser()
+type Props = {
+  user: User
+}
 
-  if (user == null) {
-    // use mantine alert
-    return <div>ログインしてください</div>
-  }
-
+const MessageForm: React.FC<Props> = async ({ user }) => {
   const userMessage = await getCachedMessageByUser(user.id)
   console.log(userMessage)
 

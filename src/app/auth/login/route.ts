@@ -1,13 +1,5 @@
-import { getSession, signIn } from "@/features/auth/action"
-import { NextResponse } from "next/server"
+import { signIn } from "@/features/auth/action"
 
 export async function GET() {
-  const {
-    data: { session },
-  } = await getSession()
-
-  if (session?.user) {
-    return NextResponse.redirect("/")
-  }
   await signIn()
 }
