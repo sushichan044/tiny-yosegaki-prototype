@@ -1,5 +1,5 @@
-import { getUser } from "@/features/auth/action"
 import MessageForm from "@/features/messages/components/MessageForm"
+import { getUser } from "@/features/supabase/action"
 import { Title } from "@mantine/core"
 import { redirect } from "next/navigation"
 
