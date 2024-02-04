@@ -1,0 +1,34 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1706642108269,
+      "tag": "0000_fearless_omega_flight",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1706884247782,
+      "tag": "0001_absurd_champions",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1706885485898,
+      "tag": "0002_eminent_sentry",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1706886445713,
+      "tag": "0003_chunky_night_thrasher",
+      "breakpoints": true
+    }
+  ]
+}
