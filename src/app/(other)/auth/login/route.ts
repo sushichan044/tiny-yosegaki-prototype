@@ -1,4 +1,4 @@
-import { getUser, signIn } from "@/features/auth/action"
+import { getUser, signIn } from "@/features/supabase/action"
 import { NextResponse } from "next/server"
 
 export async function GET() {

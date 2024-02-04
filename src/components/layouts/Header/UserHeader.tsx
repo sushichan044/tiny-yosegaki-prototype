@@ -1,6 +1,6 @@
 import LoginButton from "@/components/layouts/Header/LoginButton"
 import UserMenu from "@/components/layouts/Header/UserMenu"
-import { getUser } from "@/features/auth/action"
+import { getUser } from "@/features/supabase/action"
 import { Button } from "@mantine/core"
 import Link from "next/link"
 

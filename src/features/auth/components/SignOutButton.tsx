@@ -1,6 +1,6 @@
 "use client"
 
-import { signOut } from "@/features/auth/action"
+import { signOut } from "@/features/supabase/action"
 import { Button } from "@mantine/core"
 import { notifications } from "@mantine/notifications"
 import { useState } from "react"

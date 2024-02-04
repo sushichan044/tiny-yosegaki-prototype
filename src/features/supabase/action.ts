@@ -15,10 +15,6 @@ type SignOutFunction = () => ReturnType<
   ReturnType<typeof createActionClient>["auth"]["signOut"]
 >
 
-type GetSessionFunction = () => ReturnType<
-  ReturnType<typeof createActionClient>["auth"]["getSession"]
->
-
 type GetUserFunction = () => ReturnType<
   ReturnType<typeof createActionClient>["auth"]["getUser"]
 >
@@ -61,18 +57,6 @@ const signOut: SignOutFunction = async () => {
   return result
 }
 
-const getSession: GetSessionFunction = async () => {
-  const cookie = cookies()
-  const supabase = createActionClient(cookie)
-
-  const result = await supabase.auth.getSession()
-  if (result.error) {
-    console.error(result.error)
-  }
-
-  return result
-}
-
 const getUser: GetUserFunction = async () => {
   const cookie = cookies()
   const supabase = createActionClient(cookie)
@@ -85,4 +69,4 @@ const getUser: GetUserFunction = async () => {
   return result
 }
 
-export { getSession, getUser, signIn, signOut }
+export { getUser, signIn, signOut }

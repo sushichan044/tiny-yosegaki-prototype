@@ -1,6 +1,6 @@
 "use client"
 
-import { signOut } from "@/features/auth/action"
+import { signOut } from "@/features/supabase/action"
 import { MenuItem } from "@mantine/core"
 import { IconLogout } from "@tabler/icons-react"
 

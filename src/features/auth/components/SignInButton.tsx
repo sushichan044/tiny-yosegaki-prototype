@@ -1,6 +1,6 @@
 "use client"
 
-import { signIn } from "@/features/auth/action"
+import { signIn } from "@/features/supabase/action"
 import { Button } from "@mantine/core"
 import { IconBrandTwitter } from "@tabler/icons-react"
 import { useState } from "react"
