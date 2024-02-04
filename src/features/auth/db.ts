@@ -1,9 +1,8 @@
 import { db } from "@/db"
 import { UserInsertSchema, users } from "@/db/schema/users"
-import { eq, sql } from "drizzle-orm"
 
 const upsertUser = async (user: typeof users.$inferInsert) => {
-  const res = UserInsertSchema.safeParse(user)
+  const res = await UserInsertSchema.safeParseAsync(user)
   if (!res.success) {
     throw new Error("Invalid user")
   }
@@ -26,10 +25,13 @@ const upsertUser = async (user: typeof users.$inferInsert) => {
   }
 }
 
-const getUserPrepared = db
-  .select()
-  .from(users)
-  .where(eq(users.id, sql.placeholder("id")))
-  .prepare("get_user_prepared")
+const getUser = async (userId: string) => {
+  const user = await db.query.users.findFirst({
+    where: (users, { eq }) => {
+      return eq(users.id, userId)
+    },
+  })
+  return user
+}
 
-export { getUserPrepared, upsertUser }
+export { getUser, upsertUser }
