@@ -18,4 +18,10 @@ type IntRange<Min extends number, Max extends number> =
       : never
     : never
 
+const safeParseInt = (value: string): number | undefined => {
+  const parsed = parseInt(value, 10)
+  return isNaN(parsed) ? undefined : parsed
+}
+
+export { safeParseInt }
 export type { Enumerate, IntRange, NonNegativeInteger }
