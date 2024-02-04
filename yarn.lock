@@ -1127,6 +1127,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hookform/resolvers@npm:^3.3.4":
+  version: 3.3.4
+  resolution: "@hookform/resolvers@npm:3.3.4"
+  peerDependencies:
+    react-hook-form: ^7.0.0
+  checksum: 10c0/f7a5b8ba59cbb0859e7a212bd5cbcbc70bbdddd21d4fbe9f4a96d149b5756470cb29857a50334d8c1c64392e21007ccf5288d26aa407431784d4006a2570cb36
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.13":
   version: 0.11.14
   resolution: "@humanwhocodes/config-array@npm:0.11.14"
@@ -7612,6 +7621,7 @@ __metadata:
     "@cloudflare/workers-types": "npm:^4.20240129.0"
     "@eslint/eslintrc": "npm:^3.0.0"
     "@eslint/js": "npm:^8.56.0"
+    "@hookform/resolvers": "npm:^3.3.4"
     "@mantine/carousel": "npm:^7.5.1"
     "@mantine/core": "npm:^7.5.1"
     "@mantine/hooks": "npm:^7.5.1"
@@ -7670,6 +7680,7 @@ __metadata:
     prettier: "npm:^3.2.4"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
+    react-hook-form: "npm:^7.50.0"
     sass: "npm:^1.70.0"
     sharp: "npm:^0.33.2"
     tailwind-merge: "npm:^2.2.1"
@@ -9845,6 +9856,15 @@ __metadata:
   peerDependencies:
     react: ^18.2.0
   checksum: 10c0/66dfc5f93e13d0674e78ef41f92ed21dfb80f9c4ac4ac25a4b51046d41d4d2186abc915b897f69d3d0ebbffe6184e7c5876f2af26bfa956f179225d921be713a
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.50.0":
+  version: 7.50.0
+  resolution: "react-hook-form@npm:7.50.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: 10c0/632d02590bb912d5b1bb3102263be06cfef1918146a79925284c0874da48c5080132a819f4083682e8156956f88329ddc266eb4e5c75b6fcf3fe642dbd4db499
   languageName: node
   linkType: hard
 
