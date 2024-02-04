@@ -7,6 +7,7 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core"
+import { createInsertSchema } from "drizzle-zod"
 
 export const messages = pgTable(
   "messages",
@@ -29,3 +30,8 @@ export const messages = pgTable(
     }
   },
 )
+
+export type MessageInsert = typeof messages.$inferInsert
+export type MessageSelect = typeof messages.$inferSelect
+
+export const MessageInsertSchema = createInsertSchema(messages)

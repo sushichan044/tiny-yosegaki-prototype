@@ -10,4 +10,7 @@ export const users = pgTable("users", {
   updatedAt: timestamp("updated_at").defaultNow(),
 })
 
+export type UserInsert = typeof users.$inferInsert
+export type UserSelect = typeof users.$inferSelect
+
 export const UserInsertSchema = createInsertSchema(users)

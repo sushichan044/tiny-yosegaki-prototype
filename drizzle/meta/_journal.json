@@ -29,6 +29,13 @@
       "when": 1706886445713,
       "tag": "0003_chunky_night_thrasher",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1707028385941,
+      "tag": "0004_dear_payback",
+      "breakpoints": true
     }
   ]
 }
