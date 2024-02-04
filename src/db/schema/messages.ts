@@ -12,6 +12,8 @@ export const messages = pgTable(
   "messages",
   {
     attachmentFileName: text("attachment_file_name"),
+    authorAvatarUrl: text("author_avatar_url").notNull(),
+    authorName: text("author_name").notNull(),
     content: text("content").notNull(),
     createdAt: timestamp("created_at").defaultNow(),
     id: uuid("id").defaultRandom().primaryKey(),
