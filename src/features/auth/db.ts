@@ -20,7 +20,7 @@ const upsertUser = async (user: typeof users.$inferInsert) => {
         target: users.userId,
       })
   } catch (err) {
-    console.error(err)
+    console.error("upsertUser", err)
   }
 }
 

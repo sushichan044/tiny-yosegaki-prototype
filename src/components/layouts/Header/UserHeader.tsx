@@ -1,5 +1,5 @@
 import UserMenu from "@/components/layouts/Header/UserMenu"
-import { getSupaBaseAuthUser } from "@/features/supabase/action"
+import { getUser } from "@/features/users/db"
 import { Button } from "@mantine/core"
 import Link from "next/link"
 
@@ -20,9 +20,7 @@ const SignInButton = () => {
 }
 
 const UserHeader = async () => {
-  const {
-    data: { user },
-  } = await getSupaBaseAuthUser()
+  const { data: user } = await getUser()
 
   return (
     <div className="flex flex-row gap-x-4 h-9 overflow-hidden">
