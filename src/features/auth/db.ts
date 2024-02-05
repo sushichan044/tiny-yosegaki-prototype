@@ -13,6 +13,7 @@ const upsertUser = async (user: typeof users.$inferInsert) => {
       .values(res.data)
       .onConflictDoUpdate({
         set: {
+          twitterId: res.data.twitterId,
           updatedAt: new Date(),
           userName: res.data.userName,
         },
