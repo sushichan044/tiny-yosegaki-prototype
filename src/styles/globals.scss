@@ -304,6 +304,10 @@ body {
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
+
+  @supports (min-height: 100dvh) {
+    min-height: 100dvh;
+  }
 }
 
 * {
