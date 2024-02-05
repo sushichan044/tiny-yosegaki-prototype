@@ -1,3 +1,4 @@
+import { Noto_Sans_JP } from "next/font/google"
 import localFont from "next/font/local"
 
 //https://chocolat5.com/ja/tips/nextjs-13-next-font
@@ -32,7 +33,14 @@ const LINE_SEED_JP = localFont({
   variable: "--font-line-seed-jp",
 })
 
-const fonts = [LINE_SEED_JP]
+const NOTO_SANS_JP = Noto_Sans_JP({
+  display: "swap",
+  subsets: ["latin"],
+  variable: "--font-noto-sans-jp",
+  weight: ["300", "500", "700"],
+})
+
+const fonts = [NOTO_SANS_JP]
 const FONT_VARIABLE_CLASS = fonts.map((font) => font.variable).join(" ")
 
-export { FONT_VARIABLE_CLASS, LINE_SEED_JP }
+export { FONT_VARIABLE_CLASS, LINE_SEED_JP, NOTO_SANS_JP }
