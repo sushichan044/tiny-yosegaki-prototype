@@ -11,7 +11,9 @@ export default function NormalLayout({
     <>
       <Header />
       <main className="flex-1 bg-white">
-        <Container size="sm">{children}</Container>
+        <Container className="mt-12" size="sm">
+          {children}
+        </Container>
       </main>
       <Footer />
     </>
