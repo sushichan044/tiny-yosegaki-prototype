@@ -9,5 +9,5 @@ export default {
   },
   driver: "pg",
   out: "./drizzle",
-  schema: "./src/db/schema/*",
+  schema: "./src/db/schema/index.ts",
 } satisfies Config

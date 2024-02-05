@@ -1,16 +1,27 @@
+import { messages } from "@/db/schema/messages"
+import { projects } from "@/db/schema/projects"
+import { relations } from "drizzle-orm"
 import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core"
-import { createInsertSchema } from "drizzle-zod"
+import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 
-export const users = pgTable("users", {
-  avatarUrl: text("avatar_url").notNull(),
+const users = pgTable("users", {
   createdAt: timestamp("created_at").defaultNow(),
-  id: uuid("id").defaultRandom().primaryKey(),
-  twitterDisplayName: text("twitter_display_name").notNull(),
-  twitterName: text("twitter_name").notNull(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  // avatar url will got from userId
+  userId: uuid("user_id").defaultRandom().primaryKey(),
+  userName: text("user_name").notNull(),
 })
 
-export type UserInsert = typeof users.$inferInsert
-export type UserSelect = typeof users.$inferSelect
+const usersRelations = relations(users, ({ many }) => ({
+  messages: many(messages),
+  projects: many(projects),
+}))
 
-export const UserInsertSchema = createInsertSchema(users)
+const UserInsertSchema = createInsertSchema(users)
+const UserSelectSchema = createSelectSchema(users)
+
+type UserInsert = typeof users.$inferInsert
+type UserSelect = typeof users.$inferSelect
+
+export { UserInsertSchema, UserSelectSchema, users, usersRelations }
+export type { UserInsert, UserSelect }
