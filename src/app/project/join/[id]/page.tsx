@@ -1,5 +1,4 @@
 import { getProject } from "@/features/projects/db"
-import { Title } from "@mantine/core"
 import { notFound } from "next/navigation"
 
 type ProjectParams = { params: { id: string } }
@@ -10,11 +9,5 @@ export default async function Page({ params }: ProjectParams) {
     notFound()
   }
 
-  return (
-    <>
-      <div>
-        <Title order={1}>{project.projectName}</Title>
-      </div>
-    </>
-  )
+  return <></>
 }
