@@ -13,12 +13,10 @@ const upsertUser = async (user: typeof users.$inferInsert) => {
       .values(res.data)
       .onConflictDoUpdate({
         set: {
-          avatarUrl: res.data.avatarUrl,
-          twitterDisplayName: res.data.twitterDisplayName,
-          twitterName: res.data.twitterName,
-          updatedAt: res.data.updatedAt,
+          updatedAt: new Date(),
+          userName: res.data.userName,
         },
-        target: users.id,
+        target: users.userId,
       })
   } catch (err) {
     console.error(err)
@@ -28,7 +26,7 @@ const upsertUser = async (user: typeof users.$inferInsert) => {
 const getUser = async (userId: string) => {
   const user = await db.query.users.findFirst({
     where: (users, { eq }) => {
-      return eq(users.id, userId)
+      return eq(users.userId, userId)
     },
   })
   return user

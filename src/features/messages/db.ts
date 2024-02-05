@@ -7,7 +7,7 @@ const getMessageByUser = async (
 ): Promise<{ data: MessageSelect | null }> => {
   const message = await db.query.messages.findFirst({
     where: (messages, { eq }) => {
-      return eq(messages.userId, userId)
+      return eq(messages.authorId, userId)
     },
   })
   return {
@@ -18,7 +18,7 @@ const getMessageByUser = async (
 const getAllMessages = async (): Promise<{ data: MessageSelect[] }> => {
   const messages = await db.query.messages.findMany({
     where(message, { eq }) {
-      return eq(message.isAccepted, true)
+      return eq(message.shouldDisplay, true)
     },
   })
   return {

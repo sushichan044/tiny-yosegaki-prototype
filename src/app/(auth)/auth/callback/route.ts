@@ -41,14 +41,8 @@ export async function GET(request: Request) {
   }
 
   await upsertUser({
-    avatarUrl: session.user.user_metadata.avatar_url,
-    createdAt: new Date(session.user.created_at),
-    id: session.user.id,
-    twitterDisplayName: session.user.user_metadata.name,
-    twitterName: session.user.user_metadata.user_name,
-    updatedAt: session.user.updated_at
-      ? new Date(session.user.updated_at)
-      : new Date(),
+    updatedAt: new Date(),
+    userName: session.user.user_metadata.full_name,
   })
 
   return NextResponse.redirect(`${origin}${next}`)
