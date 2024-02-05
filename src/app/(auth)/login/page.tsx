@@ -1,8 +1,14 @@
+import Login from "@/features/auth/components/Login"
+import { VisuallyHidden } from "@mantine/core"
+
 export default function Page() {
   return (
-    <>
-      <h1>Login</h1>
-      <p>Sign in to your account with Twitter</p>
-    </>
+    <div>
+      <VisuallyHidden>
+        <h1>ログイン</h1>
+      </VisuallyHidden>
+      <div className="min-h-[20vh]" />
+      <Login />
+    </div>
   )
 }

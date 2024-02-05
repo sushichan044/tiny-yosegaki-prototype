@@ -1,12 +1,12 @@
 import MessageForm from "@/features/messages/components/MessageForm"
-import { getUser } from "@/features/supabase/action"
+import { getSupaBaseAuthUser } from "@/features/supabase/action"
 import { Title } from "@mantine/core"
 import { redirect } from "next/navigation"
 
 export default async function Page() {
   const {
     data: { user },
-  } = await getUser()
+  } = await getSupaBaseAuthUser()
   if (user == null) {
     redirect("/")
   }

@@ -43,6 +43,7 @@ export async function GET(request: Request) {
   await upsertUser({
     twitterId: session.user.user_metadata.user_name,
     updatedAt: new Date(),
+    userId: session.user.id,
     userName: session.user.user_metadata.full_name,
   })
 

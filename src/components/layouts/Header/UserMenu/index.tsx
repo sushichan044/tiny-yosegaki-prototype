@@ -12,7 +12,7 @@ import {
   Skeleton,
   Text,
 } from "@mantine/core"
-import { IconPencil } from "@tabler/icons-react"
+import { IconPencil, IconUser } from "@tabler/icons-react"
 import Link from "next/link"
 
 type Props = {
@@ -47,6 +47,9 @@ const UserMenu: React.FC<Props> = ({ user: { user_metadata } }) => {
           <Text size="sm">Twitterでログイン中</Text>
         </MenuLabel>
         <MenuDivider />
+        <MenuItem leftSection={<IconUser stroke={1} />}>
+          <Link href="/account">アカウント情報</Link>
+        </MenuItem>
         <MenuItem leftSection={<IconPencil stroke={1} />}>
           <Link href="/post">寄せ書きを書く</Link>
         </MenuItem>

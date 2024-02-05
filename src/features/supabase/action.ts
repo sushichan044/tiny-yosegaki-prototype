@@ -57,7 +57,7 @@ const signOut: SignOutFunction = async () => {
   return result
 }
 
-const getUser: GetUserFunction = async () => {
+const getSupaBaseAuthUser: GetUserFunction = async () => {
   const cookie = cookies()
   const supabase = createActionClient(cookie)
 
@@ -69,4 +69,4 @@ const getUser: GetUserFunction = async () => {
   return result
 }
 
-export { getUser, signIn, signOut }
+export { getSupaBaseAuthUser, signIn, signOut }

@@ -10,8 +10,8 @@ export default function NormalLayout({
   return (
     <>
       <Header />
-      <main className="flex-1 bg-nakuru-50/50">
-        <Container>{children}</Container>
+      <main className="flex-1 bg-white">
+        <Container size="sm">{children}</Container>
       </main>
       <Footer />
     </>
