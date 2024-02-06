@@ -1,8 +1,6 @@
-import type { ArgumentsType } from "vitest"
-
 import sharp from "sharp"
 
-type ConvertToPng = (...args: ArgumentsType<typeof sharp>) => Promise<Buffer>
+type ConvertToPng = (...args: Parameters<typeof sharp>) => Promise<Buffer>
 
 const convertToPng: ConvertToPng = async (...args) => {
   const pipeline = sharp(...args)
