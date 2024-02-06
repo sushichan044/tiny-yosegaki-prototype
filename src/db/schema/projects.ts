@@ -1,7 +1,14 @@
 import { messages } from "@/db/schema/messages"
 import { users } from "@/db/schema/users"
 import { relations } from "drizzle-orm"
-import { index, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core"
+import {
+  boolean,
+  index,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+} from "drizzle-orm/pg-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 
 const projects = pgTable(
@@ -12,6 +19,7 @@ const projects = pgTable(
       .references(() => users.userId),
     createdAt: timestamp("created_at").defaultNow(),
     deadLineDate: timestamp("dead_line_date").notNull(),
+    hasThumbnail: boolean("has_thumbnail").notNull().default(false),
     projectDescription: text("project_description").notNull(),
     projectId: uuid("project_id").defaultRandom().primaryKey(),
     projectName: text("project_name").notNull(),

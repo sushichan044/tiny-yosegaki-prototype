@@ -11,6 +11,7 @@ const messages = pgTable("messages", {
   content: text("content").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   displayName: text("display_name").notNull(),
+  hasAttachment: boolean("has_attachment").notNull().default(false),
   messageId: uuid("message_id").defaultRandom().primaryKey(),
   projectId: uuid("project_id")
     .notNull()
