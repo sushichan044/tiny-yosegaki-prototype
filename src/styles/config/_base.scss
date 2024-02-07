@@ -1,7 +1,7 @@
 @use "./mixins" as mix;
 
 @mixin base-css {
-  font-feature-settings: "palt";
+  // font-feature-settings: "palt";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 

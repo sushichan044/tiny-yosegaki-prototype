@@ -294,16 +294,8 @@ body {
   font-family:
     // var(--font-noto-sans-jp),
     // var(--font-line-seed-jp),
-    system-ui,
-    -apple-system,
-    blinkmacsystemfont,
-    "Segoe UI",
-    oxygen,
-    ubuntu,
-    cantarell,
-    "Open Sans",
-    "Helvetica Neue",
-    sans-serif;
+    -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans", Meiryo, sans-serif, "Segoe UI Emoji";
 
   @supports (min-height: 100dvh) {
     min-height: 100dvh;
