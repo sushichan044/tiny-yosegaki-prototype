@@ -15,7 +15,7 @@ const Setting: React.FC<Props> = ({ user }) => {
       <section>
         <Title order={2}>プロフィールの編集</Title>
         <Space h="1.5rem" />
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-x-4">
           <AvatarManager userId={user.userId} />
           <Divider orientation="vertical" />
           <div className="flex-1">
