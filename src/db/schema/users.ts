@@ -3,13 +3,21 @@ import type { z } from "zod"
 import { messages } from "@/db/schema/messages"
 import { projects } from "@/db/schema/projects"
 import { relations } from "drizzle-orm"
-import { index, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core"
+import {
+  boolean,
+  index,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+} from "drizzle-orm/pg-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 
 const users = pgTable(
   "users",
   {
     createdAt: timestamp("created_at").defaultNow(),
+    showTwitterOnProfile: boolean("show_twitter_on_profile").default(true),
     twitterId: text("twitter_id").unique(),
     updatedAt: timestamp("updated_at").defaultNow(),
     // avatar url will got from userId

@@ -57,6 +57,7 @@ const upsertUser: UpsertUserFunction = async (user) => {
       .values(res.data)
       .onConflictDoUpdate({
         set: {
+          showTwitterOnProfile: res.data.showTwitterOnProfile,
           twitterId: res.data.twitterId,
           updatedAt: new Date(),
           userName: res.data.userName,

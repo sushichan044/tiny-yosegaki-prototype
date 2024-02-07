@@ -5,7 +5,7 @@ import type { Control, SubmitHandler } from "react-hook-form"
 
 import { updateUserProfile } from "@/features/users/action"
 import { useProfileForm } from "@/features/users/setting/useProfileForm"
-import { Button, TextInput } from "@mantine/core"
+import { Button, Switch, Text, TextInput } from "@mantine/core"
 import { notifications } from "@mantine/notifications"
 import { IconX } from "@tabler/icons-react"
 import { useCallback } from "react"
@@ -37,6 +37,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   const onSubmit: SubmitHandler<UserUpdate> = useCallback(
     async (data) => {
       const { error } = await updateUserProfile({
+        showTwitterOnProfile: data.showTwitterOnProfile,
         userId: user.userId,
         userName: data.userName,
       })
@@ -67,9 +68,17 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           render={({ field, fieldState: { error } }) => (
             <TextInput
               data-1p-ignore
-              description="寄せ書きに表示されます"
+              description={
+                <Text size="sm" span>
+                  この名前は寄せ書きに表示されます。
+                </Text>
+              }
               error={error?.message}
-              label="表示名"
+              label={
+                <Text fw="bold" span>
+                  表示名
+                </Text>
+              }
               required
               type="text"
               {...field}
@@ -78,6 +87,29 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           rules={{
             required: true,
           }}
+        />
+        <Controller
+          control={control}
+          name="showTwitterOnProfile"
+          render={({ field: { value, ...rest } }) => (
+            <Switch
+              checked={value === null ? undefined : value}
+              color="nakuru"
+              description={
+                <Text size="sm" span>
+                  連携されたTwitterアカウント: @{user.twitterId}
+                </Text>
+              }
+              label={
+                <Text fw="bold" span>
+                  Twitterアカウントをプロフィールに表示する
+                </Text>
+              }
+              labelPosition="left"
+              size="md"
+              {...rest}
+            />
+          )}
         />
         <SubmitButton control={control} />
       </div>

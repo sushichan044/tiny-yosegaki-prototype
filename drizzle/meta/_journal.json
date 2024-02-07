@@ -22,6 +22,13 @@
       "when": 1707236224862,
       "tag": "0002_moaning_madrox",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1707319408397,
+      "tag": "0003_tricky_chat",
+      "breakpoints": true
     }
   ]
 }

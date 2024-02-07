@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "show_twitter_on_profile" boolean DEFAULT true;

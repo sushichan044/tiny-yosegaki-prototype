@@ -2,6 +2,7 @@ import type { UserSelect } from "@/db/schema/users"
 
 import AvatarManager from "@/features/users/setting/components/AvatarManager"
 import ProfileForm from "@/features/users/setting/components/ProfileForm"
+import "@/features/users/setting/components/ProfileFormSwitch.scss"
 import { Button, Divider, Space, Title } from "@mantine/core"
 
 type Props = {

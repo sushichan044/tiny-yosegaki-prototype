@@ -1,0 +1,15 @@
+@use "/src/styles/config/mixins" as mix;
+
+.mantine-Switch-body {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5rem;
+
+  @include mix.mq("md") {
+    flex-flow: row nowrap;
+  }
+}
+
+.mantine-Switch-track {
+  width: fit-content;
+}
