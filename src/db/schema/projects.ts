@@ -1,5 +1,6 @@
 import { messages } from "@/db/schema/messages"
 import { users } from "@/db/schema/users"
+import { usersToProjects } from "@/db/schema/usersToProjects"
 import { relations } from "drizzle-orm"
 import {
   boolean,
@@ -40,6 +41,7 @@ const projectsRelations = relations(projects, ({ many, one }) => ({
     references: [users.userId],
   }),
   messages: many(messages),
+  usersToProjects: many(usersToProjects),
 }))
 
 const ProjectInsertSchema = createInsertSchema(projects)

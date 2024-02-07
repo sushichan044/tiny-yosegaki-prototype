@@ -1,7 +1,7 @@
 import type { z } from "zod"
 
 import { messages } from "@/db/schema/messages"
-import { projects } from "@/db/schema/projects"
+import { usersToProjects } from "@/db/schema/usersToProjects"
 import { relations } from "drizzle-orm"
 import {
   boolean,
@@ -34,7 +34,7 @@ const users = pgTable(
 
 const usersRelations = relations(users, ({ many }) => ({
   messages: many(messages),
-  projects: many(projects),
+  usersToProjects: many(usersToProjects),
 }))
 
 const UserInsertSchema = createInsertSchema(users)

@@ -29,6 +29,13 @@
       "when": 1707319408397,
       "tag": "0003_tricky_chat",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1707326251685,
+      "tag": "0004_plain_ink",
+      "breakpoints": true
     }
   ]
 }
