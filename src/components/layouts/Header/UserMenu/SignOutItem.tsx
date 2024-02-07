@@ -1,6 +1,6 @@
 "use client"
 
-import { signOut } from "@/features/supabase/action"
+import { signOutUser } from "@/features/users/action"
 import { MenuItem } from "@mantine/core"
 import { IconLogout } from "@tabler/icons-react"
 
@@ -9,7 +9,7 @@ const SignOutItem = () => {
     <MenuItem
       aria-label="ログアウト"
       leftSection={<IconLogout stroke={1} />}
-      onClick={() => signOut()}
+      onClick={() => signOutUser()}
       role="button"
     >
       <p>ログアウト</p>

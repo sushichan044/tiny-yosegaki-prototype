@@ -1,4 +1,4 @@
-import Login from "@/features/auth/components/Login"
+import SignIn from "@/features/auth/components/SignIn"
 import { VisuallyHidden } from "@mantine/core"
 
 export default function Page() {
@@ -8,7 +8,7 @@ export default function Page() {
         <h1>ログイン</h1>
       </VisuallyHidden>
       <div className="min-h-[20vh]" />
-      <Login />
+      <SignIn />
     </div>
   )
 }

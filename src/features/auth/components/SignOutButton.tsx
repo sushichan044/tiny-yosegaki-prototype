@@ -1,6 +1,6 @@
 "use client"
 
-import { signOut } from "@/features/supabase/action"
+import { signOutUser } from "@/features/users/action"
 import { Button } from "@mantine/core"
 import { notifications } from "@mantine/notifications"
 import { useState } from "react"
@@ -9,7 +9,7 @@ const SignOutButton = () => {
   const [isPending, setIsPending] = useState(false)
   const handleClick = async () => {
     setIsPending(true)
-    const { error } = await signOut()
+    const { error } = await signOutUser()
     setIsPending(false)
     if (error) {
       notifications.show({

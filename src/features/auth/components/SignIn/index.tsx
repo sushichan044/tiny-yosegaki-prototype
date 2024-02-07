@@ -1,5 +1,5 @@
-import EmailButton from "@/features/auth/components/Login/EmailButton"
-import TwitterButton from "@/features/auth/components/Login/TwitterButton"
+import EmailButton from "@/features/auth/components/SignIn/EmailButton"
+import TwitterButton from "@/features/auth/components/SignIn/TwitterButton"
 import { Alert } from "@mantine/core"
 import { IconAlertTriangle } from "@tabler/icons-react"
 import { tv } from "tailwind-variants"
@@ -11,10 +11,16 @@ const styles = tv({
   },
 })()
 
-export default function Login() {
+type Props = {
+  redirectTo?: string | undefined
+}
+
+export default function SignIn({ redirectTo }: Props) {
+  redirectTo ??= "/"
+
   return (
     <div className={styles.wrapper()}>
-      <TwitterButton redirectTo="/" />
+      <TwitterButton redirectTo={redirectTo} />
       <EmailButton />
       <Alert
         color="nayuta"
