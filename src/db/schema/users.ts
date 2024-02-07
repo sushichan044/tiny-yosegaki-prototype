@@ -1,3 +1,5 @@
+import type { z } from "zod"
+
 import { messages } from "@/db/schema/messages"
 import { projects } from "@/db/schema/projects"
 import { relations } from "drizzle-orm"
@@ -29,9 +31,23 @@ const usersRelations = relations(users, ({ many }) => ({
 
 const UserInsertSchema = createInsertSchema(users)
 const UserSelectSchema = createSelectSchema(users)
+const UserUpdateSchema = UserInsertSchema.required({ userId: true }).refine(
+  ({ userName }) => userName.length > 0,
+  {
+    message: "ユーザー名は1文字以上である必要があります。",
+    path: ["userName"],
+  },
+)
 
 type UserInsert = typeof users.$inferInsert
 type UserSelect = typeof users.$inferSelect
+type UserUpdate = z.infer<typeof UserUpdateSchema>
 
-export { UserInsertSchema, UserSelectSchema, users, usersRelations }
-export type { UserInsert, UserSelect }
+export {
+  UserInsertSchema,
+  UserSelectSchema,
+  UserUpdateSchema,
+  users,
+  usersRelations,
+}
+export type { UserInsert, UserSelect, UserUpdate }

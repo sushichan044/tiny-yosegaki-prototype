@@ -1,8 +1,9 @@
 "use server"
 
-import type { UserSelect } from "@/db/schema/users"
+import type { UserUpdate } from "@/db/schema/users"
 
 import { db } from "@/db"
+import { type UserSelect, UserUpdateSchema, users } from "@/db/schema/users"
 import { createActionClient } from "@/lib/supabase/client/action"
 import { cookies } from "next/headers"
 
@@ -41,4 +42,33 @@ const getUser: GetUserFunction = async (userId?: string | undefined) => {
   return { data: dbUser ?? null }
 }
 
-export { getUser }
+type UpsertUserFunction = (
+  user: UserUpdate,
+) => Promise<{ error: string | null }>
+const upsertUser: UpsertUserFunction = async (user) => {
+  const res = await UserUpdateSchema.safeParseAsync(user)
+  if (!res.success) {
+    return { error: "Invalid user" }
+  }
+
+  try {
+    await db
+      .insert(users)
+      .values(res.data)
+      .onConflictDoUpdate({
+        set: {
+          twitterId: res.data.twitterId,
+          updatedAt: new Date(),
+          userName: res.data.userName,
+        },
+        target: users.userId,
+      })
+  } catch (err) {
+    console.error("upsertUser", err)
+    return { error: "Failed to upsert user" }
+  }
+
+  return { error: null }
+}
+
+export { getUser, upsertUser }

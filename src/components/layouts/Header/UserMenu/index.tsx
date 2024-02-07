@@ -50,15 +50,27 @@ const UserMenu: React.FC<Props> = ({
           <Text size="sm">Twitterでログイン中</Text>
         </MenuLabel>
         <MenuDivider />
-        <MenuItem leftSection={<IconPencil stroke={1} />}>
-          <Link href="/account/joined">参加した寄せ書き</Link>
+        <MenuItem
+          component={Link}
+          href="/account/joined"
+          leftSection={<IconPencil stroke={1} />}
+        >
+          参加した寄せ書き
         </MenuItem>
-        <MenuItem leftSection={<IconBook stroke={1} />}>
-          <Link href="/account/created">企画した寄せ書き</Link>
+        <MenuItem
+          component={Link}
+          href="/account/created"
+          leftSection={<IconBook stroke={1} />}
+        >
+          企画した寄せ書き
         </MenuItem>
         <MenuDivider />
-        <MenuItem leftSection={<IconSettings stroke={1} />}>
-          <Link href="/settings">アカウント設定</Link>
+        <MenuItem
+          component={Link}
+          href="/settings"
+          leftSection={<IconSettings stroke={1} />}
+        >
+          アカウント設定
         </MenuItem>
         {/* <MenuItem leftSection={<IconPencil stroke={1} />}>
           <Link href="/post">寄せ書きを書く</Link>

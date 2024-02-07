@@ -1,5 +1,5 @@
-import { upsertUser } from "@/features/auth/db"
 import { uploadTwitterIcon } from "@/features/users/avatar/upload"
+import { upsertUser } from "@/features/users/db"
 import { createActionClient } from "@/lib/supabase/client/action"
 import { type ServerError, isEmailNotFoundError } from "@/lib/supabase/error"
 import { safeParseInt } from "@/utils/number"
