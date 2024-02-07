@@ -7,7 +7,7 @@ const getCachedUser = () => {
     async () => {
       return await getUser()
     },
-    [`user-header`],
+    [`currentUser`],
     {
       tags: [USER_PROFILE_CACHE_TAG],
     },
