@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { FONT_VARIABLE_CLASS } from "@/lib/font"
+// import { FONT_VARIABLE_CLASS } from "@/lib/font"
 import { theme } from "@/theme"
 import { ColorSchemeScript, MantineProvider } from "@mantine/core"
 import { Notifications } from "@mantine/notifications"
@@ -31,7 +31,7 @@ export default function RootLayout({
       <head>
         <ColorSchemeScript />
       </head>
-      <body className={FONT_VARIABLE_CLASS}>
+      <body>
         <NextTopLoader color="#47a6d3" showSpinner={false} />
         <MantineProvider theme={theme}>
           <Notifications />

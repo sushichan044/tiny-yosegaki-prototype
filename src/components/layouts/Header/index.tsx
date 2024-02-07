@@ -1,6 +1,7 @@
 import UserHeader from "@/components/layouts/Header/UserHeader"
-import { Container, Text } from "@mantine/core"
+import { Container, Skeleton, Text } from "@mantine/core"
 import Link from "next/link"
+import { Suspense } from "react"
 import { tv } from "tailwind-variants"
 
 const styles = tv({
@@ -20,7 +21,9 @@ const Header = () => {
               YellBox
             </Text>
           </div>
-          <UserHeader />
+          <Suspense fallback={<Skeleton />}>
+            <UserHeader />
+          </Suspense>
         </div>
       </Container>
     </header>
