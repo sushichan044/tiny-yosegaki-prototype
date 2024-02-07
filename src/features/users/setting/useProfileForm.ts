@@ -8,9 +8,9 @@ type UserProfileFormArgs = {
   user: UserUpdate
 }
 
-const useProfileForm = (args: UserProfileFormArgs) => {
+const useProfileForm = ({ user }: UserProfileFormArgs) => {
   const returnValue = useForm<UserUpdate>({
-    defaultValues: args.user,
+    defaultValues: user,
     mode: "onTouched",
     resolver: zodResolver(UserUpdateSchema),
   })

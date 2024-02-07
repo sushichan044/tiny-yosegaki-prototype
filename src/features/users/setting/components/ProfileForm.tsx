@@ -11,19 +11,15 @@ import { IconX } from "@tabler/icons-react"
 import { useCallback } from "react"
 import { Controller, useFormState } from "react-hook-form"
 
-type ProfileFormProps = {
-  user: UserSelect
-}
-
 const SubmitButton: React.FC<{ control: Control<UserUpdate> }> = ({
   control,
 }) => {
-  const { isDirty, isSubmitting, isValid } = useFormState({ control })
+  const { isSubmitting, isValid } = useFormState({ control })
   return (
     <Button
       className="w-fit self-center"
       color="nakuru"
-      disabled={!isDirty || !isValid}
+      disabled={!isValid}
       loading={isSubmitting}
       type="submit"
     >
@@ -32,10 +28,12 @@ const SubmitButton: React.FC<{ control: Control<UserUpdate> }> = ({
   )
 }
 
+type ProfileFormProps = {
+  user: UserSelect
+}
+
 const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
-  const { control, handleSubmit } = useProfileForm({
-    user,
-  })
+  const { control, handleSubmit } = useProfileForm({ user })
   const onSubmit: SubmitHandler<UserUpdate> = useCallback(
     async (data) => {
       const { error } = await updateUserProfile({
