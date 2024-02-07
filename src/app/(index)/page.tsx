@@ -1,18 +1,19 @@
-import { Button, Center, Container, Title } from "@mantine/core"
-import Link from "next/link"
+import { Container, Title } from "@mantine/core"
 
 export default function Home() {
   return (
     <main>
       <Container size="sm">
         <Title className="text-center" order={1}>
-          寄せ書きをもっと気軽に
+          寄せ書きを
+          <br />
+          もっと気軽に
         </Title>
-        <Center>
+        {/* <Center>
           <Button color="nakuru" component={Link} href="/login">
             ログインしてはじめる
           </Button>
-        </Center>
+        </Center> */}
       </Container>
     </main>
   )

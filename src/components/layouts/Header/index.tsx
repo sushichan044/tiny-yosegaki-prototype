@@ -17,7 +17,7 @@ const Header = () => {
         <div className={styles.innerWrapper()}>
           <div>
             <Text component={Link} href="/">
-              よせがき
+              YellBox
             </Text>
           </div>
           <UserHeader />

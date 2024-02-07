@@ -1,5 +1,5 @@
 import SignIn from "@/features/auth/components/SignIn"
-import { VisuallyHidden } from "@mantine/core"
+import { Space, VisuallyHidden } from "@mantine/core"
 
 export default function Page() {
   return (
@@ -7,7 +7,7 @@ export default function Page() {
       <VisuallyHidden>
         <h1>ログイン</h1>
       </VisuallyHidden>
-      <div className="min-h-[20vh]" />
+      <Space h="2.5rem" />
       <SignIn />
     </div>
   )
