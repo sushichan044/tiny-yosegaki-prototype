@@ -1,9 +1,9 @@
-import { getCachedUser } from "@/features/users/next"
+import { getUser } from "@/features/users/db"
 import Setting from "@/features/users/setting/components/Setting"
 import { redirect } from "next/navigation"
 
 export default async function Page() {
-  const { data } = await getCachedUser()
+  const { data } = await getUser()
   if (!data) {
     redirect("/login")
   }

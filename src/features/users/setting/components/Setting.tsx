@@ -1,5 +1,3 @@
-"use client"
-
 import type { UserSelect } from "@/db/schema/users"
 
 import AvatarManager from "@/features/users/setting/components/AvatarManager"
@@ -11,8 +9,6 @@ type Props = {
 }
 
 const Setting: React.FC<Props> = ({ user }) => {
-  const userId = user.userId
-
   return (
     <div>
       <Title order={1}>設定</Title>
@@ -20,7 +16,7 @@ const Setting: React.FC<Props> = ({ user }) => {
       <Title order={2}>プロフィールの編集</Title>
       <Space h="2rem" />
       <div className="flex flex-col md:flex-row gap-4">
-        <AvatarManager userId={userId} />
+        <AvatarManager userId={user.userId} />
         <div className="flex-1">
           <ProfileForm user={user} />
         </div>

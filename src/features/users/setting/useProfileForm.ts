@@ -1,12 +1,11 @@
-import type { UserSelect, UserUpdate } from "@/db/schema/users"
+import type { UserUpdate } from "@/db/schema/users"
 
 import { UserUpdateSchema } from "@/db/schema/users"
 import { zodResolver } from "@hookform/resolvers/zod"
-import "client-only"
 import { useForm } from "react-hook-form"
 
 type UserProfileFormArgs = {
-  user: UserSelect
+  user: UserUpdate
 }
 
 const useProfileForm = (args: UserProfileFormArgs) => {
