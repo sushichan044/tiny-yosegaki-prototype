@@ -1,5 +1,5 @@
+import { updateUserProfile } from "@/features/users/action"
 import { uploadTwitterIcon } from "@/features/users/avatar/upload"
-import { upsertUser } from "@/features/users/db"
 import { createActionClient } from "@/lib/supabase/client/action"
 import { type ServerError, isEmailNotFoundError } from "@/lib/supabase/error"
 import { safeParseInt } from "@/utils/number"
@@ -41,7 +41,7 @@ export async function GET(request: Request) {
     return NextResponse.redirect(`${origin}/auth/session-error`)
   }
 
-  await upsertUser({
+  await updateUserProfile({
     twitterId: session.user.user_metadata.user_name,
     updatedAt: new Date(),
     userId: session.user.id,
