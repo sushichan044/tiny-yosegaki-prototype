@@ -2,4 +2,7 @@
 export { messages, messagesRelations } from "./messages"
 export { projects, projectsRelations } from "./projects"
 export { users, usersRelations } from "./users"
-export { usersToProjects, usersToProjectsRelations } from "./usersToProjects"
+export {
+  usersToJoinedProjects,
+  usersToJoinedProjectsRelations,
+} from "./usersJoinedProjects"
