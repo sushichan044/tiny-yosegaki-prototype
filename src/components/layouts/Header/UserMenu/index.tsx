@@ -20,9 +20,15 @@ type Props = {
   user: UserSelect
 }
 
-const UserMenu: React.FC<Props> = ({
+const UserMenu: React.FC<Props> = async ({
   user: { twitterId, userId, userName },
 }) => {
+  const avatarSrc = getUserAvatarUrl(userId, {
+    height: 72,
+    quality: 80,
+    width: 72,
+  })
+
   return (
     <Menu
       position="bottom-end"
@@ -35,7 +41,7 @@ const UserMenu: React.FC<Props> = ({
           alt="user avatar"
           className="cursor-pointer"
           size={36}
-          src={getUserAvatarUrl(userId)}
+          src={avatarSrc}
           title="アカウント"
         >
           <Skeleton />

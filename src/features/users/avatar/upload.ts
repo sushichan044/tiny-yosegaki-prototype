@@ -14,7 +14,17 @@ type UploadTwitterIcon = (
     iconSrc: string
     userId: string
   },
-) => Promise<void>
+) => ReturnType<typeof uploadFile>
+type UploadArrayBufferIcon = (
+  cookie: ReturnType<typeof cookies>,
+  {
+    file,
+    userId,
+  }: {
+    file: ArrayBuffer
+    userId: string
+  },
+) => ReturnType<typeof uploadFile>
 
 const uploadTwitterIcon: UploadTwitterIcon = async (
   cookie,
@@ -28,11 +38,21 @@ const uploadTwitterIcon: UploadTwitterIcon = async (
   const arrayBuffer = await icon.arrayBuffer()
 
   const iconPng = await convertToPng(arrayBuffer)
-  await uploadFile(
+  return await uploadArrayBufferIcon(cookie, {
+    file: iconPng,
+    userId,
+  })
+}
+
+const uploadArrayBufferIcon: UploadArrayBufferIcon = async (
+  cookie,
+  { file, userId },
+) => {
+  const res = await uploadFile(
     cookie,
     {
       bucketName: AVATAR_BUCKET_NAME,
-      file: iconPng,
+      file,
       filePath: `${userId}/avatar.png`,
     },
     {
@@ -40,6 +60,7 @@ const uploadTwitterIcon: UploadTwitterIcon = async (
       upsert: true,
     },
   )
+  return res
 }
 
-export { uploadTwitterIcon }
+export { uploadArrayBufferIcon, uploadTwitterIcon }

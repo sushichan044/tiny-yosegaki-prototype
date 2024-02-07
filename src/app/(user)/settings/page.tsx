@@ -9,8 +9,8 @@ export default async function Page() {
   }
 
   return (
-    <div>
+    <>
       <Setting user={data} />
-    </div>
+    </>
   )
 }
