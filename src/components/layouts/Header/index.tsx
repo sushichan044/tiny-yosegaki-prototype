@@ -14,7 +14,7 @@ const styles = tv({
 const Header = () => {
   return (
     <header className={styles.wrapper()}>
-      <Container classNames={{ root: "py-2" }}>
+      <Container classNames={{ root: "py-2" }} size="sm">
         <div className={styles.innerWrapper()}>
           <div>
             <Text component={Link} href="/">
