@@ -2371,6 +2371,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/nprogress@npm:^0.2.2":
+  version: 0.2.3
+  resolution: "@types/nprogress@npm:0.2.3"
+  checksum: 10c0/cac0fe73aca79bc1472a1556f56303df72026f2fcd8dbe311fe84b1f46e454b9040c1e69223d94e3bf156a5986382170c52ebda19aa70f555f1b6855d8f744a6
+  languageName: node
+  linkType: hard
+
 "@types/pg@npm:^8":
   version: 8.11.0
   resolution: "@types/pg@npm:8.11.0"
@@ -7698,6 +7705,7 @@ __metadata:
     husky: "npm:^9.0.10"
     lint-staged: "npm:^15.2.1"
     next: "npm:14.1.0"
+    nextjs-toploader: "npm:^1.6.6"
     npm-check-updates: "npm:^16.14.14"
     npm-run-all2: "npm:^6.1.2"
     pg: "npm:^8.11.3"
@@ -8528,6 +8536,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nextjs-toploader@npm:^1.6.6":
+  version: 1.6.6
+  resolution: "nextjs-toploader@npm:1.6.6"
+  dependencies:
+    "@types/nprogress": "npm:^0.2.2"
+    nprogress: "npm:^0.2.0"
+    prop-types: "npm:^15.8.1"
+  peerDependencies:
+    next: ">= 6.0.0"
+    react: ">= 16.0.0"
+    react-dom: ">= 16.0.0"
+  checksum: 10c0/1be1aece9291058895a44a6f496dc355635616ad9c46eec1061cf13f685ce9fef9362346aaecde88a6ad7a0bc9e512c35851884eb1af15058bdedc85ab6d7f24
+  languageName: node
+  linkType: hard
+
 "node-fetch@npm:2.6.7":
   version: 2.6.7
   resolution: "node-fetch@npm:2.6.7"
@@ -8877,6 +8900,13 @@ __metadata:
     gauge: "npm:^4.0.3"
     set-blocking: "npm:^2.0.0"
   checksum: 10c0/0cacedfbc2f6139c746d9cd4a85f62718435ad0ca4a2d6459cd331dd33ae58206e91a0742c1558634efcde3f33f8e8e7fd3adf1bfe7978310cf00bd55cccf890
+  languageName: node
+  linkType: hard
+
+"nprogress@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "nprogress@npm:0.2.0"
+  checksum: 10c0/eab9a923a1ad1eed71a455ecfbc358442dd9bcd71b9fa3fa1c67eddf5159360b182c218f76fca320c97541a1b45e19ced04e6dcb044a662244c5419f8ae9e821
   languageName: node
   linkType: hard
 
