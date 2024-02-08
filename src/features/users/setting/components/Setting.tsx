@@ -18,7 +18,6 @@ const Setting: React.FC<Props> = ({ user }) => {
         <Space h="1.5rem" />
         <div className="flex flex-col md:flex-row gap-x-4">
           <AvatarManager userId={user.userId} />
-          <Divider orientation="vertical" />
           <div className="flex-1">
             <ProfileForm user={user} />
           </div>
