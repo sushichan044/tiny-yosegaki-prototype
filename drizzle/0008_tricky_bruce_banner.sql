@@ -1,0 +1,1 @@
+ALTER TABLE "projects" ALTER COLUMN "dead_line_date" SET DATA TYPE timestamp with time zone;

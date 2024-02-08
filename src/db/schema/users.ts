@@ -17,12 +17,16 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 const users = pgTable(
   "users",
   {
-    createdAt: timestamp("created_at").defaultNow(),
+    createdAt: timestamp("created_at", {
+      withTimezone: true,
+    }).defaultNow(),
     showTwitterOnProfile: boolean("show_twitter_on_profile")
       .notNull()
       .default(true),
     twitterId: text("twitter_id").unique().notNull(),
-    updatedAt: timestamp("updated_at").defaultNow(),
+    updatedAt: timestamp("updated_at", {
+      withTimezone: true,
+    }),
     // avatar url will got from userId
     userId: uuid("user_id").notNull().primaryKey(),
     userName: text("user_name").notNull(),

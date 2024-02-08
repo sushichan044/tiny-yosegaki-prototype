@@ -18,14 +18,20 @@ const projects = pgTable(
     authorId: uuid("author_id")
       .notNull()
       .references(() => users.userId),
-    createdAt: timestamp("created_at").defaultNow(),
-    deadLineDate: timestamp("dead_line_date").notNull(),
+    createdAt: timestamp("created_at", {
+      withTimezone: true,
+    }).defaultNow(),
+    deadLineDate: timestamp("dead_line_date", {
+      withTimezone: true,
+    }).notNull(),
     hasThumbnail: boolean("has_thumbnail").notNull().default(false),
     projectDescription: text("project_description").notNull(),
     projectId: uuid("project_id").defaultRandom().primaryKey(),
     projectName: text("project_name").notNull(),
     tags: text("tags").array().notNull(),
-    updatedAt: timestamp("updated_at").defaultNow(),
+    updatedAt: timestamp("updated_at", {
+      withTimezone: true,
+    }).defaultNow(),
   },
   (table) => {
     return {

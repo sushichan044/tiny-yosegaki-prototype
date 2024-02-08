@@ -9,7 +9,9 @@ const messages = pgTable("messages", {
     .notNull()
     .references(() => users.userId),
   content: text("content").notNull(),
-  createdAt: timestamp("created_at").defaultNow(),
+  createdAt: timestamp("created_at", {
+    withTimezone: true,
+  }).defaultNow(),
   displayName: text("display_name").notNull(),
   hasAttachment: boolean("has_attachment").notNull().default(false),
   messageId: uuid("message_id").defaultRandom().primaryKey(),
@@ -17,7 +19,9 @@ const messages = pgTable("messages", {
     .notNull()
     .references(() => projects.projectId),
   shouldDisplay: boolean("should_display").notNull().default(true),
-  updatedAt: timestamp("updated_at").defaultNow(),
+  updatedAt: timestamp("updated_at", {
+    withTimezone: true,
+  }).defaultNow(),
 })
 
 const messagesRelations = relations(messages, ({ one }) => ({
