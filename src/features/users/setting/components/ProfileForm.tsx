@@ -38,6 +38,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
     async (data) => {
       const { error } = await updateUserProfile({
         showTwitterOnProfile: data.showTwitterOnProfile,
+        twitterId: user.twitterId,
         userId: user.userId,
         userName: data.userName,
       })
@@ -56,7 +57,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
         })
       }
     },
-    [user.userId],
+    [user.userId, user.twitterId],
   )
 
   return (
