@@ -1,5 +1,5 @@
 import { createNewUserProfile } from "@/features/users/action"
-import { uploadTwitterIcon } from "@/features/users/avatar/upload"
+import { uploadNewUserIconFromTwitter } from "@/features/users/avatar/upload"
 import { createActionClient } from "@/lib/supabase/client/action"
 import { type ServerError, isEmailNotFoundError } from "@/lib/supabase/error"
 import { safeParseInt } from "@/utils/number"
@@ -45,7 +45,7 @@ export async function GET(request: Request) {
     userId: session.user.id,
     userName: session.user.user_metadata.full_name,
   })
-  await uploadTwitterIcon(cookieStore, {
+  await uploadNewUserIconFromTwitter(cookieStore, {
     iconSrc: session.user.user_metadata.avatar_url,
     userId: session.user.id,
   })

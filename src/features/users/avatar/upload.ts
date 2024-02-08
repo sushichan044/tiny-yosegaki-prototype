@@ -26,6 +26,59 @@ type UploadArrayBufferIcon = (
   },
 ) => ReturnType<typeof uploadFile>
 
+const uploadNewUserIconFromTwitter = async (
+  cookie: ReturnType<typeof cookies>,
+  { iconSrc, userId }: { iconSrc: string; userId: string },
+): Promise<
+  | {
+      data: { path: string }
+      error: null
+    }
+  | {
+      data: null
+      error: string
+    }
+> => {
+  const icon = await fetch(
+    getProfileImageUrl(iconSrc, {
+      variant: "original",
+    }),
+  )
+  const arrayBuffer = await icon.arrayBuffer()
+
+  const iconPng = await convertToPng(arrayBuffer)
+  try {
+    const res = await uploadFile(
+      cookie,
+      {
+        bucketName: AVATAR_BUCKET_NAME,
+        file: iconPng,
+        filePath: `${userId}/avatar.png`,
+      },
+      {
+        contentType: "image/png",
+        upsert: false,
+      },
+    )
+    if (res.data) {
+      return {
+        data: res.data,
+        error: null,
+      }
+    }
+    return {
+      data: null,
+      error: "Failed to upload icon: " + res.error.message,
+    }
+  } catch (e) {
+    console.error(e)
+    return {
+      data: null,
+      error: "Object already exists in bucket",
+    }
+  }
+}
+
 const uploadTwitterIcon: UploadTwitterIcon = async (
   cookie,
   { iconSrc, userId },
@@ -63,4 +116,8 @@ const uploadArrayBufferIcon: UploadArrayBufferIcon = async (
   return res
 }
 
-export { uploadArrayBufferIcon, uploadTwitterIcon }
+export {
+  uploadArrayBufferIcon,
+  uploadNewUserIconFromTwitter,
+  uploadTwitterIcon,
+}
