@@ -1,4 +1,4 @@
-import { updateUserProfile } from "@/features/users/action"
+import { createNewUserProfile } from "@/features/users/action"
 import { uploadTwitterIcon } from "@/features/users/avatar/upload"
 import { createActionClient } from "@/lib/supabase/client/action"
 import { type ServerError, isEmailNotFoundError } from "@/lib/supabase/error"
@@ -40,10 +40,8 @@ export async function GET(request: Request) {
     console.error("No user in session")
     return NextResponse.redirect(`${origin}/auth/session-error`)
   }
-
-  await updateUserProfile({
+  await createNewUserProfile({
     twitterId: session.user.user_metadata.user_name,
-    updatedAt: new Date(),
     userId: session.user.id,
     userName: session.user.user_metadata.full_name,
   })

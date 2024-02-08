@@ -1,14 +1,36 @@
 "use server"
 
-import type { UserUpdate } from "@/db/schema/users"
-
 import { USER_PROFILE_CACHE_TAG } from "@/cache"
+import { db } from "@/db"
+import {
+  type UserInsert,
+  UserInsertSchema,
+  type UserUpdate,
+  users,
+} from "@/db/schema/users"
 import { signOut } from "@/features/supabase/action"
 import { uploadArrayBufferIcon } from "@/features/users/avatar/upload"
 import { upsertUser } from "@/features/users/db"
 import { revalidatePath, revalidateTag } from "next/cache"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
+
+const createNewUserProfile = async (user: UserInsert) => {
+  const res = await UserInsertSchema.safeParseAsync(user)
+  if (!res.success) {
+    return { error: "Invalid user" }
+  }
+
+  try {
+    await db.insert(users).values(res.data).onConflictDoNothing({
+      target: users.userId,
+    })
+  } catch (error: unknown) {
+    console.error(error)
+    return { error: "Failed to insert user" }
+  }
+  return { error: null }
+}
 
 const updateUserProfile = async (user: UserUpdate) => {
   const res = await upsertUser(user)
@@ -34,7 +56,7 @@ const uploadUserAvatar = async ({
   if (res.error) {
     return { data: null, error: res.error.message }
   }
-  revalidatePath("/settings","layout")
+  revalidatePath("/settings", "layout")
   return { data: res.data.path, error: null }
 }
 
@@ -47,4 +69,9 @@ const signOutUser = async () => {
   return { error }
 }
 
-export { signOutUser, updateUserProfile, uploadUserAvatar }
+export {
+  createNewUserProfile,
+  signOutUser,
+  updateUserProfile,
+  uploadUserAvatar,
+}

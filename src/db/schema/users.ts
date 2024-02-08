@@ -18,11 +18,13 @@ const users = pgTable(
   "users",
   {
     createdAt: timestamp("created_at").defaultNow(),
-    showTwitterOnProfile: boolean("show_twitter_on_profile").default(true),
-    twitterId: text("twitter_id").unique(),
+    showTwitterOnProfile: boolean("show_twitter_on_profile")
+      .notNull()
+      .default(true),
+    twitterId: text("twitter_id").unique().notNull(),
     updatedAt: timestamp("updated_at").defaultNow(),
     // avatar url will got from userId
-    userId: uuid("user_id").defaultRandom().primaryKey(),
+    userId: uuid("user_id").notNull().primaryKey(),
     userName: text("user_name").notNull(),
   },
   (table) => {

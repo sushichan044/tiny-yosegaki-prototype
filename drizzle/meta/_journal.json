@@ -43,6 +43,13 @@
       "when": 1707328017271,
       "tag": "0005_romantic_sunfire",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1707416503233,
+      "tag": "0006_dazzling_bloodscream",
+      "breakpoints": true
     }
   ]
 }
