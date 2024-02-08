@@ -11,9 +11,7 @@ type SignInFunction = (
   redirectTo?: string | undefined,
 ) => Promise<AuthError | never>
 
-type SignOutFunction = () => ReturnType<
-  ReturnType<typeof createActionClient>["auth"]["signOut"]
->
+type SignOutFunction = ReturnType<typeof createActionClient>["auth"]["signOut"]
 
 type GetUserFunction = () => ReturnType<
   ReturnType<typeof createActionClient>["auth"]["getUser"]
@@ -45,11 +43,12 @@ const signIn: SignInFunction = async (redirectTo) => {
   return redirect(data.url)
 }
 
-const signOut: SignOutFunction = async () => {
+const signOut: SignOutFunction = async (options) => {
   const cookie = cookies()
   const supabase = createActionClient(cookie)
 
-  const result = await supabase.auth.signOut()
+  const scope = options?.scope ?? "local"
+  const result = await supabase.auth.signOut({ scope })
   if (result.error) {
     console.error(result.error)
   }
