@@ -1,6 +1,6 @@
 "use client"
 
-import type { UserSelect, UserUpdate } from "@/db/schema/users"
+import type { UserInsert, UserSelect } from "@/db/schema/users"
 import type { Control, SubmitHandler } from "react-hook-form"
 
 import { updateUserProfile } from "@/features/users/action"
@@ -11,7 +11,7 @@ import { IconX } from "@tabler/icons-react"
 import { useCallback } from "react"
 import { Controller, useFormState } from "react-hook-form"
 
-const SubmitButton: React.FC<{ control: Control<UserUpdate> }> = ({
+const SubmitButton: React.FC<{ control: Control<UserInsert> }> = ({
   control,
 }) => {
   const { isSubmitting, isValid } = useFormState({ control })
@@ -34,7 +34,7 @@ type ProfileFormProps = {
 
 const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   const { control, handleSubmit } = useProfileForm({ user })
-  const onSubmit: SubmitHandler<UserUpdate> = useCallback(
+  const onSubmit: SubmitHandler<UserInsert> = useCallback(
     async (data) => {
       const { error } = await updateUserProfile({
         showTwitterOnProfile: data.showTwitterOnProfile,

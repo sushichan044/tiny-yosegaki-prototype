@@ -1,18 +1,18 @@
-import type { UserUpdate } from "@/db/schema/users"
+import type { UserInsert } from "@/db/schema/users"
 
-import { UserUpdateSchema } from "@/db/schema/users"
+import { UserInsertSchema } from "@/db/schema/users"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
 type UserProfileFormArgs = {
-  user: UserUpdate
+  user: UserInsert
 }
 
 const useProfileForm = ({ user }: UserProfileFormArgs) => {
-  const returnValue = useForm<UserUpdate>({
+  const returnValue = useForm<UserInsert>({
     defaultValues: user,
     mode: "onTouched",
-    resolver: zodResolver(UserUpdateSchema),
+    resolver: zodResolver(UserInsertSchema),
   })
 
   return returnValue

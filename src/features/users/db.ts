@@ -1,9 +1,9 @@
 "use server"
 
-import type { UserUpdate } from "@/db/schema/users"
+import type { UserInsert } from "@/db/schema/users"
 
 import { db } from "@/db"
-import { type UserSelect, UserUpdateSchema, users } from "@/db/schema/users"
+import { UserInsertSchema, type UserSelect, users } from "@/db/schema/users"
 import { createActionClient } from "@/lib/supabase/client/action"
 import { cookies } from "next/headers"
 
@@ -43,10 +43,10 @@ const getUser: GetUserFunction = async (userId?: string | undefined) => {
 }
 
 type UpsertUserFunction = (
-  user: UserUpdate,
+  user: UserInsert,
 ) => Promise<{ error: string | null }>
 const upsertUser: UpsertUserFunction = async (user) => {
-  const res = await UserUpdateSchema.safeParseAsync(user)
+  const res = await UserInsertSchema.safeParseAsync(user)
   if (!res.success) {
     return { error: "Invalid user" }
   }

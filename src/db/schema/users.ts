@@ -1,5 +1,3 @@
-import type { z } from "zod"
-
 import { projects } from "@/db/schema"
 import { messages } from "@/db/schema/messages"
 import { usersToJoinedProjects } from "@/db/schema/usersJoinedProjects"
@@ -45,25 +43,14 @@ const usersRelations = relations(users, ({ many }) => ({
   messages: many(messages),
 }))
 
-const UserInsertSchema = createInsertSchema(users)
+const UserInsertSchema = createInsertSchema(users, {
+  userName: (s) =>
+    s.userName.min(1, "ユーザー名は1文字以上である必要があります。"),
+})
 const UserSelectSchema = createSelectSchema(users)
-const UserUpdateSchema = UserInsertSchema.required({ userId: true }).refine(
-  ({ userName }) => userName.length > 0,
-  {
-    message: "ユーザー名は1文字以上である必要があります。",
-    path: ["userName"],
-  },
-)
 
 type UserInsert = typeof users.$inferInsert
 type UserSelect = typeof users.$inferSelect
-type UserUpdate = z.infer<typeof UserUpdateSchema>
 
-export {
-  UserInsertSchema,
-  UserSelectSchema,
-  UserUpdateSchema,
-  users,
-  usersRelations,
-}
-export type { UserInsert, UserSelect, UserUpdate }
+export { UserInsertSchema, UserSelectSchema, users, usersRelations }
+export type { UserInsert, UserSelect }
