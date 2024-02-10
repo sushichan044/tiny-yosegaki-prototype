@@ -2,12 +2,7 @@
 
 import { USER_PROFILE_CACHE_TAG } from "@/cache"
 import { db } from "@/db"
-import {
-  type UserInsert,
-  UserInsertSchema,
-  type UserUpdate,
-  users,
-} from "@/db/schema/users"
+import { type UserInsert, UserInsertSchema, users } from "@/db/schema/users"
 import { signOut } from "@/features/supabase/action"
 import { uploadArrayBufferIcon } from "@/features/users/avatar/upload"
 import { upsertUser } from "@/features/users/db"
@@ -32,7 +27,7 @@ const createNewUserProfile = async (user: UserInsert) => {
   return { error: null }
 }
 
-const updateUserProfile = async (user: UserUpdate) => {
+const updateUserProfile = async (user: UserInsert) => {
   const res = await upsertUser(user)
   revalidateTag(USER_PROFILE_CACHE_TAG)
   revalidatePath("/settings")
