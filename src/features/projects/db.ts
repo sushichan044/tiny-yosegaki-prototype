@@ -43,7 +43,6 @@ const getJoinedProjectsOfUser: GetJoinedProjectsOfUser = async (userId) => {
     // Early return if the user has not joined any projects
     // because inArray() will throw an error if the array is empty
     if (joinedProjectIds.length === 0) {
-      tx.rollback()
       return []
     }
 
