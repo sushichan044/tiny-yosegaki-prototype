@@ -6,6 +6,7 @@ import { db } from "@/db"
 import { UserInsertSchema, type UserSelect, users } from "@/db/schema/users"
 import { createActionClient } from "@/lib/supabase/client/action"
 import { cookies } from "next/headers"
+import "server-only"
 
 type GetUserFromSupabaseFunction = () => Promise<{ data: UserSelect | null }>
 type GetUserFromIdFunction = (
@@ -56,6 +57,7 @@ const getUserFromSession: GetUserFromSupabaseFunction = async () => {
     return { data: null }
   }
   if (!session) {
+    console.error("No session")
     return { data: null }
   }
 

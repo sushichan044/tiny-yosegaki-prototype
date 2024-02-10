@@ -1,6 +1,7 @@
 import type { MessageSelect } from "@/db/schema/messages"
 
 import { db } from "@/db"
+import "server-only"
 
 const getMessageByUser = async (
   userId: string,
