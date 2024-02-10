@@ -9,6 +9,7 @@ import {
   text,
   timestamp,
   uuid,
+  varchar,
 } from "drizzle-orm/pg-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 
@@ -28,10 +29,11 @@ const projects = pgTable(
     projectDescription: text("project_description").notNull(),
     projectId: uuid("project_id").defaultRandom().primaryKey(),
     projectName: text("project_name").notNull(),
-    status: text("status", {
+    status: varchar("status", {
       enum: ["prepare", "open", "closed"],
+      length: 10,
     }).default("prepare"),
-    tags: text("tags").array().notNull().default([]),
+    tags: text("tags").array().notNull(),
     updatedAt: timestamp("updated_at", {
       withTimezone: true,
     }).defaultNow(),

@@ -1,5 +1,5 @@
 {
-  "id": "9f83a098-9e4b-4ca2-a95a-21a7de6894e3",
+  "id": "98c6502a-2340-4088-9bcb-826b71add39b",
   "prevId": "483eec4c-f499-45a3-afde-2eab8c12ece4",
   "version": "5",
   "dialect": "pg",
@@ -151,7 +151,7 @@
         },
         "status": {
           "name": "status",
-          "type": "text",
+          "type": "varchar(10)",
           "primaryKey": false,
           "notNull": false,
           "default": "'prepare'"
@@ -160,8 +160,7 @@
           "name": "tags",
           "type": "text[]",
           "primaryKey": false,
-          "notNull": true,
-          "default": []
+          "notNull": true
         },
         "updated_at": {
           "name": "updated_at",
