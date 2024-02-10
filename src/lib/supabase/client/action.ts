@@ -15,8 +15,19 @@ export function createActionClient(cookieStore: ReturnType<typeof cookies>) {
         remove(name: string, options: CookieOptions) {
           cookieStore.set({ name, value: "", ...options })
         },
-        set(name: string, value: string, options: CookieOptions) {
-          cookieStore.set({ name, value, ...options })
+        set(
+          name: string,
+          value: string,
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          { httpOnly, secure, ...rest }: CookieOptions,
+        ) {
+          cookieStore.set({
+            httpOnly: true,
+            name,
+            secure: true,
+            value,
+            ...rest,
+          })
         },
       },
     },
