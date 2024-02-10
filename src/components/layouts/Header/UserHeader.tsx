@@ -1,6 +1,6 @@
 import UserMenu from "@/components/layouts/Header/UserMenu"
 import SignInModal from "@/features/auth/components/SignInModal"
-import { getUser } from "@/features/users/db"
+import { getUserFromSession } from "@/features/users/db"
 import { Button } from "@mantine/core"
 import Link from "next/link"
 
@@ -13,7 +13,7 @@ const PostButton = () => {
 }
 
 const UserHeader = async () => {
-  const { data: user } = await getUser()
+  const { data: user } = await getUserFromSession()
 
   return (
     <div className="flex flex-row gap-x-4 h-9 overflow-hidden">
