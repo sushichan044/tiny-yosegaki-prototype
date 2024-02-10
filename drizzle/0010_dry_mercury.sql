@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS "author_id_idx" ON "projects" ("author_id");

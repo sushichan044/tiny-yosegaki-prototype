@@ -40,8 +40,9 @@ const projects = pgTable(
   },
   (table) => {
     return {
+      authorIdIdx: index("author_id_idx").on(table.authorId),
       projectNameIdx: index("project_name_idx").on(table.projectName),
-      tags: index("tags_idx").on(table.tags),
+      tagsIdx: index("tags_idx").on(table.tags),
     }
   },
 )

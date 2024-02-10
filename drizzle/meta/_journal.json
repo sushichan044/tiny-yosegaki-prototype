@@ -71,6 +71,13 @@
       "when": 1707587964504,
       "tag": "0009_milky_magneto",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1707594169268,
+      "tag": "0010_dry_mercury",
+      "breakpoints": true
     }
   ]
 }
