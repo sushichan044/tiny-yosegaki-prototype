@@ -27,6 +27,7 @@ const getCreatedProjectsOfUser: GetCreatedProjectsOfUser = async (userId) => {
   })
   return projects
 }
+
 type GetJoinedProjectsOfUser = (userId: string) => Promise<ProjectSelect[]>
 const getJoinedProjectsOfUser: GetJoinedProjectsOfUser = async (userId) => {
   const projects = await db.transaction(async (tx) => {
@@ -38,6 +39,14 @@ const getJoinedProjectsOfUser: GetJoinedProjectsOfUser = async (userId) => {
         return eq(table.userId, userId)
       },
     })
+
+    // Early return if the user has not joined any projects
+    // because inArray() will throw an error if the array is empty
+    if (joinedProjectIds.length === 0) {
+      tx.rollback()
+      return []
+    }
+
     const projectIds = joinedProjectIds.map((pj) => pj.projectId)
     const projects = await tx.query.projects.findMany({
       where: (project, { inArray }) => {
