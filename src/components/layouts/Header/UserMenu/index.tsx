@@ -25,6 +25,8 @@ type Props = {
   user: UserSelect
 }
 
+export const ICON_STROKE_WIDTH = 1
+
 const UserMenu: React.FC<Props> = async ({
   user: { twitterId, userId, userName },
 }) => {
@@ -64,7 +66,7 @@ const UserMenu: React.FC<Props> = async ({
         <MenuItem
           component={Link}
           href={`/user/${userId}`}
-          leftSection={<IconUserCircle stroke={1} />}
+          leftSection={<IconUserCircle stroke={ICON_STROKE_WIDTH} />}
         >
           プロフィール
         </MenuItem>
@@ -72,14 +74,14 @@ const UserMenu: React.FC<Props> = async ({
         <MenuItem
           component={Link}
           href="/account/joined"
-          leftSection={<IconPencil stroke={1} />}
+          leftSection={<IconPencil stroke={ICON_STROKE_WIDTH} />}
         >
           参加した寄せ書き
         </MenuItem>
         <MenuItem
           component={Link}
           href="/account/created"
-          leftSection={<IconBook stroke={1} />}
+          leftSection={<IconBook stroke={ICON_STROKE_WIDTH} />}
         >
           企画した寄せ書き
         </MenuItem>
@@ -87,11 +89,11 @@ const UserMenu: React.FC<Props> = async ({
         <MenuItem
           component={Link}
           href="/settings"
-          leftSection={<IconSettings stroke={1} />}
+          leftSection={<IconSettings stroke={ICON_STROKE_WIDTH} />}
         >
           アカウント設定
         </MenuItem>
-        {/* <MenuItem leftSection={<IconPencil stroke={1} />}>
+        {/* <MenuItem leftSection={<IconPencil stroke={ICON_STROKE_WIDTH} />}>
           <Link href="/post">寄せ書きを書く</Link>
         </MenuItem> */}
         <MenuDivider />

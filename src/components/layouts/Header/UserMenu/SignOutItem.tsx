@@ -1,5 +1,6 @@
 "use client"
 
+import { ICON_STROKE_WIDTH } from "@/components/layouts/Header/UserMenu"
 import { signOutUser } from "@/features/users/action"
 import { useServerAction } from "@/hooks/useServerAction"
 import { LoadingOverlay, MenuItem } from "@mantine/core"
@@ -11,7 +12,7 @@ const SignOutItem = () => {
   return (
     <MenuItem
       aria-label="ログアウト"
-      leftSection={<IconLogout stroke={1} />}
+      leftSection={<IconLogout stroke={ICON_STROKE_WIDTH} />}
       // @ts-expect-error no arg is needed
       onClick={() => runAction()}
       role="button"
