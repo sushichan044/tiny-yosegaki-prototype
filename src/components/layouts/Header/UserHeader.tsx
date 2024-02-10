@@ -6,7 +6,7 @@ import Link from "next/link"
 
 const PostButton = () => {
   return (
-    <Button color="nakuru" component={Link} href="/post" miw="6rem">
+    <Button color="nakuru" component={Link} href="/new" miw="6rem">
       企画を立てる
     </Button>
   )

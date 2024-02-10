@@ -1,6 +1,7 @@
 import type { ProjectSelect } from "@/db/schema/projects"
 
 import { db } from "@/db"
+import { usersToJoinedProjects } from "@/db/schema"
 import {
   type ProjectInsert,
   ProjectInsertSchema,
@@ -17,12 +18,33 @@ const getProject = async (projectId: string) => {
   return project
 }
 
-type GetProjectsOfUser = (userId: string) => Promise<ProjectSelect[]>
-const getProjectsOfUser: GetProjectsOfUser = async (userId) => {
+type GetCreatedProjectsOfUser = (userId: string) => Promise<ProjectSelect[]>
+const getCreatedProjectsOfUser: GetCreatedProjectsOfUser = async (userId) => {
   const projects = await db.query.projects.findMany({
     where: (project, { eq }) => {
       return eq(project.authorId, userId)
     },
+  })
+  return projects
+}
+type GetJoinedProjectsOfUser = (userId: string) => Promise<ProjectSelect[]>
+const getJoinedProjectsOfUser: GetJoinedProjectsOfUser = async (userId) => {
+  const projects = await db.transaction(async (tx) => {
+    const joinedProjectIds = await tx.query.usersToJoinedProjects.findMany({
+      columns: {
+        projectId: true,
+      },
+      where: (table, { eq }) => {
+        return eq(table.userId, userId)
+      },
+    })
+    const projectIds = joinedProjectIds.map((pj) => pj.projectId)
+    const projects = await tx.query.projects.findMany({
+      where: (project, { inArray }) => {
+        return inArray(project.projectId, projectIds)
+      },
+    })
+    return projects
   })
   return projects
 }
@@ -63,4 +85,44 @@ const insertProject: InsertProjectFunction = async (project) => {
   }
 }
 
-export { getProject, getProjectsOfUser, insertProject }
+type JoinProjectFunction = ({
+  projectId,
+  userId,
+}: {
+  projectId: string
+  userId: string
+}) => Promise<
+  | {
+      error: null
+      success: true
+    }
+  | {
+      error: string
+      success: false
+    }
+>
+const joinProject: JoinProjectFunction = async ({ projectId, userId }) => {
+  try {
+    await db
+      .insert(usersToJoinedProjects)
+      .values({
+        projectId,
+        userId,
+      })
+      .onConflictDoNothing({
+        target: [usersToJoinedProjects.projectId, usersToJoinedProjects.userId],
+      })
+    return { error: null, success: true }
+  } catch (error: unknown) {
+    console.error(error)
+    return { error: "Failed to join project", success: false }
+  }
+}
+
+export {
+  getCreatedProjectsOfUser,
+  getJoinedProjectsOfUser,
+  getProject,
+  insertProject,
+  joinProject,
+}
