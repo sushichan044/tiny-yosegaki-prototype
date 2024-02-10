@@ -23,12 +23,15 @@ const projects = pgTable(
     }).defaultNow(),
     deadLineDate: timestamp("dead_line_date", {
       withTimezone: true,
-    }).notNull(),
+    }),
     hasThumbnail: boolean("has_thumbnail").notNull().default(false),
     projectDescription: text("project_description").notNull(),
     projectId: uuid("project_id").defaultRandom().primaryKey(),
     projectName: text("project_name").notNull(),
-    tags: text("tags").array().notNull(),
+    status: text("status", {
+      enum: ["prepare", "open", "closed"],
+    }).default("prepare"),
+    tags: text("tags").array().notNull().default([]),
     updatedAt: timestamp("updated_at", {
       withTimezone: true,
     }).defaultNow(),
@@ -50,7 +53,17 @@ const projectsRelations = relations(projects, ({ many, one }) => ({
   messages: many(messages),
 }))
 
-const ProjectInsertSchema = createInsertSchema(projects)
+const ProjectInsertSchema = createInsertSchema(projects, {
+  deadLineDate: (s) =>
+    s.deadLineDate.min(
+      new Date(),
+      "締め切り日は現在時刻より後である必要があります。",
+    ),
+  projectDescription: (s) =>
+    s.projectDescription.min(1, "企画の説明は1文字以上である必要があります。"),
+  projectName: (s) =>
+    s.projectName.min(1, "企画名は1文字以上である必要があります。"),
+})
 const ProjectSelectSchema = createSelectSchema(projects)
 
 type ProjectInsert = typeof projects.$inferInsert
