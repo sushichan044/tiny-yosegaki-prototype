@@ -35,6 +35,8 @@ export async function middleware(request: NextRequest) {
           })
         },
         set(name: string, value: string, options: CookieOptions) {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { httpOnly, secure, ...rest } = options
           request.cookies.set({
             name,
             value,
@@ -46,16 +48,19 @@ export async function middleware(request: NextRequest) {
             },
           })
           response.cookies.set({
+            httpOnly: true,
             name,
+            secure: true,
             value,
-            ...options,
+            ...rest,
           })
         },
       },
     },
   )
 
-  await supabase.auth.getUser()
+  await supabase.auth.getSession()
+  // await supabase.auth.getUser()
 
   return response
 }
