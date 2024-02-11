@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, Text } from "@mantine/core"
+import { Button, Tooltip } from "@mantine/core"
 import { IconMail } from "@tabler/icons-react"
 import { useState } from "react"
 
@@ -8,32 +8,33 @@ type Props = {
   redirectTo?: string | undefined
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const EmailButton: React.FC<Props> = ({ redirectTo }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false)
 
-  const handleClick = async () => {
-    setLoading(true)
-    // implement email login
-    console.log("redirect to", redirectTo)
-  }
+  // const handleClick = async () => {
+  //   setLoading(true)
+  //   // implement email login
+  //   console.log("redirect to", redirectTo)
+  // }
 
   return (
-    <div>
+    <Tooltip label="メールアドレスでのログインは現在準備中です。">
       <Button
         color="gray"
-        disabled
+        data-disabled
+        justify="space-between"
         leftSection={<IconMail />}
         loading={loading}
-        onClick={handleClick}
-        radius="lg"
-        size="xl"
+        onClick={(e) => e.preventDefault()}
+        radius="md"
+        rightSection={<span></span>}
+        size="lg"
       >
         メールアドレスでログイン
       </Button>
-      <Text className="text-center pt-1" size="sm">
-        メールアドレスでのログインは現在準備中です。
-      </Text>
-    </div>
+    </Tooltip>
   )
 }
 

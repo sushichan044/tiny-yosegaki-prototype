@@ -7,7 +7,7 @@ import { tv } from "tailwind-variants"
 const styles = tv({
   slots: {
     wrapper:
-      "flex flex-col flex-nowrap gap-y-8 justify-center max-w-80 mx-auto",
+      "flex flex-col flex-nowrap gap-y-6 justify-center max-w-80 mx-auto",
   },
 })()
 
@@ -20,8 +20,8 @@ export default function SignIn({ redirectTo }: Props) {
 
   return (
     <div className={styles.wrapper()}>
-      <TwitterButton redirectTo={redirectTo} />
       <EmailButton />
+      <TwitterButton redirectTo={redirectTo} />
       <Alert
         color="nayuta"
         icon={<IconAlertTriangle />}

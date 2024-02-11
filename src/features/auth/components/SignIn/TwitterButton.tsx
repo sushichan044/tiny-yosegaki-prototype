@@ -20,13 +20,15 @@ const SignInButton: React.FC<Props> = ({ redirectTo }) => {
   return (
     <Button
       color="nakuru"
+      justify="space-between"
       leftSection={<IconBrandTwitter />}
       loading={loading}
       onClick={handleClick}
-      radius="lg"
-      size="xl"
+      radius="md"
+      rightSection={<span></span>}
+      size="lg"
     >
-      Twitterでログイン
+      Twitterでログイン/登録
     </Button>
   )
 }

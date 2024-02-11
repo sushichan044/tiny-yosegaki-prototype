@@ -1,7 +1,7 @@
 "use client"
 
 import SignIn from "@/features/auth/components/SignIn"
-import { Button, Modal } from "@mantine/core"
+import { Button, Modal, Text } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import { usePathname } from "next/navigation"
 
@@ -20,7 +20,11 @@ const SignInModal = () => {
         onClose={close}
         opened={opened}
         size="md"
-        title="ログイン"
+        title={
+          <Text fw="bold" size="lg">
+            ログイン
+          </Text>
+        }
       >
         <SignIn redirectTo={pathName} />
       </Modal>
