@@ -2,8 +2,10 @@
 
 import type { AuthError } from "@supabase/supabase-js"
 
+import { USER_PROFILE_CACHE_TAG } from "@/cache"
 import { createActionClient } from "@/lib/supabase/client/action"
 import { getSiteUrl } from "@/utils/url"
+import { revalidateTag } from "next/cache"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
@@ -52,6 +54,7 @@ const signOut: SignOutFunction = async (options) => {
   if (result.error) {
     console.error(result.error)
   }
+  revalidateTag(USER_PROFILE_CACHE_TAG)
 
   return result
 }

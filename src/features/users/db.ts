@@ -4,11 +4,14 @@ import type { UserInsert } from "@/db/schema/users"
 
 import { db } from "@/db"
 import { UserInsertSchema, type UserSelect, users } from "@/db/schema/users"
+import { getCachedUserFromId } from "@/features/users/next"
 import { createActionClient } from "@/lib/supabase/client/action"
 import { cookies } from "next/headers"
 import "server-only"
 
-type GetUserFromSupabaseFunction = () => Promise<{ data: UserSelect | null }>
+type GetUserFromSupabaseFunction = (options?: {
+  useCache?: boolean
+}) => Promise<{ data: UserSelect | null }>
 type GetUserFromIdFunction = (
   userId: string,
 ) => Promise<{ data: UserSelect | null }>
@@ -46,7 +49,8 @@ const getLatestUserFromSupabase: GetUserFromSupabaseFunction = async () => {
  * Do not use this function on critical paths like user profile pages.
  * @returns {Promise<{ data: User | null }>} The user data or null if not found.
  */
-const getUserFromSession: GetUserFromSupabaseFunction = async () => {
+const getUserFromSession: GetUserFromSupabaseFunction = async (options) => {
+  const useCache = options?.useCache ?? false
   const supabase = createActionClient(cookies())
   const {
     data: { session },
@@ -61,12 +65,11 @@ const getUserFromSession: GetUserFromSupabaseFunction = async () => {
     return { data: null }
   }
 
-  const dbUser = await db.query.users.findFirst({
-    where: (user, { eq }) => {
-      return eq(user.userId, session.user.id)
-    },
-  })
-  return { data: dbUser ?? null }
+  if (useCache) {
+    return await getCachedUserFromId(session.user.id)
+  }
+
+  return await getUserFromId(session.user.id)
 }
 
 const getUserFromId: GetUserFromIdFunction = async (userId) => {
@@ -76,6 +79,15 @@ const getUserFromId: GetUserFromIdFunction = async (userId) => {
     },
   })
   return { data: user ?? null }
+}
+
+const getAllUserIds = async () => {
+  const users = await db.query.users.findMany({
+    columns: {
+      userId: true,
+    },
+  })
+  return users.map((u) => u.userId)
 }
 
 type UpsertUserFunction = (
@@ -109,6 +121,7 @@ const upsertUser: UpsertUserFunction = async (user) => {
 }
 
 export {
+  getAllUserIds,
   getLatestUserFromSupabase,
   getUserFromId,
   getUserFromSession,
