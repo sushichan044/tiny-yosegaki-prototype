@@ -5,10 +5,13 @@ import { signOutUser } from "@/features/users/action"
 import { useServerAction } from "@/hooks/useServerAction"
 import { LoadingOverlay, MenuItem } from "@mantine/core"
 import { IconLogout } from "@tabler/icons-react"
-import { redirect } from "next/navigation"
+import { redirect, usePathname } from "next/navigation"
 
 const SignOutItem = () => {
-  const [runAction, isPending] = useServerAction(signOutUser)
+  const pathName = usePathname()
+  const [runAction, isPending] = useServerAction(() =>
+    signOutUser({ revalidatePath: pathName }),
+  )
 
   const handleClick = () => {
     // @ts-expect-error no arg is needed

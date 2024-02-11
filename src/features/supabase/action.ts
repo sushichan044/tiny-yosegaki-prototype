@@ -5,7 +5,7 @@ import type { AuthError } from "@supabase/supabase-js"
 import { USER_PROFILE_CACHE_TAG } from "@/cache"
 import { createActionClient } from "@/lib/supabase/client/action"
 import { getSiteUrl } from "@/utils/url"
-import { revalidateTag } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
@@ -13,7 +13,13 @@ type SignInFunction = (
   redirectTo?: string | undefined,
 ) => Promise<AuthError | never>
 
-type SignOutFunction = ReturnType<typeof createActionClient>["auth"]["signOut"]
+type SignOutFunction = (
+  options?: Parameters<
+    ReturnType<typeof createActionClient>["auth"]["signOut"]
+  >[0] & {
+    pathName?: string | undefined
+  },
+) => ReturnType<ReturnType<typeof createActionClient>["auth"]["signOut"]>
 
 type GetUserFunction = () => ReturnType<
   ReturnType<typeof createActionClient>["auth"]["getUser"]
@@ -55,6 +61,9 @@ const signOut: SignOutFunction = async (options) => {
     console.error(result.error)
   }
   revalidateTag(USER_PROFILE_CACHE_TAG)
+  if (options?.pathName) {
+    revalidatePath(options.pathName, "layout")
+  }
 
   return result
 }

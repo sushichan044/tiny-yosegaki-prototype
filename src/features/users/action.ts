@@ -8,7 +8,6 @@ import { uploadArrayBufferIcon } from "@/features/users/avatar/upload"
 import { upsertUser } from "@/features/users/db"
 import { revalidatePath, revalidateTag } from "next/cache"
 import { cookies } from "next/headers"
-import { redirect } from "next/navigation"
 
 const createNewUserProfile = async (user: UserInsert) => {
   const res = await UserInsertSchema.safeParseAsync(user)
@@ -55,13 +54,8 @@ const uploadUserAvatar = async ({
   return { data: res.data.path, error: null }
 }
 
-const signOutUser = async () => {
-  const { error } = await signOut()
-  if (!error) {
-    revalidateTag(USER_PROFILE_CACHE_TAG)
-    redirect("/")
-  }
-  return { error }
+const signOutUser = async (options?: { revalidatePath: string | undefined }) => {
+  return await signOut({ pathName: options?.revalidatePath, scope: "local" })
 }
 
 export {
