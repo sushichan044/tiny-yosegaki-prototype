@@ -1,5 +1,3 @@
-import Footer from "@/components/layouts/Footer"
-import Header from "@/components/layouts/Header"
 import { Container } from "@mantine/core"
 
 export default function NormalLayout({
@@ -9,13 +7,11 @@ export default function NormalLayout({
 }) {
   return (
     <>
-      <Header />
       <main className="flex-1 bg-white">
         <Container className="my-4 md:my-8" size="sm">
           {children}
         </Container>
       </main>
-      <Footer />
     </>
   )
 }
