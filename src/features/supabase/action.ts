@@ -63,7 +63,7 @@ const signOut: SignOutFunction = async (options) => {
   revalidateTag(USER_PROFILE_CACHE_TAG)
   revalidatePath("/", "layout")
   if (options?.pathName) {
-    revalidatePath(options.pathName)
+    revalidatePath(options.pathName, "layout")
   }
 
   return result

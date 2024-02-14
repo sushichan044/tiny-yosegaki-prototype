@@ -1,3 +1,5 @@
+import type { z } from "zod"
+
 import { projects } from "@/db/schema"
 import { messages } from "@/db/schema/messages"
 import { usersToJoinedProjects } from "@/db/schema/usersJoinedProjects"
@@ -49,8 +51,21 @@ const UserInsertSchema = createInsertSchema(users, {
 })
 const UserSelectSchema = createSelectSchema(users)
 
+const UserUpdateSchema = UserInsertSchema.pick({
+  showTwitterOnProfile: true,
+  userId: true,
+  userName: true,
+})
+
 type UserInsert = typeof users.$inferInsert
 type UserSelect = typeof users.$inferSelect
+type UserUpdate = z.infer<typeof UserUpdateSchema>
 
-export { UserInsertSchema, UserSelectSchema, users, usersRelations }
-export type { UserInsert, UserSelect }
+export {
+  UserInsertSchema,
+  UserSelectSchema,
+  UserUpdateSchema,
+  users,
+  usersRelations,
+}
+export type { UserInsert, UserSelect, UserUpdate }

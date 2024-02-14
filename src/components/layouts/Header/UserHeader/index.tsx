@@ -31,11 +31,15 @@ const UserHeader = () => {
             style={styles}
           >
             {user ? (
-              <UserMenu user={user} />
+              <>
+                <UserMenu user={user} />
+                <div className="max-md:hidden">
+                  <PostButton />
+                </div>
+              </>
             ) : (
               <>
                 <SignInModal />
-                <div className="max-md:hidden">{user && <PostButton />}</div>
               </>
             )}
           </div>

@@ -1,11 +1,17 @@
 "use server"
 
-import type { UserInsert } from "@/db/schema/users"
+import type { UserInsert, UserUpdate } from "@/db/schema/users"
 
 import { db } from "@/db"
-import { UserInsertSchema, type UserSelect, users } from "@/db/schema/users"
+import {
+  UserInsertSchema,
+  type UserSelect,
+  UserUpdateSchema,
+  users,
+} from "@/db/schema/users"
 import { getCachedUserFromId } from "@/features/users/next"
 import { createActionClient } from "@/lib/supabase/client/action"
+import { eq } from "drizzle-orm"
 import { cookies } from "next/headers"
 import "server-only"
 
@@ -120,10 +126,33 @@ const upsertUser: UpsertUserFunction = async (user) => {
   return { error: null }
 }
 
+const updateUser = async (user: UserUpdate) => {
+  const res = await UserUpdateSchema.safeParseAsync(user)
+  if (!res.success) {
+    return { error: "Invalid user update" }
+  }
+  try {
+    await db
+      .update(users)
+      .set({
+        showTwitterOnProfile: res.data.showTwitterOnProfile,
+        updatedAt: new Date(),
+        userName: res.data.userName,
+      })
+      .where(eq(users.userId, res.data.userId))
+  } catch (err) {
+    console.error("updateUser", err)
+    return { error: "Failed to update user" }
+  }
+
+  return { error: null }
+}
+
 export {
   getAllUserIds,
   getLatestUserFromSupabase,
   getUserFromId,
   getUserFromSession,
+  updateUser,
   upsertUser,
 }

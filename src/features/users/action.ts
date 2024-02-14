@@ -1,11 +1,13 @@
 "use server"
 
+import type { UserUpdate } from "@/db/schema/users"
+
 import { USER_PROFILE_CACHE_TAG } from "@/cache"
 import { db } from "@/db"
 import { type UserInsert, UserInsertSchema, users } from "@/db/schema/users"
 import { signOut } from "@/features/supabase/action"
 import { uploadArrayBufferIcon } from "@/features/users/avatar/upload"
-import { upsertUser } from "@/features/users/db"
+import { updateUser } from "@/features/users/db"
 import { revalidatePath, revalidateTag } from "next/cache"
 import { cookies } from "next/headers"
 
@@ -26,8 +28,8 @@ const createNewUserProfile = async (user: UserInsert) => {
   return { error: null }
 }
 
-const updateUserProfile = async (user: UserInsert) => {
-  const res = await upsertUser(user)
+const updateUserProfile = async (user: UserUpdate) => {
+  const res = await updateUser(user)
   revalidateTag(USER_PROFILE_CACHE_TAG)
   revalidatePath("/settings")
   return res
@@ -54,7 +56,9 @@ const uploadUserAvatar = async ({
   return { data: res.data.path, error: null }
 }
 
-const signOutUser = async (options?: { revalidatePath: string | undefined }) => {
+const signOutUser = async (options?: {
+  revalidatePath: string | undefined
+}) => {
   return await signOut({ pathName: options?.revalidatePath, scope: "local" })
 }
 

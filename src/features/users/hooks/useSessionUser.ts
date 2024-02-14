@@ -8,7 +8,7 @@ const useSessionUser = () => {
   const [user, setUser] = useState<UserSelect | null>(null)
   const [isInitial, setIsInitial] = useState(true)
   const [runAction, isPending] = useServerAction(() =>
-    getUserFromSession({ useCache: true }),
+    getUserFromSession({ useCache: false }),
   )
 
   useEffect(() => {

@@ -8,7 +8,6 @@ import { useProfileForm } from "@/features/users/setting/useProfileForm"
 import { Button, Switch, Text, TextInput } from "@mantine/core"
 import { notifications } from "@mantine/notifications"
 import { IconX } from "@tabler/icons-react"
-import { useCallback } from "react"
 import { Controller, useFormState } from "react-hook-form"
 
 const SubmitButton: React.FC<{ control: Control<UserInsert> }> = ({
@@ -34,31 +33,28 @@ type ProfileFormProps = {
 
 const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   const { control, handleSubmit } = useProfileForm({ user })
-  const onSubmit: SubmitHandler<UserInsert> = useCallback(
-    async (data) => {
-      const { error } = await updateUserProfile({
-        showTwitterOnProfile: data.showTwitterOnProfile,
-        twitterId: user.twitterId,
-        userId: user.userId,
-        userName: data.userName,
+
+  const onSubmit: SubmitHandler<UserInsert> = async (data) => {
+    const { error } = await updateUserProfile({
+      showTwitterOnProfile: data.showTwitterOnProfile,
+      userId: user.userId,
+      userName: data.userName,
+    })
+    if (error) {
+      notifications.show({
+        color: "nayuta",
+        icon: <IconX stroke={1} />,
+        message: error,
+        title: "ユーザー情報の編集に失敗しました。",
       })
-      if (error) {
-        notifications.show({
-          color: "nayuta",
-          icon: <IconX stroke={1} />,
-          message: error,
-          title: "ユーザー情報の編集に失敗しました。",
-        })
-      } else {
-        notifications.show({
-          color: "nakuru",
-          message: "ユーザー情報を編集しました。",
-          title: "成功",
-        })
-      }
-    },
-    [user.userId, user.twitterId],
-  )
+    } else {
+      notifications.show({
+        color: "nakuru",
+        message: "ユーザー情報を編集しました。",
+        title: "成功",
+      })
+    }
+  }
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
