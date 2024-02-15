@@ -31,8 +31,10 @@ export default async function Page({ params }: ProjectParams) {
       >{`${projectData.projectName}にメッセージを投稿する`}</Title>
       <MessageForm
         projectId={projectId}
-        userId={userData.userId}
-        userName={userData.userName}
+        user={{
+          userId: userData.userId,
+          userName: userData.userName,
+        }}
       />
     </>
   )
