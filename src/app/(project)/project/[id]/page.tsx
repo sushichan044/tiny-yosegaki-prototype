@@ -1,9 +1,17 @@
+import { db } from "@/db"
 import { getCachedProject } from "@/features/projects/next"
 import { Button, Title } from "@mantine/core"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
 type ProjectParams = { params: { id: string } }
+
+export async function generateStaticParams() {
+  const projects = await db.query.projects.findMany({
+    columns: { projectId: true },
+  })
+  return projects.map((p) => ({ id: p.projectId }))
+}
 
 export default async function Page({ params }: ProjectParams) {
   const project = await getCachedProject(params.id)
@@ -14,9 +22,7 @@ export default async function Page({ params }: ProjectParams) {
   return (
     <>
       <div>
-        <Title order={1}>
-          {project.projectName}
-        </Title>
+        <Title order={1}>{project.projectName}</Title>
         <Button
           color="nakuru"
           component={Link}

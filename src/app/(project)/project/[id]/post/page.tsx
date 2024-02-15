@@ -1,3 +1,4 @@
+import { db } from "@/db"
 import MessageForm from "@/features/messages/components/MessageForm"
 import { cachedCheckProjectIsAvailable } from "@/features/projects/next"
 import { getLatestUserFromSupabase } from "@/features/users/db"
@@ -5,6 +6,13 @@ import { Title } from "@mantine/core"
 import { notFound } from "next/navigation"
 
 type ProjectParams = { params: { id: string } }
+
+export async function generateStaticParams() {
+  const projects = await db.query.projects.findMany({
+    columns: { projectId: true },
+  })
+  return projects.map((p) => ({ id: p.projectId }))
+}
 
 export default async function Page({ params }: ProjectParams) {
   const projectId = params.id
