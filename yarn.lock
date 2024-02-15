@@ -250,7 +250,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.20.13, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.23.7, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.20.13, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.23.7, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
   version: 7.23.9
   resolution: "@babel/runtime@npm:7.23.9"
   dependencies:
@@ -2468,6 +2468,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/twitter-text@npm:^3":
+  version: 3.1.10
+  resolution: "@types/twitter-text@npm:3.1.10"
+  checksum: 10c0/b90ae93104282aff29490252965a7728d8ea9811a7617669936205ab8037d54bb086e51db330e80e0952f340ddc88e593fbd8df61792bb671e353fa6623a26b2
+  languageName: node
+  linkType: hard
+
 "@types/ws@npm:^8.5.10":
   version: 8.5.10
   resolution: "@types/ws@npm:8.5.10"
@@ -4070,6 +4077,13 @@ __metadata:
   dependencies:
     is-what: "npm:^4.1.8"
   checksum: 10c0/01eadd500c7e1db71d32d95a3bfaaedcb839ef891c741f6305ab0461398056133de08f2d1bf4c392b364e7bdb7ce498513896e137a7a183ac2516b065c28a4fe
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^2.5.0":
+  version: 2.6.12
+  resolution: "core-js@npm:2.6.12"
+  checksum: 10c0/00128efe427789120a06b819adc94cc72b96955acb331cb71d09287baf9bd37bebd191d91f1ee4939c893a050307ead4faea08876f09115112612b6a05684b63
   languageName: node
   linkType: hard
 
@@ -7769,6 +7783,7 @@ __metadata:
     "@types/pg": "npm:^8"
     "@types/react": "npm:^18.2.55"
     "@types/react-dom": "npm:^18.2.19"
+    "@types/twitter-text": "npm:^3"
     "@typescript-eslint/eslint-plugin": "npm:^6.21.0"
     "@typescript-eslint/parser": "npm:^6.21.0"
     "@vitejs/plugin-react": "npm:^4.2.1"
@@ -7816,6 +7831,7 @@ __metadata:
     tailwind-variants: "npm:^0.2.0"
     tailwindcss: "npm:^3.4.1"
     tsx: "npm:^4.7.1"
+    twitter-text: "npm:^3.1.0"
     typescript: "npm:^5.3.3"
     vercel: "npm:^33.5.1"
     vite-tsconfig-paths: "npm:^4.3.1"
@@ -9990,6 +10006,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"punycode@npm:1.4.1":
+  version: 1.4.1
+  resolution: "punycode@npm:1.4.1"
+  checksum: 10c0/354b743320518aef36f77013be6e15da4db24c2b4f62c5f1eb0529a6ed02fbaf1cb52925785f6ab85a962f2b590d9cd5ad730b70da72b5f180e2556b8bd3ca08
+  languageName: node
+  linkType: hard
+
 "punycode@npm:^2.1.0":
   version: 2.3.1
   resolution: "punycode@npm:2.3.1"
@@ -11762,6 +11785,25 @@ __metadata:
     debug: "npm:^4.3.4"
     make-fetch-happen: "npm:^11.1.1"
   checksum: 10c0/7c4980ada7a55f2670b895e8d9345ef2eec4a471c47f6127543964a12a8b9b69f16002990e01a138cd775aa954880b461186a6eaf7b86633d090425b4273375b
+  languageName: node
+  linkType: hard
+
+"twemoji-parser@npm:^11.0.2":
+  version: 11.0.2
+  resolution: "twemoji-parser@npm:11.0.2"
+  checksum: 10c0/b06116434ef19dcf34fcc44129482dcf561a4f78fd6525aba55329b5a50b525c68125f95d040e9274cd9a1f3e8315b8e6842bb735c68069530a9cb28422130d6
+  languageName: node
+  linkType: hard
+
+"twitter-text@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "twitter-text@npm:3.1.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.3.1"
+    core-js: "npm:^2.5.0"
+    punycode: "npm:1.4.1"
+    twemoji-parser: "npm:^11.0.2"
+  checksum: 10c0/34f2b42df7a0cde707ae3d9138b0232eabced946ab9f825b2500fbcc0c8be8a494fdf98ab5f4c44d7c652843c0c3846ab0aba952c7e3ca90aad69edb06dccdf5
   languageName: node
   linkType: hard
 

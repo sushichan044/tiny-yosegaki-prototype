@@ -63,6 +63,7 @@
     "sharp": "^0.33.2",
     "tailwind-merge": "^2.2.1",
     "tailwind-variants": "^0.2.0",
+    "twitter-text": "^3.1.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
@@ -80,6 +81,7 @@
     "@types/pg": "^8",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
+    "@types/twitter-text": "^3",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react": "^4.2.1",

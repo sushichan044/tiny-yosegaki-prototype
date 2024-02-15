@@ -1,3 +1,5 @@
+import twitter from "twitter-text"
+
 const TWITTER_PROFILE_IMAGE_URL_REGEX =
   /^https:\/\/pbs\.twimg\.com\/profile_images\/(?<id>\d+)\/(?<prefix>\w+)_(?<variant>normal|bigger|mini)\.jpg$/
 
@@ -30,4 +32,12 @@ const getProfileImageUrl: GetProfileImageUrl = (url: string, options) => {
   )
 }
 
-export { getProfileImageUrl }
+const parseTweet = (s: string) => {
+  const MAX_LENGTH = 280
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { permillage, weightedLength, ...rest } = twitter.parseTweet(s)
+  const percent = Math.floor((weightedLength / MAX_LENGTH) * 100)
+  return { ...rest, percent, weightedLength }
+}
+
+export { getProfileImageUrl, parseTweet }
