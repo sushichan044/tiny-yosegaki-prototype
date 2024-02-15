@@ -1,30 +1,30 @@
-import type { MessageSelect } from "@/db/schema/messages"
+import type { messages } from "@/db/schema"
+import type { SelectColumnsConfig } from "@/db/types"
 
 import { db } from "@/db"
 import "server-only"
 
-const getMessageByUser = async (
-  userId: string,
-): Promise<{ data: MessageSelect | null }> => {
+type GetUserMessageOptions = {
+  columns: SelectColumnsConfig<typeof messages>
+}
+
+const getUserMessage = async (
+  {
+    projectId,
+    userId,
+  }: {
+    projectId: string
+    userId: string
+  },
+  options: Partial<GetUserMessageOptions>,
+) => {
   const message = await db.query.messages.findFirst({
-    where: (messages, { eq }) => {
-      return eq(messages.authorId, userId)
+    where: (message, { and, eq }) => {
+      return and(eq(message.projectId, projectId), eq(message.authorId, userId))
     },
+    ...(options.columns && { columns: options.columns }),
   })
-  return {
-    data: message ?? null,
-  }
+  return { data: message ?? null }
 }
 
-const getAllMessages = async (): Promise<{ data: MessageSelect[] }> => {
-  const messages = await db.query.messages.findMany({
-    where(message, { eq }) {
-      return eq(message.shouldDisplay, true)
-    },
-  })
-  return {
-    data: messages,
-  }
-}
-
-export { getAllMessages, getMessageByUser }
+export { getUserMessage }

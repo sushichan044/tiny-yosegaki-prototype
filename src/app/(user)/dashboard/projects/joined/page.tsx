@@ -10,5 +10,14 @@ export default async function Page() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const projects = await getCachedJoinedProjectsOfUser(data.userId)
 
-  return <></>
+  return (
+    <>
+      {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        projects.map((project) => {
+          return <div key={project.projectId}>{project.projectName}</div>
+        })
+      }
+    </>
+  )
 }

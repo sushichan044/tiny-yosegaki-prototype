@@ -1,5 +1,6 @@
 import { projects } from "@/db/schema/projects"
 import { users } from "@/db/schema/users"
+import { parseTweet } from "@/utils/twitter"
 import { relations } from "drizzle-orm"
 import { boolean, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
@@ -35,7 +36,13 @@ const messagesRelations = relations(messages, ({ one }) => ({
   }),
 }))
 
-const MessageInsertSchema = createInsertSchema(messages)
+const MessageInsertSchema = createInsertSchema(messages, {
+  content: (s) =>
+    s.content
+      .min(1, "1文字以上入力してください。")
+      .refine((s) => parseTweet(s).valid, "文字数制限を超えています。"),
+  displayName: (s) => s.displayName.min(1, "1文字以上入力してください。"),
+})
 const MessageSelectSchema = createSelectSchema(messages)
 
 type MessageInsert = typeof messages.$inferInsert

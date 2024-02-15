@@ -7,6 +7,7 @@ import { getProjectsForCard } from "@/features/projects/action"
 import {
   getCreatedProjectsOfUser,
   getJoinedProjectsOfUser,
+  getProject,
 } from "@/features/projects/db"
 import { unstable_cache } from "next/cache"
 
@@ -34,8 +35,14 @@ const getCachedProjectsForCard = unstable_cache(
   },
 )
 
+const getCachedProject = unstable_cache(
+  async (projectId: string) => getProject(projectId),
+  ["getProject"],
+)
+
 export {
   getCachedCreatedProjectsOfUser,
   getCachedJoinedProjectsOfUser,
+  getCachedProject,
   getCachedProjectsForCard,
 }

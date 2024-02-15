@@ -18,6 +18,28 @@ const getProject = async (projectId: string) => {
   return project
 }
 
+const checkProjectIsAvailable = async (projectId: string) => {
+  const project = await db.query.projects.findFirst({
+    columns: {
+      projectName: true,
+      status: true,
+    },
+    where: (project, { eq }) => {
+      return eq(project.projectId, projectId)
+    },
+  })
+  if (!project) {
+    return {
+      data: null,
+      exists: false as const,
+    }
+  }
+  return {
+    data: project,
+    exists: true as const,
+  }
+}
+
 type GetCreatedProjectsOfUser = (userId: string) => Promise<ProjectSelect[]>
 const getCreatedProjectsOfUser: GetCreatedProjectsOfUser = async (userId) => {
   const projects = await db.query.projects.findMany({
@@ -128,6 +150,7 @@ const joinProject: JoinProjectFunction = async ({ projectId, userId }) => {
 }
 
 export {
+  checkProjectIsAvailable,
   getCreatedProjectsOfUser,
   getJoinedProjectsOfUser,
   getProject,

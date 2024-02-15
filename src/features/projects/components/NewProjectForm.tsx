@@ -4,8 +4,8 @@ import type { ProjectInsert } from "@/db/schema/projects"
 import type { UserSelect } from "@/db/schema/users"
 import type { Control } from "react-hook-form"
 
-import { useNewProjectForm } from "@/features/messages/hooks/useNewProjectForm"
 import { createNewProject } from "@/features/projects/action"
+import { useNewProjectForm } from "@/features/projects/hooks/useNewProjectForm"
 import {
   Button,
   Checkbox,
