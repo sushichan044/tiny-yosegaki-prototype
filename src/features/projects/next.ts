@@ -3,7 +3,10 @@ import {
   USER_CREATED_PROJECTS_CACHE_TAG,
   USER_JOINED_PROJECTS_CACHE_TAG,
 } from "@/cache"
-import { getProjectsForCard } from "@/features/projects/action"
+import {
+  checkProjectIsAvailable,
+  getProjectsForCard,
+} from "@/features/projects/action"
 import {
   getCreatedProjectsOfUser,
   getJoinedProjectsOfUser,
@@ -40,7 +43,16 @@ const getCachedProject = unstable_cache(
   ["getProject"],
 )
 
+const cachedCheckProjectIsAvailable = unstable_cache(
+  async (projectId: string) => checkProjectIsAvailable(projectId),
+  ["checkProjectIsAvailable"],
+  {
+    tags: [ALL_OPENED_PROJECTS_CACHE_TAG],
+  },
+)
+
 export {
+  cachedCheckProjectIsAvailable,
   getCachedCreatedProjectsOfUser,
   getCachedJoinedProjectsOfUser,
   getCachedProject,

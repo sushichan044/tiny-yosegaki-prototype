@@ -5,11 +5,9 @@ import type { ProjectInsert } from "@/db/schema/projects"
 import {
   ALL_OPENED_PROJECTS_CACHE_TAG,
   USER_CREATED_PROJECTS_CACHE_TAG,
-  USER_JOINED_PROJECTS_CACHE_TAG,
 } from "@/cache"
 import { db } from "@/db"
 import { insertProject } from "@/features/projects/db"
-import { joinProject as joinProjectFn } from "@/features/projects/db"
 import { revalidateTag } from "next/cache"
 
 const createNewProject = async (project: ProjectInsert) => {
@@ -60,18 +58,26 @@ const getProjectsForCard = async (
   return projects
 }
 
-const joinProject = async ({
-  projectId,
-  userId,
-}: {
-  projectId: string
-  userId: string
-}) => {
-  const res = await joinProjectFn({ projectId, userId })
-  if (res.success) {
-    revalidateTag(USER_JOINED_PROJECTS_CACHE_TAG)
+const checkProjectIsAvailable = async (projectId: string) => {
+  const project = await db.query.projects.findFirst({
+    columns: {
+      projectName: true,
+      status: true,
+    },
+    where: (project, { eq }) => {
+      return eq(project.projectId, projectId)
+    },
+  })
+  if (!project) {
+    return {
+      data: null,
+      exists: false as const,
+    }
   }
-  return res
+  return {
+    data: project,
+    exists: true as const,
+  }
 }
 
-export { createNewProject, getProjectsForCard, joinProject }
+export { checkProjectIsAvailable, createNewProject, getProjectsForCard }
