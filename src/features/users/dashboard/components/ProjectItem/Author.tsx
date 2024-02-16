@@ -13,7 +13,7 @@ const Author: React.FC<Props> = ({ id, name }) => {
         <Skeleton circle />
       </Avatar>
       <Text c="gray" lineClamp={1} size="sm">
-        主催者: {name}
+        企画者: {name}
       </Text>
     </div>
   )
