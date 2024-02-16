@@ -10,7 +10,7 @@ export default async function Page({
       <aside>
         <DashboardTab />
       </aside>
-      {children}
+      <div className="flex-1">{children}</div>
     </div>
   )
 }

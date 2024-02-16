@@ -3,31 +3,53 @@
 import "@/features/users/dashboard/components/DashBoardTab/tab.scss"
 import { normalizePathName, removePathName } from "@/utils/url"
 import { Tabs } from "@mantine/core"
-import { useMediaQuery } from "@mantine/hooks"
 import { IconBook, IconPencil } from "@tabler/icons-react"
 import { usePathname, useRouter } from "next/navigation"
 
-const DashboardTab = () => {
+const TabRoot = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter()
   const pathName = usePathname()
   const dashboardPath = removePathName(pathName, {
     pathNameToRemove: "/dashboard",
   })
-  const isMobile = useMediaQuery("(max-width: 768px)", true, {
-    getInitialValueInEffect: true,
-  })
 
   return (
-    <Tabs
-      color="nakuru"
-      onChange={(value) => {
-        router.push(`/dashboard${value ? normalizePathName(value) : ""}`)
-      }}
-      orientation={isMobile ? "horizontal" : "vertical"}
-      radius="md"
-      value={dashboardPath}
-      variant="default"
-    >
+    <>
+      <Tabs
+        className="max-md:hidden"
+        color="nakuru"
+        onChange={(value) => {
+          router.push(`/dashboard${value ? normalizePathName(value) : ""}`)
+        }}
+        orientation="vertical"
+        radius="md"
+        value={dashboardPath}
+        variant="default"
+      >
+        {children}
+      </Tabs>
+      <Tabs
+        className="md:hidden"
+        color="nakuru"
+        onChange={(value) => {
+          router.push(`/dashboard${value ? normalizePathName(value) : ""}`)
+        }}
+        orientation="horizontal"
+        radius="md"
+        value={dashboardPath}
+        variant="default"
+      >
+        {children}
+      </Tabs>
+    </>
+  )
+}
+
+const DashboardTab = () => {
+  // const isMobile = useMediaQuery("(max-width: 768px)")
+
+  return (
+    <TabRoot>
       <Tabs.List>
         <Tabs.Tab
           leftSection={<IconBook stroke={1.5} />}
@@ -42,7 +64,7 @@ const DashboardTab = () => {
           参加した寄せ書き
         </Tabs.Tab>
       </Tabs.List>
-    </Tabs>
+    </TabRoot>
   )
 }
 

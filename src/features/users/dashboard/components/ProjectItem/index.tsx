@@ -17,7 +17,7 @@ const ProjectItem: React.FC<Props> = ({ project, variant }) => {
   const postPageUrl = getPostPageUrl(project.projectId)
 
   return (
-    <article>
+    <article className="w-full">
       {isJoinedVariant && (
         <>
           <Author id={project.authorId} name={project.author.userName} />
