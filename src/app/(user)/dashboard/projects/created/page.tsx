@@ -1,4 +1,4 @@
-import { getCachedCreatedProjectsOfUser } from "@/features/projects/next"
+import { getCreatedProjectsOfUser } from "@/features/projects/db"
 import ProjectItem from "@/features/users/dashboard/components/ProjectItem"
 import { getLatestUserFromSupabase } from "@/features/users/db"
 import { Divider, Space, Title } from "@mantine/core"
@@ -10,7 +10,7 @@ export default async function Page() {
   if (!data) {
     redirect("/login")
   }
-  const projects = await getCachedCreatedProjectsOfUser(data.userId)
+  const projects = await getCreatedProjectsOfUser(data.userId)
 
   return (
     <section>

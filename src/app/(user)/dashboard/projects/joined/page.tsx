@@ -1,4 +1,4 @@
-import { getCachedJoinedProjectsOfUser } from "@/features/projects/next"
+import { getJoinedProjectsOfUser } from "@/features/projects/db"
 import ProjectItem from "@/features/users/dashboard/components/ProjectItem"
 import { getUserFromSession } from "@/features/users/db"
 import { Divider, Space, Title } from "@mantine/core"
@@ -10,8 +10,7 @@ export default async function Page() {
   if (!data) {
     redirect("/login")
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const projects = await getCachedJoinedProjectsOfUser(data.userId)
+  const projects = await getJoinedProjectsOfUser(data.userId)
 
   return (
     <section>

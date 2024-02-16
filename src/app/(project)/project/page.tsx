@@ -1,10 +1,9 @@
+import { getProjectsForCard } from "@/features/projects/action"
 import ProjectCard from "@/features/projects/components/ProjectCard"
-import { getCachedProjectsForCard } from "@/features/projects/next"
 import { SimpleGrid } from "@mantine/core"
 
 export default async function Page() {
-  const projects = await getCachedProjectsForCard({ limit: 10 })
-
+  const projects = await getProjectsForCard({ limit: 10 })
   return (
     <SimpleGrid
       cols={{

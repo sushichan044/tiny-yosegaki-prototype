@@ -1,5 +1,5 @@
 import { db } from "@/db"
-import { getCachedUserFromId } from "@/features/users/next"
+import { getUserFromId } from "@/features/users/db"
 import { Title } from "@mantine/core"
 import { notFound } from "next/navigation"
 
@@ -16,7 +16,7 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: UserParams) {
   const { id } = params
-  const { data } = await getCachedUserFromId(id)
+  const { data } = await getUserFromId(id)
   if (!data) {
     notFound()
   }

@@ -1,6 +1,6 @@
 import { db } from "@/db"
 import MessageForm from "@/features/messages/components/MessageForm"
-import { cachedCheckProjectIsAvailable } from "@/features/projects/next"
+import { checkProjectIsAvailable } from "@/features/projects/action"
 import { getLatestUserFromSupabase } from "@/features/users/db"
 import { Title } from "@mantine/core"
 import { notFound } from "next/navigation"
@@ -21,8 +21,7 @@ export default async function Page({ params }: ProjectParams) {
     return <>login required</>
   }
 
-  const { data: projectData, exists } =
-    await cachedCheckProjectIsAvailable(projectId)
+  const { data: projectData, exists } = await checkProjectIsAvailable(projectId)
   if (!exists) {
     notFound()
   }

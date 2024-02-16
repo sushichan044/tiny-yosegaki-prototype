@@ -6,12 +6,15 @@ import { useServerAction } from "@/hooks/useServerAction"
 import { LoadingOverlay, MenuItem } from "@mantine/core"
 import { IconLogout } from "@tabler/icons-react"
 import { usePathname } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 const SignOutItem = () => {
   const pathName = usePathname()
-  const [runAction, isPending] = useServerAction(signOutUser, () =>
-    window.location.reload(),
-  )
+  const router = useRouter()
+  const [runAction, isPending] = useServerAction(signOutUser, () => {
+    router.refresh()
+    window.location.reload()
+  })
 
   const handleClick = () => {
     runAction({ revalidatePath: pathName })

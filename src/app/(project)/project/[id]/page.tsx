@@ -1,5 +1,5 @@
 import { db } from "@/db"
-import { getCachedProject } from "@/features/projects/next"
+import { getProject } from "@/features/projects/db"
 import { Button, Title } from "@mantine/core"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -14,7 +14,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: ProjectParams) {
-  const { data } = await getCachedProject(params.id)
+  const { data } = await getProject(params.id)
   if (!data) {
     notFound()
   }
