@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 // css
 import Footer from "@/components/layouts/Footer"
 import Header from "@/components/layouts/Header"
+import { SITE_NAME } from "@/consts"
 import "@/styles/globals.scss"
 // import { FONT_VARIABLE_CLASS } from "@/lib/font"
 import { theme } from "@/theme"
@@ -15,12 +16,15 @@ import NextTopLoader from "nextjs-toploader"
 
 export const metadata: Metadata = {
   description:
-    "La prière 1st Tour 「SPLASH the TONE」 東京振替公演の開催をお祝いする記念寄せ書きWebサイトです！",
+    "Twitterアカウントだけで気軽にWebサイト完結の寄せ書きを作成できます。",
   robots: {
     follow: false,
     index: false,
   },
-  title: "La prière 1st Tour記念寄せ書きWebサイト",
+  title: {
+    default: `${SITE_NAME}`,
+    template: `%s | ${SITE_NAME}`,
+  },
 }
 
 export default function RootLayout({
@@ -34,7 +38,7 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <NextTopLoader color="#47a6d3" showSpinner={false} />
+        <NextTopLoader color="#37a0d1" showSpinner={false} />
         <MantineProvider theme={theme}>
           <Notifications />
           <Header />

@@ -1,16 +1,28 @@
-import { db } from "@/db"
-import { getProject } from "@/features/projects/db"
+import type { Metadata } from "next"
+
+import { getProject, getProjectForMetaData } from "@/features/projects/db"
 import { Button, Title } from "@mantine/core"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
 type ProjectParams = { params: { id: string } }
 
-export async function generateStaticParams() {
-  const projects = await db.query.projects.findMany({
-    columns: { projectId: true },
-  })
-  return projects.map((p) => ({ id: p.projectId }))
+// export async function generateStaticParams() {
+//   const projects = await db.query.projects.findMany({
+//     columns: { projectId: true },
+//   })
+//   return projects.map((p) => ({ id: p.projectId }))
+// }
+
+export const generateMetadata = async ({
+  params: { id },
+}: ProjectParams): Promise<Metadata> => {
+  const { data } = await getProjectForMetaData(id)
+
+  return {
+    description: data?.projectDescription,
+    title: data?.projectName,
+  }
 }
 
 export default async function Page({ params }: ProjectParams) {

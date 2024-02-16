@@ -1,17 +1,29 @@
-import { db } from "@/db"
-import { getUserFromId } from "@/features/users/db"
+import type { Metadata } from "next"
+
+import { getUserForMetaData, getUserFromId } from "@/features/users/db"
 import { Title } from "@mantine/core"
 import { notFound } from "next/navigation"
 
 type UserParams = { params: { id: string } }
 
-export async function generateStaticParams() {
-  const users = await db.query.users.findMany({
-    columns: {
-      userId: true,
-    },
-  })
-  return users.map((u) => ({ id: u.userId }))
+// export async function generateStaticParams() {
+//   const users = await db.query.users.findMany({
+//     columns: {
+//       userId: true,
+//     },
+//   })
+//   return users.map((u) => ({ id: u.userId }))
+// }
+
+export const generateMetadata = async ({
+  params: { id },
+}: UserParams): Promise<Metadata> => {
+  const { data } = await getUserForMetaData(id)
+
+  return {
+    description: `${data?.userName}さんのプロフィールです。`,
+    title: `${data?.userName}さんのプロフィール`,
+  }
 }
 
 export default async function Page({ params }: UserParams) {

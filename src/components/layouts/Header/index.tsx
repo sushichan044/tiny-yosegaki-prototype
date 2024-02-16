@@ -1,4 +1,5 @@
 import UserHeader from "@/components/layouts/Header/UserHeader"
+import { SITE_NAME } from "@/consts"
 import { Container, Skeleton, Text } from "@mantine/core"
 import Link from "next/link"
 import { Suspense } from "react"
@@ -21,7 +22,7 @@ const Header = () => {
       >
         <div>
           <Text component={Link} href="/">
-            YellBox
+            {SITE_NAME}
           </Text>
         </div>
         <Suspense
