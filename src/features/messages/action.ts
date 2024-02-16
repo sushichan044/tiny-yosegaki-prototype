@@ -1,5 +1,6 @@
 "use server"
 
+import { USER_JOINED_PROJECTS_CACHE_TAG } from "@/cache"
 import { db } from "@/db"
 import { usersToJoinedProjects } from "@/db/schema"
 import {
@@ -7,6 +8,7 @@ import {
   MessageInsertSchema,
   messages,
 } from "@/db/schema/messages"
+import { revalidateTag } from "next/cache"
 
 const getUserMessageForPostForm = async ({
   projectId,
@@ -106,6 +108,7 @@ const upsertMessage: InsertMessageFunction = async (
     }
     return { error: null, success: true as const }
   })
+  revalidateTag(USER_JOINED_PROJECTS_CACHE_TAG)
   return dbRes
 }
 
