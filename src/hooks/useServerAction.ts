@@ -3,8 +3,8 @@ import { useEffect, useRef, useState, useTransition } from "react"
 const useServerAction = <
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Fn extends (...args: any) => any,
-  P extends Parameters<Fn>,
-  R extends ReturnType<Fn>,
+  const P extends Parameters<Fn>,
+  const R extends ReturnType<Fn>,
 >(
   action: (...args: P) => Promise<R>,
   onFinished?: (_: R | undefined) => void,
