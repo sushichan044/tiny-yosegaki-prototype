@@ -18,7 +18,7 @@ const Header = () => {
       <Container
         className={styles.innerWrapper()}
         classNames={{ root: "py-2" }}
-        size="md"
+        size="lg"
       >
         <div>
           <Text component={Link} href="/">

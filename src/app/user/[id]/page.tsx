@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 import { getUserForMetaData, getUserFromId } from "@/features/users/db"
-import { Title } from "@mantine/core"
+import { Container, Title } from "@mantine/core"
 import { notFound } from "next/navigation"
 
 type UserParams = { params: { id: string } }
@@ -34,10 +34,12 @@ export default async function Page({ params }: UserParams) {
   }
 
   return (
-    <>
-      <div>
-        <Title order={1}>{data.userName}</Title>
-      </div>
-    </>
+    <main className="flex-1 bg-white">
+      <Container className="my-6 md:my-12" size="md">
+        <div>
+          <Title order={1}>{data.userName}</Title>
+        </div>
+      </Container>
+    </main>
   )
 }

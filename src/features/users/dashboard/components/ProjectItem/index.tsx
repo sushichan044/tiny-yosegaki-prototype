@@ -43,7 +43,7 @@ const ProjectItem: React.FC<Props> = ({ project, variant }) => {
           )}
         </div>
       </div>
-      <Space h="sm" />
+      <Space h="xs" />
       <div className="flex flex-row items-center">
         <ItemBadge status={project.status} />
       </div>

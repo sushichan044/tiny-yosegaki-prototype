@@ -10,7 +10,7 @@ const styles = tv({
 const Footer = () => {
   return (
     <footer className={styles.wrapper()}>
-      <Container classNames={{ root: "py-4" }} size="md">
+      <Container classNames={{ root: "py-4" }} size="lg">
         Footer
       </Container>
     </footer>
