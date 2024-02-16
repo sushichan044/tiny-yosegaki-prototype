@@ -25,13 +25,13 @@ export default function SignIn({ redirectTo }: Props) {
       <Alert
         color="nayuta"
         icon={<IconAlertTriangle />}
-        title="Twitterでログインする際の注意"
+        title="X(旧Twitter)でログインする際の注意"
         variant="light"
       >
-        Twitterアカウントでログインするには
+        Xアカウントでログインするには
         <b>メールアドレスが登録されている</b>必要があります。
         <br />
-        ログインに失敗する場合は、Twitterアカウントにメールアドレスが登録されいるか今一度ご確認ください。
+        ログインに失敗する場合は、Xアカウントにメールアドレスが登録されいるか今一度ご確認ください。
       </Alert>
     </div>
   )

@@ -16,7 +16,7 @@ import NextTopLoader from "nextjs-toploader"
 
 export const metadata: Metadata = {
   description:
-    "Twitterアカウントだけで気軽にWebサイト完結の寄せ書きを作成できます。",
+    "X(旧Twitter)アカウントだけで気軽にWebサイト完結の寄せ書きを作成できます。",
   robots: {
     follow: false,
     index: false,

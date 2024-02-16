@@ -60,7 +60,7 @@ const UserMenu: React.FC<Props> = async ({
             {userName}
           </Text>
           <Text size="sm">@{twitterId}</Text>
-          <Text size="sm">Twitterでログイン中</Text>
+          <Text size="xs">X(旧Twitter)でログイン中</Text>
         </MenuLabel>
         <MenuDivider />
         <MenuItem

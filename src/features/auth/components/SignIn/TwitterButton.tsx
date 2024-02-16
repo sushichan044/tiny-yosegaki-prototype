@@ -2,7 +2,7 @@
 
 import { signIn } from "@/features/supabase/action"
 import { Button } from "@mantine/core"
-import { IconBrandTwitter } from "@tabler/icons-react"
+import { IconBrandX } from "@tabler/icons-react"
 import { useState } from "react"
 
 type Props = {
@@ -21,14 +21,14 @@ const SignInButton: React.FC<Props> = ({ redirectTo }) => {
     <Button
       color="nakuru"
       justify="space-between"
-      leftSection={<IconBrandTwitter />}
+      leftSection={<IconBrandX />}
       loading={loading}
       onClick={handleClick}
       radius="md"
       rightSection={<span></span>}
       size="lg"
     >
-      Twitterでログイン/登録
+      X(旧Twitter)でログイン
     </Button>
   )
 }

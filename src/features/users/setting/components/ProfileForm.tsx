@@ -67,7 +67,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
               data-1p-ignore
               description={
                 <Text size="sm" span>
-                  この名前は寄せ書きに表示されます。
+                  この名前は寄せ書きでデフォルトの表示名として使用されます。
                 </Text>
               }
               error={error?.message}
@@ -77,6 +77,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
                 </Text>
               }
               required
+              size="md"
               type="text"
               {...field}
             />
@@ -94,12 +95,12 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
               color="nakuru"
               description={
                 <Text size="sm" span>
-                  連携されたTwitterアカウント: @{user.twitterId}
+                  連携されたアカウント: @{user.twitterId}
                 </Text>
               }
               label={
                 <Text fw="bold" span>
-                  Twitterアカウントをプロフィールに表示する
+                  X(旧Twitter)アカウントをプロフィールに表示する
                 </Text>
               }
               labelPosition="left"
