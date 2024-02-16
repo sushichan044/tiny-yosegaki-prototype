@@ -15,37 +15,37 @@ const PostButton = () => {
 }
 
 const UserHeader = () => {
-  const { isInitial, isPending, user } = useSessionUser()
+  const {
+    data: { data, isInitial },
+    isPending,
+  } = useSessionUser()
+
+  if (isInitial || isPending) {
+    return <></>
+  }
 
   return (
-    <>
-      <Transition
-        duration={400}
-        mounted={!isInitial && !isPending}
-        timingFunction="ease"
-        transition="fade"
-      >
-        {(styles) => (
-          <div
-            className="flex flex-row gap-x-4 h-9 overflow-hidden"
-            style={styles}
-          >
-            {user ? (
-              <>
-                <UserMenu user={user} />
-                <div className="max-md:hidden">
-                  <PostButton />
-                </div>
-              </>
-            ) : (
-              <>
-                <SignInModal />
-              </>
-            )}
-          </div>
-        )}
-      </Transition>
-    </>
+    <Transition duration={400} mounted timingFunction="ease" transition="fade">
+      {(styles) => (
+        <div
+          className="flex flex-row gap-x-4 h-9 overflow-hidden"
+          style={styles}
+        >
+          {data ? (
+            <>
+              <UserMenu user={data} />
+              <div className="max-md:hidden">
+                <PostButton />
+              </div>
+            </>
+          ) : (
+            <>
+              <SignInModal />
+            </>
+          )}
+        </div>
+      )}
+    </Transition>
   )
 }
 

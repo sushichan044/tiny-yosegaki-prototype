@@ -1,42 +1,33 @@
+"use client"
+
 import type { UserSelect } from "@/db/schema/users"
 
 import { getUserFromSession } from "@/features/users/db"
-import { useServerAction } from "@/hooks/useServerAction"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useTransition } from "react"
 
 const useSessionUser = () => {
-  const [user, setUser] = useState<UserSelect | null>(null)
-  const [isInitial, setIsInitial] = useState(true)
-  const [runAction, isPending] = useServerAction(() =>
-    getUserFromSession({ useCache: false }),
-  )
+  const [data, setData] = useState<{
+    data: UserSelect | null
+    isInitial: boolean
+  }>({
+    data: null,
+    isInitial: true,
+  })
+  const [isPending, startTransition] = useTransition()
 
   useEffect(() => {
-    //@ts-expect-error no arg is needed
-    runAction()
-      .then((data) => {
-        if (data?.data) {
-          setUser(data.data)
-        }
-        setIsInitial(false)
-      })
-      .catch((e) => {
-        console.error(e)
-        setIsInitial(false)
-      })
+    startTransition(async () => {
+      const { data } = await getUserFromSession({ useCache: true })
+      setData({ data, isInitial: false })
+    })
     return () => {
-      setUser(null)
-      setIsInitial(true)
+      setData({ data: null, isInitial: true })
     }
-    // do not pass runAction as a dependency
-    // it will cause an infinite loop
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return {
-    isInitial,
+    data,
     isPending,
-    user,
   }
 }
 

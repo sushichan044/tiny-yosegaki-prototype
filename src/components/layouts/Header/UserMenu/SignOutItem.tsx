@@ -9,13 +9,12 @@ import { usePathname } from "next/navigation"
 
 const SignOutItem = () => {
   const pathName = usePathname()
-  const [runAction, isPending] = useServerAction(() =>
-    signOutUser({ revalidatePath: pathName }),
-  )
+  const [runAction, isPending] = useServerAction(signOutUser)
 
   const handleClick = () => {
-    // @ts-expect-error no arg is needed
-    runAction()
+    runAction({ revalidatePath: pathName }).then(() => {
+      window.location.reload()
+    })
   }
 
   return (
