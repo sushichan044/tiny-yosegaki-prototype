@@ -23,6 +23,7 @@ const SignOutItem = () => {
   return (
     <MenuItem
       aria-label="ログアウト"
+      color="red"
       leftSection={<IconLogout stroke={ICON_STROKE_WIDTH} />}
       onClick={handleClick}
       role="button"
