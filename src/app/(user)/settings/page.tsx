@@ -1,5 +1,6 @@
 import { getLatestUserFromSupabase } from "@/features/users/db"
 import Setting from "@/features/users/setting/components/Setting"
+import { Container } from "@mantine/core"
 import { redirect } from "next/navigation"
 
 export default async function Page() {
@@ -10,8 +11,8 @@ export default async function Page() {
   }
 
   return (
-    <>
+    <Container size="sm">
       <Setting user={data} />
-    </>
+    </Container>
   )
 }
