@@ -35,7 +35,7 @@ const ProjectItem: React.FC<Props> = ({ project, variant }) => {
             {project.projectName}
           </Text>
         </div>
-        <div className="flex flex-row gap-x-4">
+        <div className="flex flex-row gap-x-2 md:gap-x-4">
           {isJoinedVariant ? (
             <JoinedAction projectId={project.projectId} />
           ) : (
