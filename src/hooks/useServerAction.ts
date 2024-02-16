@@ -1,9 +1,14 @@
 import { useEffect, useRef, useState, useTransition } from "react"
 
-const useServerAction = <P, R>(
-  action: (_: P) => Promise<R>,
+const useServerAction = <
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Fn extends (...args: any) => any,
+  P extends Parameters<Fn>,
+  R extends ReturnType<Fn>,
+>(
+  action: (...args: P) => Promise<R>,
   onFinished?: (_: R | undefined) => void,
-): [(_: P) => Promise<R | undefined>, boolean] => {
+): [(...args: P) => Promise<R | undefined>, boolean] => {
   const [isPending, startTransition] = useTransition()
   const [result, setResult] = useState<R>()
   const [finished, setFinished] = useState(false)
@@ -16,9 +21,9 @@ const useServerAction = <P, R>(
     resolver.current?.(result)
   }, [result, finished, onFinished])
 
-  const runAction = async (args: P): Promise<R | undefined> => {
+  const runAction = async (...args: P): Promise<R | undefined> => {
     startTransition(() => {
-      action(args).then((data) => {
+      action(...args).then((data) => {
         setResult(data)
         setFinished(true)
       })
