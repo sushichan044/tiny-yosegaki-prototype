@@ -1,12 +1,14 @@
-@use "../../../../styles/config/mixins" as mix;
+@use "../../../../../styles/config/mixins" as mix;
 
 .mantine-Tabs-tab {
   display: flex;
   flex-direction: column;
+  font-weight: 700;
+  gap: 0.625rem;
+
   @include mix.mq("md") {
     flex-direction: row;
   }
-  gap: 0.625rem;
 }
 
 .mantine-Tabs-tabSection {

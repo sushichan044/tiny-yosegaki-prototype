@@ -1,4 +1,4 @@
-import DashboardNavigation from "@/features/users/dashboard/components/DashboardNavigation"
+import DashboardTab from "@/features/users/dashboard/components/DashBoardTab"
 
 export default async function Page({
   children,
@@ -8,7 +8,7 @@ export default async function Page({
   return (
     <div className="flex flex-col md:flex-row gap-8">
       <aside>
-        <DashboardNavigation />
+        <DashboardTab />
       </aside>
       {children}
     </div>

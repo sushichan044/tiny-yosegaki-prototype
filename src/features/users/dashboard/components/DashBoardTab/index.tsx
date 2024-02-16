@@ -1,17 +1,16 @@
 "use client"
 
-import { ICON_STROKE_WIDTH } from "@/components/layouts/Header/UserMenu"
-import "@/features/users/dashboard/components/tab.scss"
+import "@/features/users/dashboard/components/DashBoardTab/tab.scss"
 import { normalizePathName, removePathName } from "@/utils/url"
 import { Tabs } from "@mantine/core"
 import { useMediaQuery } from "@mantine/hooks"
 import { IconBook, IconPencil } from "@tabler/icons-react"
 import { usePathname, useRouter } from "next/navigation"
 
-const DashboardNavigation = () => {
+const DashboardTab = () => {
   const router = useRouter()
   const pathName = usePathname()
-  const dashPath = removePathName(pathName, {
+  const dashboardPath = removePathName(pathName, {
     pathNameToRemove: "/dashboard",
   })
   const isMobile = useMediaQuery("(max-width: 768px)", true, {
@@ -25,17 +24,19 @@ const DashboardNavigation = () => {
         router.push(`/dashboard${value ? normalizePathName(value) : ""}`)
       }}
       orientation={isMobile ? "horizontal" : "vertical"}
-      value={dashPath}
+      radius="md"
+      value={dashboardPath}
+      variant="pills"
     >
       <Tabs.List>
         <Tabs.Tab
-          leftSection={<IconBook stroke={ICON_STROKE_WIDTH} />}
+          leftSection={<IconBook stroke={1.5} />}
           value="/projects/created"
         >
           企画した寄せ書き
         </Tabs.Tab>
         <Tabs.Tab
-          leftSection={<IconPencil stroke={ICON_STROKE_WIDTH} />}
+          leftSection={<IconPencil stroke={1.5} />}
           value="/projects/joined"
         >
           参加した寄せ書き
@@ -45,4 +46,4 @@ const DashboardNavigation = () => {
   )
 }
 
-export default DashboardNavigation
+export default DashboardTab

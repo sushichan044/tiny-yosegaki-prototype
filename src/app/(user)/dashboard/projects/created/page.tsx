@@ -1,7 +1,9 @@
 import { getCachedCreatedProjectsOfUser } from "@/features/projects/next"
+import ProjectItem from "@/features/users/dashboard/components/ProjectItem"
 import { getLatestUserFromSupabase } from "@/features/users/db"
-import { Title } from "@mantine/core"
+import { Divider, Space, Title } from "@mantine/core"
 import { redirect } from "next/navigation"
+import React from "react"
 
 export default async function Page() {
   const { data } = await getLatestUserFromSupabase()
@@ -13,11 +15,12 @@ export default async function Page() {
   return (
     <section>
       <Title order={1}>企画した寄せ書き</Title>
-      {projects.map((project) => (
-        <div key={project.projectId}>
-          <h2>{project.projectName}</h2>
-          <p>{project.projectDescription}</p>
-        </div>
+      <Space h="lg" />
+      {projects.map((project, i) => (
+        <React.Fragment key={project.projectId}>
+          {i !== 0 && <Divider />}
+          <ProjectItem project={project} variant="created" />
+        </React.Fragment>
       ))}
     </section>
   )

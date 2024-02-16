@@ -18,18 +18,32 @@ const getProject = async (projectId: string) => {
   return project
 }
 
-type GetCreatedProjectsOfUser = (userId: string) => Promise<ProjectSelect[]>
-const getCreatedProjectsOfUser: GetCreatedProjectsOfUser = async (userId) => {
+export type ProjectSelectWithAuthorName = ProjectSelect & {
+  author: {
+    userName: string
+  }
+}
+
+type GetProjectsOfUserFunction = (
+  userId: string,
+) => Promise<ProjectSelectWithAuthorName[]>
+const getCreatedProjectsOfUser: GetProjectsOfUserFunction = async (userId) => {
   const projects = await db.query.projects.findMany({
     where: (project, { eq }) => {
       return eq(project.authorId, userId)
+    },
+    with: {
+      author: {
+        columns: {
+          userName: true,
+        },
+      },
     },
   })
   return projects
 }
 
-type GetJoinedProjectsOfUser = (userId: string) => Promise<ProjectSelect[]>
-const getJoinedProjectsOfUser: GetJoinedProjectsOfUser = async (userId) => {
+const getJoinedProjectsOfUser: GetProjectsOfUserFunction = async (userId) => {
   const projects = await db.transaction(async (tx) => {
     const joinedProjectIds = await tx.query.usersToJoinedProjects.findMany({
       columns: {
@@ -50,6 +64,13 @@ const getJoinedProjectsOfUser: GetJoinedProjectsOfUser = async (userId) => {
     const projects = await tx.query.projects.findMany({
       where: (project, { inArray }) => {
         return inArray(project.projectId, projectIds)
+      },
+      with: {
+        author: {
+          columns: {
+            userName: true,
+          },
+        },
       },
     })
     return projects
