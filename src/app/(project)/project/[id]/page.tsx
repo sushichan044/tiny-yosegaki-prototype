@@ -14,19 +14,19 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: ProjectParams) {
-  const project = await getCachedProject(params.id)
-  if (!project) {
+  const { data } = await getCachedProject(params.id)
+  if (!data) {
     notFound()
   }
 
   return (
     <>
       <div>
-        <Title order={1}>{project.projectName}</Title>
+        <Title order={1}>{data.projectName}</Title>
         <Button
           color="nakuru"
           component={Link}
-          href={`/project/${project.projectId}/post`}
+          href={`/project/${data.projectId}/post`}
         >
           参加する
         </Button>

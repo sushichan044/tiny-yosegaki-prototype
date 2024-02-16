@@ -5,9 +5,10 @@ import type { ProjectInsert } from "@/db/schema/projects"
 import {
   ALL_OPENED_PROJECTS_CACHE_TAG,
   USER_CREATED_PROJECTS_CACHE_TAG,
+  revalidateProjectWithId,
 } from "@/cache"
 import { db } from "@/db"
-import { insertProject } from "@/features/projects/db"
+import { __deleteProject, insertProject } from "@/features/projects/db"
 import { revalidateTag } from "next/cache"
 
 const createNewProject = async (project: ProjectInsert) => {
@@ -80,4 +81,38 @@ const checkProjectIsAvailable = async (projectId: string) => {
   }
 }
 
-export { checkProjectIsAvailable, createNewProject, getProjectsForCard }
+const checkProjectAuthorIsUser = async ({
+  projectId,
+  userId,
+}: {
+  projectId: string
+  userId: string
+}) => {
+  const project = await db.query.projects.findFirst({
+    columns: {
+      authorId: true,
+    },
+    where: (project, { eq }) => {
+      return eq(project.projectId, projectId)
+    },
+  })
+  if (!project) {
+    return false
+  }
+  return project.authorId === userId
+}
+
+const deleteProject = async (projectId: string) => {
+  await __deleteProject(projectId)
+  revalidateProjectWithId(projectId)
+  revalidateTag(USER_CREATED_PROJECTS_CACHE_TAG)
+  revalidateTag(ALL_OPENED_PROJECTS_CACHE_TAG)
+}
+
+export {
+  checkProjectAuthorIsUser,
+  checkProjectIsAvailable,
+  createNewProject,
+  deleteProject,
+  getProjectsForCard,
+}

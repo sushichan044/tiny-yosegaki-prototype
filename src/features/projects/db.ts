@@ -1,12 +1,13 @@
 import type { ProjectSelect } from "@/db/schema/projects"
 
 import { db } from "@/db"
-import { usersToJoinedProjects } from "@/db/schema"
+import { messages, usersToJoinedProjects } from "@/db/schema"
 import {
   type ProjectInsert,
   ProjectInsertSchema,
   projects,
 } from "@/db/schema/projects"
+import { eq } from "drizzle-orm"
 import "server-only"
 
 const getProject = async (projectId: string) => {
@@ -15,7 +16,7 @@ const getProject = async (projectId: string) => {
       return eq(project.projectId, projectId)
     },
   })
-  return project
+  return { data: project ?? null }
 }
 
 export type ProjectSelectWithAuthorName = ProjectSelect & {
@@ -148,7 +149,18 @@ const joinProject: JoinProjectFunction = async ({ projectId, userId }) => {
   }
 }
 
+const __deleteProject = async (projectId: string) => {
+  await db.transaction(async (tx) => {
+    await tx
+      .delete(usersToJoinedProjects)
+      .where(eq(usersToJoinedProjects.projectId, projectId))
+    await tx.delete(messages).where(eq(messages.projectId, projectId))
+    await tx.delete(projects).where(eq(projects.projectId, projectId))
+  })
+}
+
 export {
+  __deleteProject,
   getCreatedProjectsOfUser,
   getJoinedProjectsOfUser,
   getProject,
