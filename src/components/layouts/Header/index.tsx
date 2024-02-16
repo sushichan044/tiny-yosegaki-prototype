@@ -24,7 +24,16 @@ const Header = () => {
             YellBox
           </Text>
         </div>
-        <Suspense fallback={<Skeleton />}>
+        <Suspense
+          fallback={
+            <div className="flex gap-x-4 flex-row">
+              <Skeleton circle h={36} w={36} />
+              <div className="max-md:hidden">
+                <Skeleton h={36} w={128} />
+              </div>
+            </div>
+          }
+        >
           <UserHeader />
         </Suspense>
       </Container>

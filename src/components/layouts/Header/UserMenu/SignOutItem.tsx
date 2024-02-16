@@ -12,7 +12,7 @@ const SignOutItem = () => {
   const [runAction, isPending] = useServerAction(signOutUser)
 
   const handleClick = () => {
-    runAction({ revalidatePath: pathName }).then(() => {
+    runAction({ revalidatePath: pathName }).finally(() => {
       window.location.reload()
     })
   }
