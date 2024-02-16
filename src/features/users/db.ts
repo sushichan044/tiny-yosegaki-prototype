@@ -67,7 +67,7 @@ const getUserFromSession: GetUserFromSupabaseFunction = async (options) => {
     return { data: null }
   }
   if (!session) {
-    console.error("No session")
+    // console.error("No session")
     return { data: null }
   }
 
