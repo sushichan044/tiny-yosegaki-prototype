@@ -7,7 +7,7 @@ export const USER_JOINED_PROJECTS_CACHE_TAG = "user-joined-projects"
 export const ALL_ACCEPTED_MESSAGES_CACHE_TAG = "accepted_messages"
 export const ALL_OPENED_PROJECTS_CACHE_TAG = "all-opened-projects"
 
-export const revalidateProject = (projectId: string) => {
+export const revalidateProjectWithId = (projectId: string) => {
   revalidatePath(`/project/${projectId}`)
   revalidatePath(`/project/${projectId}/post`)
   revalidatePath(`/project/${projectId}/edit`)
