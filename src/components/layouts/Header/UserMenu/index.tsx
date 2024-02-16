@@ -73,17 +73,17 @@ const UserMenu: React.FC<Props> = async ({
         <MenuDivider />
         <MenuItem
           component={Link}
-          href="/dashboard/projects/joined"
-          leftSection={<IconPencil stroke={ICON_STROKE_WIDTH} />}
-        >
-          参加した寄せ書き
-        </MenuItem>
-        <MenuItem
-          component={Link}
           href="/dashboard/projects/created"
           leftSection={<IconBook stroke={ICON_STROKE_WIDTH} />}
         >
           企画した寄せ書き
+        </MenuItem>
+        <MenuItem
+          component={Link}
+          href="/dashboard/projects/joined"
+          leftSection={<IconPencil stroke={ICON_STROKE_WIDTH} />}
+        >
+          参加した寄せ書き
         </MenuItem>
         <MenuDivider />
         <MenuItem
