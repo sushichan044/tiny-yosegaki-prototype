@@ -26,7 +26,7 @@ const DashboardTab = () => {
       orientation={isMobile ? "horizontal" : "vertical"}
       radius="md"
       value={dashboardPath}
-      variant="pills"
+      variant="default"
     >
       <Tabs.List>
         <Tabs.Tab

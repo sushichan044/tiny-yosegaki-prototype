@@ -11,6 +11,13 @@
   }
 }
 
+.mantine-Tabs-list {
+  justify-content: center;
+  @include mix.mq("md") {
+    justify-content: flex-start;
+  }
+}
+
 .mantine-Tabs-tabSection {
   margin-right: 0;
 }
