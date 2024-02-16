@@ -87,6 +87,18 @@ const getUserFromId: GetUserFromIdFunction = async (userId) => {
   return { data: user ?? null }
 }
 
+const getUserForMetaData = async (userId: string) => {
+  const user = await db.query.users.findFirst({
+    columns: {
+      userName: true,
+    },
+    where: (user, { eq }) => {
+      return eq(user.userId, userId)
+    },
+  })
+  return { data: user ?? null }
+}
+
 const getAllUserIds = async () => {
   const users = await db.query.users.findMany({
     columns: {
@@ -151,6 +163,7 @@ const updateUser = async (user: UserUpdate) => {
 export {
   getAllUserIds,
   getLatestUserFromSupabase,
+  getUserForMetaData,
   getUserFromId,
   getUserFromSession,
   updateUser,

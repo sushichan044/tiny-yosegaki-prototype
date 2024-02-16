@@ -19,6 +19,19 @@ const getProject = async (projectId: string) => {
   return { data: project ?? null }
 }
 
+const getProjectForMetaData = async (projectId: string) => {
+  const project = await db.query.projects.findFirst({
+    columns: {
+      projectDescription: true,
+      projectName: true,
+    },
+    where: (project, { eq }) => {
+      return eq(project.projectId, projectId)
+    },
+  })
+  return { data: project ?? null }
+}
+
 export type ProjectSelectWithAuthorName = ProjectSelect & {
   author: {
     userName: string
@@ -164,6 +177,7 @@ export {
   getCreatedProjectsOfUser,
   getJoinedProjectsOfUser,
   getProject,
+  getProjectForMetaData,
   insertProject,
   joinProject,
 }
