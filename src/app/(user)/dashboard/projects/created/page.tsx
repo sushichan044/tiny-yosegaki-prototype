@@ -24,7 +24,7 @@ export default async function Page() {
       <Space h="lg" />
       {projects.map((project, i) => (
         <React.Fragment key={project.projectId}>
-          {i !== 0 && <Divider />}
+          {i !== 0 && <Divider my="md" />}
           <ProjectItem project={project} variant="created" />
         </React.Fragment>
       ))}
