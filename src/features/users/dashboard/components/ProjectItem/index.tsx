@@ -39,7 +39,10 @@ const ProjectItem: React.FC<Props> = ({ project, variant }) => {
           {isJoinedVariant ? (
             <JoinedAction projectId={project.projectId} />
           ) : (
-            <CreatedAction projectId={project.projectId} />
+            <CreatedAction
+              projectId={project.projectId}
+              status={project.status}
+            />
           )}
         </div>
       </div>
