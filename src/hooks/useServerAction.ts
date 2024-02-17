@@ -14,12 +14,19 @@ const useServerAction = <
   const [finished, setFinished] = useState(false)
   const resolver = useRef<(value?: PromiseLike<R> | R) => void>()
 
+  const handleFinish = useCallback(
+    (result: R | undefined) => {
+      if (onFinished) onFinished(result)
+    },
+    [onFinished],
+  )
+
   useEffect(() => {
     if (!finished) return
 
-    if (onFinished) onFinished(result)
+    handleFinish(result)
     resolver.current?.(result)
-  }, [result, finished, onFinished])
+  }, [result, finished, handleFinish])
 
   const runAction = useCallback(
     async (...args: P): Promise<R | undefined> => {
