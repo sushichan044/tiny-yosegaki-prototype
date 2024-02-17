@@ -10,6 +10,7 @@ import { theme } from "@/theme"
 import { ColorSchemeScript, MantineProvider } from "@mantine/core"
 // eslint-disable-next-line perfectionist/sort-imports
 import "@mantine/core/styles.css"
+import { ModalsProvider } from "@mantine/modals"
 import { Notifications } from "@mantine/notifications"
 import "@mantine/notifications/styles.css"
 import NextTopLoader from "nextjs-toploader"
@@ -40,10 +41,12 @@ export default function RootLayout({
       <body>
         <NextTopLoader color="#37a0d1" showSpinner={false} />
         <MantineProvider theme={theme}>
-          <Notifications />
-          <Header />
-          {children}
-          <Footer />
+          <ModalsProvider>
+            <Notifications />
+            <Header />
+            {children}
+            <Footer />
+          </ModalsProvider>
         </MantineProvider>
       </body>
     </html>
