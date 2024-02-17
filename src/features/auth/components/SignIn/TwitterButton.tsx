@@ -19,7 +19,7 @@ const SignInButton: React.FC<Props> = ({ redirectTo }) => {
 
   return (
     <Button
-      color="nakuru"
+      color="black"
       justify="space-between"
       leftSection={<IconBrandX />}
       loading={loading}

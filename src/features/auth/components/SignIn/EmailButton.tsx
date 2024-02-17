@@ -20,7 +20,10 @@ const EmailButton: React.FC<Props> = ({ redirectTo }) => {
   // }
 
   return (
-    <Tooltip label="メールアドレスでのログインは現在準備中です。">
+    <Tooltip
+      label="メールアドレスでのログインは現在準備中です。"
+      position="bottom"
+    >
       <Button
         color="gray"
         data-disabled

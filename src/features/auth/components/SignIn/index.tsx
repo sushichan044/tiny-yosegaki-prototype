@@ -20,8 +20,8 @@ export default function SignIn({ redirectTo }: Props) {
 
   return (
     <div className={styles.wrapper()}>
-      <EmailButton />
       <TwitterButton redirectTo={redirectTo} />
+      <EmailButton />
       <Alert
         color="nayuta"
         icon={<IconAlertTriangle />}
