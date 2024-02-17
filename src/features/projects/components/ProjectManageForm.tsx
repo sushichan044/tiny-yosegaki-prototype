@@ -154,7 +154,7 @@ const ProjectManageForm: React.FC<Props> = ({ project }) => {
                         企画一覧に表示されます。
                       </Text>
                     }
-                    disabled={disabled || value === "closed"}
+                    disabled={disabled}
                     label={
                       <Text fw="bold" span>
                         準備中
@@ -171,7 +171,7 @@ const ProjectManageForm: React.FC<Props> = ({ project }) => {
                         企画一覧に表示されません。
                       </Text>
                     }
-                    disabled={disabled || value === "closed"}
+                    disabled={disabled}
                     label={
                       <Text fw="bold" span>
                         受付中
@@ -188,13 +188,13 @@ const ProjectManageForm: React.FC<Props> = ({ project }) => {
                         企画一覧に表示されません。
                       </Text>
                     }
-                    disabled={disabled || value === "closed"}
+                    disabled={disabled}
                     label={
                       <Text fw="bold" span>
                         終了
                       </Text>
                     }
-                    value="close"
+                    value="closed"
                   />
                 </Stack>
               </Radio.Group>
