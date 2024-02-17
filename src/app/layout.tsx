@@ -39,7 +39,7 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <NextTopLoader color="#37a0d1" showSpinner={false} />
+        <NextTopLoader color="#37a0d1" height={2} showSpinner={false} />
         <MantineProvider theme={theme}>
           <ModalsProvider>
             <Notifications />
