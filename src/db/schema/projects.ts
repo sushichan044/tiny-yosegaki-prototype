@@ -12,6 +12,7 @@ import {
   varchar,
 } from "drizzle-orm/pg-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
+import { z } from "zod"
 
 const projects = pgTable(
   "projects",
@@ -66,11 +67,25 @@ const ProjectInsertSchema = createInsertSchema(projects, {
     s.projectDescription.min(1, "企画の説明は1文字以上である必要があります。"),
   projectName: (s) =>
     s.projectName.min(1, "企画名は1文字以上である必要があります。"),
+  tags: (s) => s.tags.max(5, "タグは5個までしか追加できません。"),
 })
+
+const ProjectUpdateSchema = ProjectInsertSchema.extend({
+  projectId: z.string().uuid(),
+  tags: z.array(z.string()).max(5, "タグは5個までしか追加できません。"),
+})
+
 const ProjectSelectSchema = createSelectSchema(projects)
 
 type ProjectInsert = typeof projects.$inferInsert
+type ProjectUpdate = z.infer<typeof ProjectUpdateSchema>
 type ProjectSelect = typeof projects.$inferSelect
 
-export { ProjectInsertSchema, ProjectSelectSchema, projects, projectsRelations }
-export type { ProjectInsert, ProjectSelect }
+export {
+  ProjectInsertSchema,
+  ProjectSelectSchema,
+  ProjectUpdateSchema,
+  projects,
+  projectsRelations,
+}
+export type { ProjectInsert, ProjectSelect, ProjectUpdate }

@@ -51,6 +51,10 @@ const getCreatedProjectsOfUser: GetCreatedProjectsOfUserFunction = async (
   userId,
 ) => {
   const projects = await db.query.projects.findMany({
+    orderBy: (project, { desc }) => [
+      desc(project.updatedAt),
+      desc(project.createdAt),
+    ],
     where: (project, { eq }) => {
       return eq(project.authorId, userId)
     },

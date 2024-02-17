@@ -1,11 +1,13 @@
+import type { ProjectParams } from "@/app/(project)/project/[id]/manage/_template"
 import type { Metadata } from "next"
 
 import { checkProjectAuthorIsUser } from "@/features/projects/action"
-import { getProjectForMetaData } from "@/features/projects/db"
+import ManageTab from "@/features/projects/components/ManageTab"
+import ProjectManageForm from "@/features/projects/components/ProjectManageForm"
+import { getProject, getProjectForMetaData } from "@/features/projects/db"
 import { getLatestUserFromSupabase } from "@/features/users/db"
+import { Space, Title } from "@mantine/core"
 import { notFound } from "next/navigation"
-
-type ProjectParams = { params: { id: string } }
 
 // export async function generateStaticParams() {
 //   const projects = await db.query.projects.findMany({
@@ -42,5 +44,26 @@ export default async function Page({ params }: ProjectParams) {
     notFound()
   }
 
-  return <>edit project</>
+  const { data } = await getProject(projectId)
+  if (!data) {
+    // navigate to project not available page
+    notFound()
+  }
+
+  console.log(data)
+
+  return (
+    <div className="flex flex-col gap-8">
+      <aside>
+        <ManageTab projectId={params.id} />
+      </aside>
+      <div className="flex-1">
+        <article>
+          <Title order={1}>企画の管理</Title>
+          <Space h="xl" />
+          <ProjectManageForm project={data} />
+        </article>
+      </div>
+    </div>
+  )
 }

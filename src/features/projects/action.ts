@@ -1,6 +1,6 @@
 "use server"
 
-import type { ProjectInsert } from "@/db/schema/projects"
+import type { ProjectUpdate } from "@/db/schema/projects"
 
 import {
   ALL_OPENED_PROJECTS_CACHE_TAG,
@@ -8,7 +8,13 @@ import {
   revalidateProjectWithId,
 } from "@/cache"
 import { db } from "@/db"
+import {
+  type ProjectInsert,
+  ProjectUpdateSchema,
+  projects,
+} from "@/db/schema/projects"
 import { __deleteProject, insertProject } from "@/features/projects/db"
+import { eq } from "drizzle-orm"
 import { revalidateTag } from "next/cache"
 
 const createNewProject = async (project: ProjectInsert) => {
@@ -20,6 +26,45 @@ const createNewProject = async (project: ProjectInsert) => {
     }
   }
   return res
+}
+
+type UpdateProjectFunction = (project: ProjectUpdate) => Promise<
+  | {
+      error: null
+      success: true
+    }
+  | {
+      error: string
+      success: false
+    }
+>
+const updateProject: UpdateProjectFunction = async (project) => {
+  const res = await ProjectUpdateSchema.safeParseAsync(project)
+  if (!res.success) {
+    return {
+      error: "Zod parse failed: Invalid project",
+      success: false,
+    }
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { updatedAt: _, ...rest } = res.data
+
+  try {
+    await db
+      .update(projects)
+      .set({ updatedAt: new Date(), ...rest })
+      .where(eq(projects.projectId, project.projectId))
+    return {
+      error: null,
+      success: true,
+    }
+  } catch (error: unknown) {
+    console.error(error)
+    return {
+      error: "Failed to update project",
+      success: false,
+    }
+  }
 }
 
 type GetProJectsForCardOptions = {
@@ -102,6 +147,23 @@ const checkProjectAuthorIsUser = async ({
   return project.authorId === userId
 }
 
+// const getProjectForManagePage = async (projectId: string) => {
+//   const project = await db.query.projects.findFirst({
+//     where: (project, { eq }) => {
+//       return eq(project.projectId, projectId)
+//     },
+//     with: {
+//       messages: {
+//         orderBy: (message, { desc }) => {
+//           return desc(message.updatedAt)
+//         },
+//       },
+//     },
+//   })
+
+//   return project
+// }
+
 const deleteProject = async (projectId: string) => {
   await __deleteProject(projectId)
   revalidateProjectWithId(projectId)
@@ -114,5 +176,7 @@ export {
   checkProjectIsAvailable,
   createNewProject,
   deleteProject,
+  // getProjectForManagePage,
   getProjectsForCard,
+  updateProject,
 }
