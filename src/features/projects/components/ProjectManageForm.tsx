@@ -75,6 +75,7 @@ const ProjectManageForm: React.FC<Props> = ({ project }) => {
                 </Text>
               }
               required
+              size="md"
               type="text"
               {...field}
             />
@@ -94,6 +95,7 @@ const ProjectManageForm: React.FC<Props> = ({ project }) => {
               }
               minRows={2}
               required
+              size="md"
               {...field}
             />
           )}
@@ -115,6 +117,7 @@ const ProjectManageForm: React.FC<Props> = ({ project }) => {
                 </Text>
               }
               placeholder="Enterキーかカンマで区切って入力できます。"
+              size="md"
               splitChars={[","]}
               {...field}
             />
@@ -136,6 +139,7 @@ const ProjectManageForm: React.FC<Props> = ({ project }) => {
                     企画の状態
                   </Text>
                 }
+                size="md"
                 value={value ?? undefined}
                 withAsterisk
                 {...rest}

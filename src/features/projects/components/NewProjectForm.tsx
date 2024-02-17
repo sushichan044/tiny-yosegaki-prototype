@@ -72,6 +72,7 @@ const NewProjectForm: React.FC<NewProjectFormProps> = ({ user }) => {
                 </Text>
               }
               required
+              size="md"
               type="text"
               {...field}
             />
@@ -91,6 +92,7 @@ const NewProjectForm: React.FC<NewProjectFormProps> = ({ user }) => {
               }
               minRows={2}
               required
+              size="md"
               {...field}
             />
           )}
@@ -112,6 +114,7 @@ const NewProjectForm: React.FC<NewProjectFormProps> = ({ user }) => {
                 </Text>
               }
               placeholder="カンマで区切って入力できます。"
+              size="md"
               splitChars={[","]}
               {...field}
             />
@@ -137,6 +140,7 @@ const NewProjectForm: React.FC<NewProjectFormProps> = ({ user }) => {
               onChange={(event) => {
                 onChange(event.target.checked ? "open" : "prepare")
               }}
+              size="md"
               {...rest}
             />
           )}
