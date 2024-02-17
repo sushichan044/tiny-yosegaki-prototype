@@ -24,10 +24,13 @@ const useServerAction = <
   const runAction = useCallback(
     async (...args: P): Promise<R | undefined> => {
       startTransition(() => {
-        action(...args).then((data) => {
-          setResult(data)
-          setFinished(true)
-        })
+        action(...args)
+          .then((data) => {
+            setResult(data)
+          })
+          .finally(() => {
+            setFinished(true)
+          })
       })
 
       return new Promise((resolve) => {
