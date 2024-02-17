@@ -1,17 +1,13 @@
 "use client"
 
 import "@/features/users/dashboard/components/DashBoardTab/tab.scss"
-import { normalizePathName, removePathName } from "@/utils/url"
 import { Tabs } from "@mantine/core"
 import { IconBook, IconPencil } from "@tabler/icons-react"
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 const TabRoot = ({ children }: { children: React.ReactNode }) => {
   const pathName = usePathname()
-  // const dashboardPath = removePathName(pathName, {
-  //   pathNameToRemove: "/dashboard",
-  // })
 
   return (
     <>
