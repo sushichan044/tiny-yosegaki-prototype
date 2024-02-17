@@ -13,7 +13,7 @@ const SignOutButton = () => {
     setIsPending(false)
     if (error) {
       notifications.show({
-        color: "red",
+        color: "nayuta",
         message: error.message,
         title: "ログアウトに失敗しました",
       })

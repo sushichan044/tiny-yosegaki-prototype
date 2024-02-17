@@ -19,6 +19,7 @@ const SignInModal = () => {
         closeButtonProps={{ "aria-label": "閉じる" }}
         onClose={close}
         opened={opened}
+        overlayProps={{ backgroundOpacity: 0.2, blur: 3 }}
         size="md"
         title={
           <Text fw="bold" size="lg">
