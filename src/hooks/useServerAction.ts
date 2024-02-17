@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useTransition } from "react"
+import { useCallback, useEffect, useRef, useState, useTransition } from "react"
 
 const useServerAction = <
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -21,18 +21,21 @@ const useServerAction = <
     resolver.current?.(result)
   }, [result, finished, onFinished])
 
-  const runAction = async (...args: P): Promise<R | undefined> => {
-    startTransition(() => {
-      action(...args).then((data) => {
-        setResult(data)
-        setFinished(true)
+  const runAction = useCallback(
+    async (...args: P): Promise<R | undefined> => {
+      startTransition(() => {
+        action(...args).then((data) => {
+          setResult(data)
+          setFinished(true)
+        })
       })
-    })
 
-    return new Promise((resolve) => {
-      resolver.current = resolve
-    })
-  }
+      return new Promise((resolve) => {
+        resolver.current = resolve
+      })
+    },
+    [action],
+  )
 
   return [runAction, isPending]
 }
