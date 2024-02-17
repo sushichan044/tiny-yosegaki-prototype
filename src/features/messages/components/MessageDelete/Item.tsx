@@ -2,7 +2,7 @@
 
 import { deleteMessage } from "@/features/messages/action"
 import { useServerAction } from "@/hooks/useServerAction"
-import { Button, Group, MenuItem, Modal, Text } from "@mantine/core"
+import { Button, Group, MenuItem, Modal, Space, Text } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import { notifications } from "@mantine/notifications"
 import { IconTrash } from "@tabler/icons-react"
@@ -79,6 +79,7 @@ const MessageDeleteItem: React.FC<Props> = ({
               <Text c="gray" size="sm" span>
                 この操作は取り消せません。
               </Text>
+              <Space h="md" />
               <Group justify="flex-end">
                 <Button
                   disabled={isPending}
