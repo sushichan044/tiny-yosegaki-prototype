@@ -1453,6 +1453,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mantine/modals@npm:^7.5.3":
+  version: 7.5.3
+  resolution: "@mantine/modals@npm:7.5.3"
+  peerDependencies:
+    "@mantine/core": 7.5.3
+    "@mantine/hooks": 7.5.3
+    react: ^18.2.0
+    react-dom: ^18.2.0
+  checksum: 10c0/c9b985d77040eb571a4e58e7753eacaf04e2cc3c20800c3ca98abfed42979cd4703f77dcca3431310e3d958c65515b40921de645c73f2969840dfc30b45d8801
+  languageName: node
+  linkType: hard
+
 "@mantine/notifications@npm:^7.5.2":
   version: 7.5.2
   resolution: "@mantine/notifications@npm:7.5.2"
@@ -7766,6 +7778,7 @@ __metadata:
     "@mantine/carousel": "npm:^7.5.2"
     "@mantine/core": "npm:^7.5.2"
     "@mantine/hooks": "npm:^7.5.2"
+    "@mantine/modals": "npm:^7.5.3"
     "@mantine/notifications": "npm:^7.5.2"
     "@mantine/nprogress": "npm:^7.5.2"
     "@radix-ui/react-slot": "npm:^1.0.2"

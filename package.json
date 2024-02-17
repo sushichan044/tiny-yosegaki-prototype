@@ -38,6 +38,7 @@
     "@mantine/carousel": "^7.5.2",
     "@mantine/core": "^7.5.2",
     "@mantine/hooks": "^7.5.2",
+    "@mantine/modals": "^7.5.3",
     "@mantine/notifications": "^7.5.2",
     "@mantine/nprogress": "^7.5.2",
     "@radix-ui/react-slot": "^1.0.2",
