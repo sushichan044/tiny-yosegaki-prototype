@@ -1,5 +1,6 @@
 "use client"
 
+import "@/features/projects/components/ManageTab.scss"
 import { removePathName } from "@/utils/url"
 import { Tabs } from "@mantine/core"
 import { IconMessage, IconSettings } from "@tabler/icons-react"
@@ -25,7 +26,7 @@ const ManageTab: React.FC<Props> = ({ projectId }) => {
       radius="md"
       variant="default"
     >
-      <Tabs.List classNames={{ list: "justify-center font-bold" }}>
+      <Tabs.List>
         <Tabs.Tab
           component={Link}
           // @ts-expect-error this works!

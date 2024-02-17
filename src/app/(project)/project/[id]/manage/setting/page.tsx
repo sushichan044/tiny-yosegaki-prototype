@@ -50,8 +50,6 @@ export default async function Page({ params }: ProjectParams) {
     notFound()
   }
 
-  console.log(data)
-
   return (
     <div className="flex flex-col gap-8">
       <aside>
