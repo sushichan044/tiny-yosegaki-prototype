@@ -1,3 +1,5 @@
+import type { JoinedProjectSelect } from "@/features/projects/db"
+
 import {
   getPostPageUrl,
   getProjectPageUrl,
@@ -8,10 +10,10 @@ import { IconExternalLink, IconPencil } from "@tabler/icons-react"
 import Link from "next/link"
 
 type Props = {
-  projectId: string
+  project: JoinedProjectSelect
 }
 
-const JoinedAction: React.FC<Props> = ({ projectId }) => {
+const JoinedAction: React.FC<Props> = ({ project }) => {
   return (
     <>
       <Tooltip label="寄せ書きを編集する" position="bottom" withArrow>
@@ -19,7 +21,7 @@ const JoinedAction: React.FC<Props> = ({ projectId }) => {
           aria-label="寄せ書きを編集する"
           color="gray"
           component={Link}
-          href={getPostPageUrl(projectId)}
+          href={getPostPageUrl(project.projectId)}
           p={4}
           radius="50%"
           size="lg"
@@ -33,7 +35,7 @@ const JoinedAction: React.FC<Props> = ({ projectId }) => {
           aria-label="寄せ書きを投稿する"
           color="gray"
           component={Link}
-          href={getProjectPageUrl(projectId)}
+          href={getProjectPageUrl(project.projectId)}
           p={4}
           radius="50%"
           size="lg"
@@ -42,7 +44,7 @@ const JoinedAction: React.FC<Props> = ({ projectId }) => {
           <IconExternalLink stroke={1.5} />
         </ActionIcon>
       </Tooltip>
-      <JoinedMenu />
+      <JoinedMenu project={project} />
     </>
   )
 }

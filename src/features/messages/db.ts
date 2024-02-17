@@ -1,7 +1,8 @@
-import type { messages } from "@/db/schema"
 import type { SelectColumnsConfig } from "@/db/types"
 
 import { db } from "@/db"
+import { messages, usersToJoinedProjects } from "@/db/schema"
+import { and, eq } from "drizzle-orm"
 import "server-only"
 
 type GetUserMessageOptions = {
@@ -27,4 +28,36 @@ const getUserMessage = async (
   return { data: message ?? null }
 }
 
-export { getUserMessage }
+export type DeleteMessageArg = {
+  authorId: string
+  messageId: string
+  projectId: string
+}
+
+const __deleteMessage = async ({
+  authorId,
+  messageId,
+  projectId,
+}: DeleteMessageArg) => {
+  await db.transaction(async (tx) => {
+    await tx
+      .delete(usersToJoinedProjects)
+      .where(
+        and(
+          eq(usersToJoinedProjects.projectId, projectId),
+          eq(usersToJoinedProjects.userId, authorId),
+        ),
+      )
+    await tx
+      .delete(messages)
+      .where(
+        and(
+          eq(messages.messageId, messageId),
+          eq(messages.projectId, projectId),
+        ),
+      )
+  })
+  return
+}
+
+export { __deleteMessage, getUserMessage }

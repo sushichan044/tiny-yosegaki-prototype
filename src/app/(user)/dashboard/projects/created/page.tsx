@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 import { getCreatedProjectsOfUser } from "@/features/projects/db"
-import ProjectItem from "@/features/users/dashboard/components/ProjectItem"
+import CreatedItem from "@/features/users/dashboard/components/ProjectItem/CreatedItem"
 import { getLatestUserFromSupabase } from "@/features/users/db"
 import { Divider, Space, Title } from "@mantine/core"
 import { redirect } from "next/navigation"
@@ -25,7 +25,7 @@ export default async function Page() {
       {projects.map((project, i) => (
         <React.Fragment key={project.projectId}>
           {i !== 0 && <Divider my="lg" />}
-          <ProjectItem project={project} variant="created" />
+          <CreatedItem project={project} />
         </React.Fragment>
       ))}
     </section>

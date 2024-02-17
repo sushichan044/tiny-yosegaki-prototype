@@ -1,4 +1,4 @@
-import type { ProjectSelectWithAuthorName } from "@/features/projects/db"
+import type { JoinedProjectSelect } from "@/features/projects/db"
 
 import {
   getManagePageUrl,
@@ -11,7 +11,7 @@ import Link from "next/link"
 
 type Props = {
   projectId: string
-  status: ProjectSelectWithAuthorName["status"]
+  status: JoinedProjectSelect["status"]
 }
 
 const CreatedAction: React.FC<Props> = ({ projectId, status }) => {

@@ -1,5 +1,7 @@
 "use server"
 
+import type { DeleteMessageArg } from "@/features/messages/db"
+
 import { USER_JOINED_PROJECTS_CACHE_TAG } from "@/cache"
 import { db } from "@/db"
 import { usersToJoinedProjects } from "@/db/schema"
@@ -8,6 +10,7 @@ import {
   MessageInsertSchema,
   messages,
 } from "@/db/schema/messages"
+import { __deleteMessage } from "@/features/messages/db"
 import { revalidateTag } from "next/cache"
 
 const getUserMessageForPostForm = async ({
@@ -112,4 +115,18 @@ const upsertMessage: InsertMessageFunction = async (
   return dbRes
 }
 
-export { getUserMessageForPostForm, upsertMessage }
+const deleteMessage = async ({
+  authorId,
+  messageId,
+  projectId,
+}: DeleteMessageArg) => {
+  try {
+    await __deleteMessage({ authorId, messageId, projectId })
+    return { success: true }
+  } catch (e) {
+    console.error(e)
+    return { success: false }
+  }
+}
+
+export { deleteMessage, getUserMessageForPostForm, upsertMessage }

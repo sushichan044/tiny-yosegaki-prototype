@@ -1,15 +1,18 @@
-import {
-  ActionIcon,
-  Menu,
-  MenuDropdown,
-  MenuItem,
-  MenuTarget,
-} from "@mantine/core"
-import { IconChevronDown, IconTrash } from "@tabler/icons-react"
+import type { JoinedProjectSelect } from "@/features/projects/db"
 
-const JoinedMenu = () => {
+import MessageDeleteItem from "@/features/messages/components/MessageDelete/Item"
+import { ActionIcon, Menu, MenuDropdown, MenuTarget } from "@mantine/core"
+import { IconChevronDown } from "@tabler/icons-react"
+
+type Props = {
+  project: JoinedProjectSelect
+}
+
+const JoinedMenu: React.FC<Props> = ({ project: { messages, projectId } }) => {
+  const userMessage = messages[0]
+
   return (
-    <Menu position="bottom-end" shadow="md">
+    <Menu keepMounted position="bottom-end" shadow="md">
       <MenuTarget>
         <ActionIcon
           aria-label="詳細メニューを開く"
@@ -23,9 +26,13 @@ const JoinedMenu = () => {
         </ActionIcon>
       </MenuTarget>
       <MenuDropdown>
-        <MenuItem color="red" leftSection={<IconTrash stroke={1} />}>
-          削除する
-        </MenuItem>
+        <MessageDeleteItem
+          messageAuthorId={userMessage.authorId}
+          messageId={userMessage.messageId}
+          projectId={projectId}
+        >
+          投稿を削除する
+        </MessageDeleteItem>
       </MenuDropdown>
     </Menu>
   )
