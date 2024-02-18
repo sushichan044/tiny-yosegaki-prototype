@@ -103,25 +103,27 @@ const ProjectManageForm: React.FC<Props> = ({ project }) => {
         <Controller
           control={control}
           name="tags"
-          render={({ field, fieldState: { error } }) => (
-            <TagsInput
-              description={
-                <Text size="sm" span>
-                  タグを追加することで他のユーザーが企画を見つけやすくなります。
-                </Text>
-              }
-              error={error?.message}
-              label={
-                <Text fw="bold" span>
-                  タグ
-                </Text>
-              }
-              placeholder="Enterキーかカンマで区切って入力できます。"
-              size="md"
-              splitChars={[","]}
-              {...field}
-            />
-          )}
+          render={({ field, fieldState: { error } }) => {
+            return (
+              <TagsInput
+                description={
+                  <Text size="sm" span>
+                    タグを追加することで他のユーザーが企画を見つけやすくなります。
+                  </Text>
+                }
+                error={error?.message}
+                label={
+                  <Text fw="bold" span>
+                    タグ
+                  </Text>
+                }
+                placeholder="Enterかカンマで入力を確定"
+                size="md"
+                splitChars={[","]}
+                {...field}
+              />
+            )
+          }}
         />
         <Controller
           control={control}
