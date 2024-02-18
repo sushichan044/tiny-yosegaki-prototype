@@ -43,5 +43,22 @@ function isValidIndex<Arr extends readonly unknown[]>(
   return getNumSequence(array.length).includes(value)
 }
 
-export { belongsToArray, getNumSequence, isValidIndex }
+/**
+ * Splits an array into chunks of a specified size.
+ *
+ * @template T The type of elements in the array.
+ * @param {T[]} array The array to be chunked.
+ * @param {number} size The size of each chunk.
+ * @returns {T[][]} An array of chunks.
+ */
+function chunkArray<T>(array: T[], size: number): T[][] {
+  if (!array.length) {
+    return []
+  }
+  const head = array.slice(0, size)
+  const tail = array.slice(size)
+  return [head, ...chunkArray(tail, size)]
+}
+
+export { belongsToArray, chunkArray, getNumSequence, isValidIndex }
 export type { ValidIndex }

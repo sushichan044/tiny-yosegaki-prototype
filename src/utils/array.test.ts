@@ -1,6 +1,11 @@
 import type { ValidIndex } from "@/utils/array"
 
-import { belongsToArray, getNumSequence, isValidIndex } from "@/utils/array"
+import {
+  belongsToArray,
+  chunkArray,
+  getNumSequence,
+  isValidIndex,
+} from "@/utils/array"
 
 describe("belongsToArray", () => {
   it("should return true if value belongs to the allowed values array", () => {
@@ -62,5 +67,39 @@ describe("isValidIndex", () => {
     const array = [1, 2, 3, 4, 5]
     const value = 5
     expect(isValidIndex(array, value)).toBe(false)
+  })
+})
+
+describe("chunkArray", () => {
+  it("should return an empty array if the input array is empty", () => {
+    const array: number[] = []
+    const size = 2
+    const result = chunkArray(array, size)
+    expect(result).toEqual([])
+  })
+
+  it("should return an array of chunks with the specified size", () => {
+    const array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    const size = 3
+    const result = chunkArray(array, size)
+    expect(result).toEqual([
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+    ])
+  })
+
+  it("should handle cases where the input array length is not a multiple of the chunk size", () => {
+    const array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    const size = 4
+    const result = chunkArray(array, size)
+    expect(result).toEqual([[1, 2, 3, 4], [5, 6, 7, 8], [9]])
+  })
+
+  it("should handle cases where the chunk size is greater than the input array length", () => {
+    const array = [1, 2, 3, 4, 5]
+    const size = 10
+    const result = chunkArray(array, size)
+    expect(result).toEqual([[1, 2, 3, 4, 5]])
   })
 })
