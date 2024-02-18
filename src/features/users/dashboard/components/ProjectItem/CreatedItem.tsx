@@ -13,7 +13,7 @@ type Props = {
 const CreatedItem: React.FC<Props> = ({ project }) => {
   return (
     <article className="w-full">
-      <div className="flex flex-row flex-nowrap items-start gap-x-3 md:gap-x-6">
+      <div className="flex flex-row flex-nowrap items-start gap-x-1 md:gap-x-2">
         <div className="flex-1">
           <Text
             component={Link}
@@ -24,7 +24,7 @@ const CreatedItem: React.FC<Props> = ({ project }) => {
             {project.projectName}
           </Text>
         </div>
-        <div className="flex flex-row gap-x-2 md:gap-x-4">
+        <div className="flex flex-row md:gap-x-2">
           <CreatedAction
             projectId={project.projectId}
             status={project.status}

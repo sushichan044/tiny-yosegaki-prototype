@@ -51,7 +51,7 @@ export default async function Page({ params }: ProjectParams) {
   }
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col md:flex-row gap-8">
       <aside>
         <ManageTab projectId={params.id} />
       </aside>

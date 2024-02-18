@@ -7,6 +7,39 @@ import { IconMessage, IconSettings } from "@tabler/icons-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
+const TabRoot = ({
+  children,
+  defaultValue,
+}: {
+  children: React.ReactNode
+  defaultValue: string
+}) => {
+  return (
+    <>
+      <Tabs
+        className="max-md:hidden"
+        color="nakuru"
+        defaultValue={defaultValue}
+        orientation="vertical"
+        radius="md"
+        variant="default"
+      >
+        {children}
+      </Tabs>
+      <Tabs
+        className="md:hidden"
+        color="nakuru"
+        defaultValue={defaultValue}
+        orientation="horizontal"
+        radius="md"
+        variant="default"
+      >
+        {children}
+      </Tabs>
+    </>
+  )
+}
+
 type Props = {
   projectId: string
 }
@@ -19,13 +52,7 @@ const ManageTab: React.FC<Props> = ({ projectId }) => {
   })
 
   return (
-    <Tabs
-      color="nakuru"
-      defaultValue={normalizedPathName}
-      orientation="horizontal"
-      radius="md"
-      variant="default"
-    >
+    <TabRoot defaultValue={normalizedPathName}>
       <Tabs.List>
         <Tabs.Tab
           component={Link}
@@ -46,7 +73,7 @@ const ManageTab: React.FC<Props> = ({ projectId }) => {
           投稿された寄せ書き
         </Tabs.Tab>
       </Tabs.List>
-    </Tabs>
+    </TabRoot>
   )
 }
 

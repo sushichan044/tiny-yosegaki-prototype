@@ -27,7 +27,7 @@ const JoinedItem: React.FC<Props> = ({ project }) => {
             {project.projectName}
           </Text>
         </div>
-        <div className="flex flex-row gap-x-2 md:gap-x-4">
+        <div className="flex flex-row">
           <JoinedAction project={project} />
         </div>
       </div>

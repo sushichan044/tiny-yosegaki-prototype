@@ -7,8 +7,8 @@ export default function NormalLayout({
 }) {
   return (
     <>
-      <main className="flex-1 bg-white">
-        <Container className="my-6 md:my-12" size="sm">
+      <main className="flex-1 bg-gray-100">
+        <Container className="my-6 md:my-12" size="lg">
           {children}
         </Container>
       </main>

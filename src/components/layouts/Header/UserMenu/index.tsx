@@ -56,7 +56,7 @@ const UserMenu: React.FC<Props> = async ({
       </MenuTarget>
       <MenuDropdown>
         <MenuLabel>
-          <Text c="black" fw={600}>
+          <Text c="#2c2c2c" fw={600}>
             {userName}
           </Text>
           <Text size="sm">@{twitterId}</Text>

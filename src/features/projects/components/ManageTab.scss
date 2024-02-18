@@ -4,11 +4,19 @@
   display: flex;
   flex-direction: column;
   font-weight: 700;
-  gap: 0.625rem;
+  gap: 0.25rem;
+
+  @include mix.mq("md") {
+    flex-direction: row;
+    gap: 0.625rem;
+  }
 }
 
 .mantine-Tabs-list {
   justify-content: center;
+  @include mix.mq("md") {
+    justify-content: flex-start;
+  }
 }
 
 .mantine-Tabs-tabSection {
