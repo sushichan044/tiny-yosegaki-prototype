@@ -1,12 +1,11 @@
 "use client"
 
 import type { ProjectSelect, ProjectUpdate } from "@/db/schema/projects"
-import type { Control } from "react-hook-form"
 
+import RHFSubmitButton from "@/components/ui/form/RHFSubmitButton"
 import { updateProject } from "@/features/projects/action"
 import { useProjectManageForm } from "@/features/projects/hooks/useProjectManageForm"
 import {
-  Button,
   Radio,
   Stack,
   TagsInput,
@@ -15,24 +14,7 @@ import {
   Textarea,
 } from "@mantine/core"
 import { notifications } from "@mantine/notifications"
-import { Controller, type SubmitHandler, useFormState } from "react-hook-form"
-
-const SubmitButton: React.FC<{ control: Control<ProjectUpdate> }> = ({
-  control,
-}) => {
-  const { isSubmitting, isValid } = useFormState({ control })
-  return (
-    <Button
-      className="w-fit self-center"
-      color="nakuru"
-      disabled={!isValid}
-      loading={isSubmitting}
-      type="submit"
-    >
-      企画を編集する
-    </Button>
-  )
-}
+import { Controller, type SubmitHandler } from "react-hook-form"
 
 type Props = {
   project: ProjectSelect
@@ -203,7 +185,7 @@ const ProjectManageForm: React.FC<Props> = ({ project }) => {
             )
           }}
         />
-        <SubmitButton control={control} />
+        <RHFSubmitButton control={control}>企画を編集する</RHFSubmitButton>
       </Stack>
     </form>
   )

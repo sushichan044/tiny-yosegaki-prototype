@@ -2,40 +2,16 @@
 
 import type { ProjectInsert } from "@/db/schema/projects"
 import type { UserSelect } from "@/db/schema/users"
-import type { Control } from "react-hook-form"
 
+import RHFSubmitButton from "@/components/ui/form/RHFSubmitButton"
 import { createNewProject } from "@/features/projects/action"
 import { useNewProjectForm } from "@/features/projects/hooks/useNewProjectForm"
-import {
-  Button,
-  Checkbox,
-  TagsInput,
-  Text,
-  TextInput,
-  Textarea,
-} from "@mantine/core"
+import { Checkbox, TagsInput, Text, TextInput, Textarea } from "@mantine/core"
 import { notifications } from "@mantine/notifications"
-import { Controller, type SubmitHandler, useFormState } from "react-hook-form"
+import { Controller, type SubmitHandler } from "react-hook-form"
 
 type NewProjectFormProps = {
   user: UserSelect
-}
-
-const SubmitButton: React.FC<{ control: Control<ProjectInsert> }> = ({
-  control,
-}) => {
-  const { isSubmitting, isValid } = useFormState({ control })
-  return (
-    <Button
-      className="w-fit self-center"
-      color="nakuru"
-      disabled={!isValid}
-      loading={isSubmitting}
-      type="submit"
-    >
-      企画を立てる
-    </Button>
-  )
 }
 
 const NewProjectForm: React.FC<NewProjectFormProps> = ({ user }) => {
@@ -145,7 +121,7 @@ const NewProjectForm: React.FC<NewProjectFormProps> = ({ user }) => {
             />
           )}
         />
-        <SubmitButton control={control} />
+        <RHFSubmitButton control={control}>企画を立てる</RHFSubmitButton>
       </div>
     </form>
   )

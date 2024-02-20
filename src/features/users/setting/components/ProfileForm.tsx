@@ -1,31 +1,15 @@
 "use client"
 
 import type { UserInsert, UserSelect } from "@/db/schema/users"
-import type { Control, SubmitHandler } from "react-hook-form"
+import type { SubmitHandler } from "react-hook-form"
 
+import RHFSubmitButton from "@/components/ui/form/RHFSubmitButton"
 import { updateUserProfile } from "@/features/users/action"
 import { useProfileForm } from "@/features/users/setting/useProfileForm"
-import { Button, Switch, Text, TextInput } from "@mantine/core"
+import { Switch, Text, TextInput } from "@mantine/core"
 import { notifications } from "@mantine/notifications"
 import { IconX } from "@tabler/icons-react"
-import { Controller, useFormState } from "react-hook-form"
-
-const SubmitButton: React.FC<{ control: Control<UserInsert> }> = ({
-  control,
-}) => {
-  const { isSubmitting, isValid } = useFormState({ control })
-  return (
-    <Button
-      className="w-fit self-center"
-      color="nakuru"
-      disabled={!isValid}
-      loading={isSubmitting}
-      type="submit"
-    >
-      保存する
-    </Button>
-  )
-}
+import { Controller } from "react-hook-form"
 
 type ProfileFormProps = {
   user: UserSelect
@@ -109,7 +93,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
             />
           )}
         />
-        <SubmitButton control={control} />
+        <RHFSubmitButton control={control}>保存する</RHFSubmitButton>
       </div>
     </form>
   )
