@@ -129,4 +129,21 @@ const deleteMessage = async ({
   }
 }
 
-export { deleteMessage, getUserMessageForPostForm, upsertMessage }
+const getMessagesForProject = async (projectId: string) => {
+  const res = await db.query.messages.findMany({
+    orderBy(fields, { desc }) {
+      return desc(fields.createdAt)
+    },
+    where(fields, { eq }) {
+      return eq(fields.projectId, projectId)
+    },
+  })
+  return res
+}
+
+export {
+  deleteMessage,
+  getMessagesForProject,
+  getUserMessageForPostForm,
+  upsertMessage,
+}
