@@ -104,6 +104,23 @@ const getProjectsForCard = async (
   return projects
 }
 
+const getProjectForProjectPage = async (projectId: string) => {
+  const project = await db.query.projects.findFirst({
+    where: (project, { eq }) => {
+      return eq(project.projectId, projectId)
+    },
+    with: {
+      author: {
+        columns: {
+          showTwitterOnProfile: true,
+          userName: true,
+        },
+      },
+    },
+  })
+  return { data: project ?? null }
+}
+
 const checkProjectIsAvailable = async (projectId: string) => {
   const project = await db.query.projects.findFirst({
     columns: {
@@ -176,6 +193,7 @@ export {
   checkProjectIsAvailable,
   createNewProject,
   deleteProject,
+  getProjectForProjectPage,
   // getProjectForManagePage,
   getProjectsForCard,
   updateProject,

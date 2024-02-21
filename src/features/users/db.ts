@@ -87,6 +87,18 @@ const getUserFromId: GetUserFromIdFunction = async (userId) => {
   return { data: user ?? null }
 }
 
+const getUserWithoutTwitterId = async (userId: string) => {
+  const user = await db.query.users.findFirst({
+    columns: {
+      twitterId: false,
+    },
+    where: (user, { eq }) => {
+      return eq(user.userId, userId)
+    },
+  })
+  return { data: user ?? null }
+}
+
 const getUserForMetaData = async (userId: string) => {
   const user = await db.query.users.findFirst({
     columns: {
@@ -166,6 +178,7 @@ export {
   getUserForMetaData,
   getUserFromId,
   getUserFromSession,
+  getUserWithoutTwitterId,
   updateUser,
   upsertUser,
 }

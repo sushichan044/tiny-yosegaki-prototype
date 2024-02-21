@@ -35,6 +35,15 @@ const updateUserProfile = async (user: UserUpdate) => {
   return res
 }
 
+const getUserTwitterId = async (userId: string) => {
+  const res = await db.query.users.findFirst({
+    columns: { twitterId: true },
+    where: (user, { eq }) => eq(user.userId, userId),
+  })
+
+  return res?.twitterId
+}
+
 const uploadUserAvatar = async ({
   formData,
   userId,
@@ -67,6 +76,7 @@ const signOutUser = async (options?: {
 
 export {
   createNewUserProfile,
+  getUserTwitterId,
   signOutUser,
   updateUserProfile,
   uploadUserAvatar,
