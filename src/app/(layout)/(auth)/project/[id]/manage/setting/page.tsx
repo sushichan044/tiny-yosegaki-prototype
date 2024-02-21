@@ -7,7 +7,7 @@ import ProjectManageForm from "@/features/projects/components/ProjectManageForm"
 import { getProject, getProjectForMetaData } from "@/features/projects/db"
 import { getLatestUserFromSupabase } from "@/features/users/db"
 import { Space, Title } from "@mantine/core"
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 
 // export async function generateStaticParams() {
 //   const projects = await db.query.projects.findMany({
@@ -32,7 +32,7 @@ export default async function Page({ params }: ProjectParams) {
   const { data: userData } = await getLatestUserFromSupabase()
   if (!userData) {
     // navigate to project not available page
-    notFound()
+    redirect("/auth/401")
   }
 
   const isCorrectUser = await checkProjectAuthorIsUser({
@@ -41,7 +41,7 @@ export default async function Page({ params }: ProjectParams) {
   })
   if (!isCorrectUser) {
     // navigate to project not available page
-    notFound()
+    redirect("/auth/403")
   }
 
   const { data } = await getProject(projectId)
