@@ -1,8 +1,7 @@
 "use client"
 
 import { uploadUserAvatar } from "@/features/users/action"
-import { getUserAvatarUrl } from "@/features/users/avatar/url"
-import AvatarManagerImage from "@/features/users/setting/components/AvatarManagerImage"
+import UserAvatar from "@/features/users/dashboard/components/UserAvatar"
 import { Container, FileButton, Text } from "@mantine/core"
 import { notifications } from "@mantine/notifications"
 
@@ -11,12 +10,6 @@ type Props = {
 }
 
 const AvatarManager = ({ userId }: Props) => {
-  const avatarSrc = getUserAvatarUrl(userId, {
-    height: 72,
-    quality: 80,
-    width: 72,
-  })
-
   const handleChange = async (payload: File | null) => {
     if (!payload) {
       notifications.show({
@@ -33,20 +26,19 @@ const AvatarManager = ({ userId }: Props) => {
       userId,
     })
     if (error) {
-      console.error(error)
       notifications.show({
         color: "red",
         message: "アバターのアップロードに失敗しました",
         title: "エラー",
       })
-      return
+    } else {
+      notifications.show({
+        color: "green",
+        message:
+          "アイコンを変更しました。反映にはしばらく時間がかかることがあります。",
+        title: "成功",
+      })
     }
-    notifications.show({
-      color: "green",
-      message:
-        "アイコンを変更しました。反映にはしばらく時間がかかることがあります。",
-      title: "成功",
-    })
   }
 
   return (
@@ -54,10 +46,15 @@ const AvatarManager = ({ userId }: Props) => {
       <FileButton accept="image/*" onChange={handleChange}>
         {(props) => (
           <button
-            className="bg-white flex flex-col justify-center items-center gap-y-2"
+            className="bg-transparent flex flex-col justify-center items-center gap-y-2"
             {...props}
           >
-            <AvatarManagerImage avatarSrc={avatarSrc} />
+            <UserAvatar
+              alt="あなたのアバター"
+              size={72}
+              title="クリックしてアバターを編集"
+              userId={userId}
+            />
             <Text
               c="gray"
               className="hocus:underline underline-offset-4"

@@ -51,8 +51,8 @@ const MessageDeleteItem: React.FC<Props> = ({
   const handleCancel = () => {
     close()
   }
-  const handleConfirm = () => {
-    runAction({ authorId: messageAuthorId, messageId, projectId })
+  const handleConfirm = async () => {
+    await runAction({ authorId: messageAuthorId, messageId, projectId })
   }
 
   return (

@@ -16,8 +16,8 @@ const SignOutItem = () => {
     window.location.reload()
   })
 
-  const handleClick = () => {
-    runAction({ revalidatePath: pathName })
+  const handleClick = async () => {
+    await runAction({ revalidatePath: pathName })
   }
 
   return (

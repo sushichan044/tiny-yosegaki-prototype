@@ -11,7 +11,7 @@ import { redirect } from "next/navigation"
 
 type SignInFunction = (
   redirectTo?: string | undefined,
-) => Promise<AuthError | never>
+) => Promise<AuthError | void>
 
 type SignOutFunction = (
   options?: Parameters<
