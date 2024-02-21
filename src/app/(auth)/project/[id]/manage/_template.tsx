@@ -2,6 +2,7 @@ import ManageTab from "@/features/projects/components/ManageTab"
 
 export type ProjectParams = { params: { id: string } }
 
+// SEE: https://github.com/vercel/next.js/issues/48149
 // TODO: use this template when template.tsx accepts params
 export default function Template({
   children,

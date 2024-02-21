@@ -61,7 +61,6 @@ const signOut: SignOutFunction = async (options) => {
     console.error(result.error)
   }
   revalidateTag(USER_PROFILE_CACHE_TAG)
-  revalidatePath("/", "layout")
   if (options?.pathName) {
     revalidatePath(options.pathName, "layout")
   }

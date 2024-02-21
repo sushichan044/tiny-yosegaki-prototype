@@ -68,10 +68,11 @@ const uploadUserAvatar = async ({
 const signOutUser = async (options?: {
   revalidatePath: string | undefined
 }) => {
-  return await signOut({
+  const { error } = await signOut({
     pathName: options?.revalidatePath,
     scope: "local",
   })
+  return { error: error?.message ?? null }
 }
 
 export {

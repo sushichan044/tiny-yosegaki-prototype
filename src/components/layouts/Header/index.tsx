@@ -5,6 +5,10 @@ import Link from "next/link"
 import { Suspense } from "react"
 import { tv } from "tailwind-variants"
 
+type Props = {
+  showUserHeader?: boolean | undefined
+}
+
 const styles = tv({
   slots: {
     innerWrapper: "flex justify-between items-center h-full",
@@ -12,7 +16,9 @@ const styles = tv({
   },
 })()
 
-const Header = () => {
+const Header:React.FC<Props> = ({showUserHeader}) => {
+  showUserHeader ??= true
+
   return (
     <header className={styles.wrapper()}>
       <Container
@@ -25,18 +31,22 @@ const Header = () => {
             {SITE_NAME}
           </Text>
         </div>
-        <Suspense
-          fallback={
-            <div className="flex gap-x-4 flex-row">
-              <Skeleton circle h={36} w={36} />
-              <div className="max-md:hidden">
-                <Skeleton h={36} w={128} />
-              </div>
-            </div>
-          }
-        >
-          <UserHeader />
-        </Suspense>
+        {
+          showUserHeader && (
+            <Suspense
+              fallback={
+                <div className="flex gap-x-4 flex-row">
+                  <Skeleton circle h={36} w={36} />
+                  <div className="max-md:hidden">
+                    <Skeleton h={36} w={128} />
+                  </div>
+                </div>
+              }
+            >
+              <UserHeader />
+            </Suspense>
+          )
+        }
       </Container>
     </header>
   )

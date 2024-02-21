@@ -6,10 +6,10 @@ export default function NormalLayout({
   children: React.ReactNode
 }) {
   return (
-    <>
-      <main className="flex-1 bg-nakuru-50/50">
-        <Container>{children}</Container>
-      </main>
-    </>
+    <main className="flex-1 bg-gray-50">
+      <Container className="my-6 md:my-12" size="lg">
+        {children}
+      </Container>
+    </main>
   )
 }

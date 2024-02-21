@@ -6,7 +6,7 @@ import {
   getUserForMetaData,
   getUserWithoutTwitterId,
 } from "@/features/users/db"
-import { Center, Container,  Stack, Title } from "@mantine/core"
+import { Center, Stack, Title } from "@mantine/core"
 import { notFound } from "next/navigation"
 
 type UserParams = { params: { id: string } }
@@ -39,20 +39,16 @@ export default async function Page({ params }: UserParams) {
   }
 
   return (
-    <main className="flex-1 bg-white">
-      <Container className="my-6 md:my-12" size="md">
-        <Stack gap="lg">
-          <Center>
-            <Stack align="center" gap="xs">
-              <UserAvatar size="lg" userId={id} userName={data.userName} />
-              <Title order={1} size="h2">
-                {data.userName}
-              </Title>
-              <UserTwitterLink userId={id} userName={data.userName} />
-            </Stack>
-          </Center>
+    <Stack gap="lg">
+      <Center>
+        <Stack align="center" gap="xs">
+          <UserAvatar size="lg" userId={id} userName={data.userName} />
+          <Title order={1} size="h2">
+            {data.userName}
+          </Title>
+          <UserTwitterLink userId={id} userName={data.userName} />
         </Stack>
-      </Container>
-    </main>
+      </Center>
+    </Stack>
   )
 }

@@ -5,19 +5,15 @@ import { signOutUser } from "@/features/users/action"
 import { useServerAction } from "@/hooks/useServerAction"
 import { LoadingOverlay, MenuItem } from "@mantine/core"
 import { IconLogout } from "@tabler/icons-react"
-import { usePathname } from "next/navigation"
-import { useRouter } from "next/navigation"
+import { redirect } from "next/navigation"
 
 const SignOutItem = () => {
-  const pathName = usePathname()
-  const router = useRouter()
   const [runAction, isPending] = useServerAction(signOutUser, () => {
-    router.refresh()
-    window.location.reload()
+    redirect("/")
   })
 
   const handleClick = async () => {
-    await runAction({ revalidatePath: pathName })
+    await runAction()
   }
 
   return (

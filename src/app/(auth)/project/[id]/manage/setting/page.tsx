@@ -1,4 +1,4 @@
-import type { ProjectParams } from "@/app/(project)/project/[id]/manage/_template"
+import type { ProjectParams } from "@/app/(auth)/project/[id]/manage/_template"
 import type { Metadata } from "next"
 
 import { checkProjectAuthorIsUser } from "@/features/projects/action"

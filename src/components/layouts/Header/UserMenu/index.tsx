@@ -38,6 +38,7 @@ const UserMenu: React.FC<Props> = ({
 
   return (
     <Menu
+      keepMounted
       position="bottom-end"
       shadow="md"
       transitionProps={{ duration: 200, transition: "fade" }}
