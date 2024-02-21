@@ -32,9 +32,14 @@ const useServerAction = <
     async (...args: P): Promise<R | undefined> => {
       startTransition(() => {
         action(...args)
-          .then((data) => {
-            setResult(data)
-          })
+          .then(
+            (data) => {
+              setResult(data)
+            },
+            (error) => {
+              console.error(error)
+            },
+          )
           .finally(() => {
             setFinished(true)
           })
