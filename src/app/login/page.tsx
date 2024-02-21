@@ -18,7 +18,7 @@ export default async function Page() {
   return (
     <main className="flex-1 bg-white">
       <Container className="my-6 md:my-12" maw={320} p={0}>
-        <Stack gap="xl" mt="25vh">
+        <Stack className="mt-[10vh] md:mt-[20vh]" gap="xl">
           <Center>
             <Title order={1} size="h2">
               ログイン

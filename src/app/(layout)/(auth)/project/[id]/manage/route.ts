@@ -1,4 +1,4 @@
-import type { ProjectParams } from "@/app/(auth)/project/[id]/manage/_template"
+import type { ProjectParams } from "@/app/(layout)/(auth)/project/[id]/manage/_template"
 
 import { redirect } from "next/navigation"
 
