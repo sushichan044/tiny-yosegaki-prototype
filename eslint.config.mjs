@@ -6,7 +6,7 @@ import { nextOnPages } from "./config/eslint/index.mjs"
 /** @type {import("@typescript-eslint/utils").TSESLint.FlatConfig.ConfigArray} */
 const config = [
   {
-    ignores: ["config/**"],
+    ignores: ["config/**", "**/*.config.{js,cjs,mjs}"],
   },
   ...nextOnPages,
 ]
