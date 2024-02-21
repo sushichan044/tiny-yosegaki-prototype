@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 
+import Footer from "@/components/layouts/Footer"
 import Header from "@/components/layouts/Header"
 import { SITE_NAME } from "@/consts"
 import { NOTO_SANS_JP } from "@/lib/font"
@@ -48,6 +49,7 @@ export default function Home() {
           </Container>
         </div>
       </main>
+      <Footer />
     </>
   )
 }

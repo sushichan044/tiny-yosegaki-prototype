@@ -1,7 +1,5 @@
 import type { Metadata } from "next"
 
-import Footer from "@/components/layouts/Footer"
-import Header from "@/components/layouts/Header"
 import SignIn from "@/features/auth/components/SignIn"
 import { getUserFromSession } from "@/features/users/db"
 import { Center, Container, Stack, Title } from "@mantine/core"
@@ -18,8 +16,6 @@ export default async function Page() {
   }
 
   return (
-    <>
-      <Header showUserHeader={false} />
       <main className="flex-1 bg-white">
         <Container className="my-6 md:my-12" maw={320} p={0}>
           <Stack className="mt-[10vh] md:mt-[20vh]" gap="xl">
@@ -32,7 +28,5 @@ export default async function Page() {
           </Stack>
         </Container>
       </main>
-      <Footer />
-    </>
   )
 }
