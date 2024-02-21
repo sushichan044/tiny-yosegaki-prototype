@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 
+import Favicons from "@/components/layouts/meta/Favicons"
 // css
 import { SITE_NAME } from "@/consts"
 import "@/styles/globals.scss"
@@ -35,6 +36,7 @@ export default function RootLayout({
     <html lang="ja">
       <head>
         <ColorSchemeScript />
+        <Favicons />
       </head>
       <body>
         <NextTopLoader color="#37a0d1" height={2} showSpinner={false} />
