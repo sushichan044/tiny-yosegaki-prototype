@@ -36,17 +36,17 @@ export async function GET(request: Request) {
     return NextResponse.redirect(`${origin}/auth/session-error`)
   }
 
-  if (!session || !session.user) {
+  if (!session?.user) {
     console.error("No user in session")
     return NextResponse.redirect(`${origin}/auth/session-error`)
   }
   await createNewUserProfile({
-    twitterId: session.user.user_metadata.user_name,
+    twitterId: session.user.user_metadata.user_name as string,
     userId: session.user.id,
-    userName: session.user.user_metadata.full_name,
+    userName: session.user.user_metadata.full_name as string,
   })
   await uploadNewUserIconFromTwitter(cookieStore, {
-    iconSrc: session.user.user_metadata.avatar_url,
+    iconSrc: session.user.user_metadata.avatar_url as string,
     userId: session.user.id,
   })
 

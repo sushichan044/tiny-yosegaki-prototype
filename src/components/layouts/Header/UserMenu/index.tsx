@@ -27,7 +27,7 @@ type Props = {
 
 export const ICON_STROKE_WIDTH = 1
 
-const UserMenu: React.FC<Props> = async ({
+const UserMenu: React.FC<Props> = ({
   user: { twitterId, userId, userName },
 }) => {
   const avatarSrc = getUserAvatarUrl(userId, {

@@ -3,7 +3,7 @@ import ManageTab from "@/features/projects/components/ManageTab"
 export type ProjectParams = { params: { id: string } }
 
 // TODO: use this template when template.tsx accepts params
-export default async function Template({
+export default function Template({
   children,
   params,
 }: ProjectParams & {

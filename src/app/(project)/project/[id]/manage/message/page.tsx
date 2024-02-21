@@ -2,7 +2,7 @@ import type { ProjectParams } from "@/app/(project)/project/[id]/manage/_templat
 
 import ManageTab from "@/features/projects/components/ManageTab"
 
-export default async function Page({ params }: ProjectParams) {
+export default function Page({ params }: ProjectParams) {
   return (
     <div className="flex flex-col md:flex-row gap-8">
       <aside>

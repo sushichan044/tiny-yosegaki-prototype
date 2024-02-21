@@ -1,6 +1,6 @@
 import DashboardTab from "@/features/users/dashboard/components/DashBoardTab"
 
-export default async function Template({
+export default function Template({
   children,
 }: {
   children: React.ReactNode

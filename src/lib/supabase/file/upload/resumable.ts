@@ -1,4 +1,4 @@
-const uploadFileResumable = async () => {
+const uploadFileResumable = () => {
   throw new Error("Not implemented")
 }
 

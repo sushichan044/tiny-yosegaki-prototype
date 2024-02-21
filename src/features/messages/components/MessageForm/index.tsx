@@ -11,7 +11,7 @@ type Props = {
   }
 }
 
-const MessageForm: React.FC<Props> = async ({ projectId, user }) => {
+const MessageForm: React.FC<Props> = ({ projectId, user }) => {
   const message = getUserMessageForPostForm({ projectId, userId: user.userId })
 
   return (

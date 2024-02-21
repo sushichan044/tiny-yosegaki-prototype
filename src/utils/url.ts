@@ -14,7 +14,7 @@ const getSiteUrl = ({ addTrailingSlash = false }: Options = {}) => {
   url = url.includes("http") ? url : `https://${url}`
   // Make sure to include a trailing `/`.
   if (addTrailingSlash) {
-    url = url.charAt(url.length - 1) === "/" ? url : `${url}/`
+    url = url.endsWith("/") ? url : `${url}/`
   }
   return url
 }
@@ -37,7 +37,7 @@ const normalizePathName = <const Path extends string>(
     return "/" as NormalizePathName<Path>
   }
 
-  if (target.charAt(0) !== "/") {
+  if (!target.startsWith("/")) {
     result = `/${result}`
   }
   if (target.charAt(result.length - 1) === "/") {
