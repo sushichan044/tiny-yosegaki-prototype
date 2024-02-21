@@ -8,14 +8,16 @@ import next from "./_config/next.mjs"
 import style from "./_config/style.mjs"
 import typescript from "./_config/typescript.mjs"
 
-/** @type {import("eslint").Linter.FlatConfig[]} */
-const config = [
+import tseslint from "typescript-eslint"
+
+/** @type {import("@typescript-eslint/utils").TSESLint.FlatConfig.ConfigArray} */
+const config = tseslint.config(
   gitignore(),
   js.configs.recommended,
   ...base,
   ...style,
-  ...typescript,
   ...next,
-]
+  ...typescript,
+)
 
 export default config
