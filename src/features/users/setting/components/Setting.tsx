@@ -3,7 +3,7 @@ import type { UserSelect } from "@/db/schema/users"
 import AvatarManager from "@/features/users/setting/components/AvatarManager"
 import ProfileForm from "@/features/users/setting/components/ProfileForm"
 import "@/features/users/setting/components/ProfileFormSwitch.scss"
-import { Button, Divider, Space, Title } from "@mantine/core"
+import { Button, Center, Divider, Space, Stack, Title } from "@mantine/core"
 
 type Props = {
   user: UserSelect
@@ -11,27 +11,25 @@ type Props = {
 
 const Setting: React.FC<Props> = ({ user }) => {
   return (
-    <article className="flex flex-col gap-y-4">
+    <Stack component="article" gap="lg">
       <Title order={1}>設定</Title>
-      <section>
-        <Title order={2}>プロフィールの編集</Title>
-        <Space h="1.5rem" />
-        <div className="flex flex-col md:flex-row gap-x-4">
-          <AvatarManager userId={user.userId} />
-          <div className="flex-1">
-            <ProfileForm user={user} />
-          </div>
-        </div>
-      </section>
       <Divider />
-      <section>
+      <Stack component="section">
+        <Title order={2}>プロフィールの編集</Title>
+        <AvatarManager userId={user.userId} />
+        <ProfileForm user={user} />
+      </Stack>
+      <Divider />
+      <Stack component="section">
         <Title order={2}>アカウントの削除</Title>
-        <Space h="1.5rem" />
-        <Button color="red" disabled>
-          アカウントを削除する
-        </Button>
-      </section>
-    </article>
+        <Space h="md" />
+        <Center>
+          <Button color="red" disabled>
+            アカウントを削除する
+          </Button>
+        </Center>
+      </Stack>
+    </Stack>
   )
 }
 

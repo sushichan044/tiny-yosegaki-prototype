@@ -2,6 +2,7 @@
 
 import type { SubmitHandler } from "react-hook-form"
 
+import FormStack from "@/components/ui/form/FormStack"
 import RHFSubmitButton from "@/components/ui/form/RHFSubmitButton"
 import { type MessageInsert, MessageInsertSchema } from "@/db/schema/messages"
 import { upsertMessage } from "@/features/messages/action"
@@ -10,7 +11,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import {
   Checkbox,
   RingProgress,
-  Stack,
   Text,
   TextInput,
   Textarea,
@@ -72,7 +72,7 @@ const MessageFormInput: React.FC<Props> = ({ message, projectId, user }) => {
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
-      <Stack gap="md">
+      <FormStack>
         <Controller
           control={control}
           name="displayName"
@@ -150,7 +150,7 @@ const MessageFormInput: React.FC<Props> = ({ message, projectId, user }) => {
         <RHFSubmitButton control={control}>
           メッセージを{isNewMessage ? "投稿" : "編集"}する
         </RHFSubmitButton>
-      </Stack>
+      </FormStack>
     </form>
   )
 }

@@ -3,6 +3,7 @@
 import type { UserInsert, UserSelect } from "@/db/schema/users"
 import type { SubmitHandler } from "react-hook-form"
 
+import FormStack from "@/components/ui/form/FormStack"
 import RHFSubmitButton from "@/components/ui/form/RHFSubmitButton"
 import { updateUserProfile } from "@/features/users/action"
 import { useProfileForm } from "@/features/users/setting/useProfileForm"
@@ -42,7 +43,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-y-4 md:gap-y-6">
+      <FormStack>
         <Controller
           control={control}
           name="userName"
@@ -94,7 +95,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
           )}
         />
         <RHFSubmitButton control={control}>保存する</RHFSubmitButton>
-      </div>
+      </FormStack>
     </form>
   )
 }

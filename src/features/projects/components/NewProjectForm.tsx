@@ -3,6 +3,7 @@
 import type { ProjectInsert } from "@/db/schema/projects"
 import type { UserSelect } from "@/db/schema/users"
 
+import FormStack from "@/components/ui/form/FormStack"
 import RHFSubmitButton from "@/components/ui/form/RHFSubmitButton"
 import { createNewProject } from "@/features/projects/action"
 import { useNewProjectForm } from "@/features/projects/hooks/useNewProjectForm"
@@ -11,10 +12,14 @@ import { notifications } from "@mantine/notifications"
 import { Controller, type SubmitHandler } from "react-hook-form"
 
 type NewProjectFormProps = {
+  isDisabledFeature?: boolean
   user: UserSelect
 }
 
-const NewProjectForm: React.FC<NewProjectFormProps> = ({ user }) => {
+const NewProjectForm: React.FC<NewProjectFormProps> = ({
+  isDisabledFeature,
+  user,
+}) => {
   const { control, handleSubmit } = useNewProjectForm({ authorId: user.userId })
   const onSubmit: SubmitHandler<ProjectInsert> = async (data) => {
     const { error, success } = await createNewProject(data)
@@ -35,9 +40,10 @@ const NewProjectForm: React.FC<NewProjectFormProps> = ({ user }) => {
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-y-4 md:gap-y-6">
+      <FormStack>
         <Controller
           control={control}
+          disabled={isDisabledFeature}
           name="projectName"
           render={({ field, fieldState: { error } }) => (
             <TextInput
@@ -56,6 +62,7 @@ const NewProjectForm: React.FC<NewProjectFormProps> = ({ user }) => {
         />
         <Controller
           control={control}
+          disabled={isDisabledFeature}
           name="projectDescription"
           render={({ field, fieldState: { error } }) => (
             <Textarea
@@ -75,6 +82,7 @@ const NewProjectForm: React.FC<NewProjectFormProps> = ({ user }) => {
         />
         <Controller
           control={control}
+          disabled={isDisabledFeature}
           name="tags"
           render={({ field, fieldState: { error } }) => (
             <TagsInput
@@ -98,6 +106,7 @@ const NewProjectForm: React.FC<NewProjectFormProps> = ({ user }) => {
         />
         <Controller
           control={control}
+          disabled={isDisabledFeature}
           name="status"
           render={({
             field: { onChange, value, ...rest },
@@ -122,7 +131,7 @@ const NewProjectForm: React.FC<NewProjectFormProps> = ({ user }) => {
           )}
         />
         <RHFSubmitButton control={control}>企画を立てる</RHFSubmitButton>
-      </div>
+      </FormStack>
     </form>
   )
 }

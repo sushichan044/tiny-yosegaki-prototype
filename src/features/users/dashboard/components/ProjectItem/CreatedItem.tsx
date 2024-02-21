@@ -3,7 +3,7 @@ import type { CreatedProjectSelect } from "@/features/projects/db"
 import { getProjectPageUrl } from "@/features/projects/utils/url"
 import CreatedAction from "@/features/users/dashboard/components/ProjectItem/CreatedAction"
 import ItemBadge from "@/features/users/dashboard/components/ProjectItem/ItemBadge"
-import { Space, Text } from "@mantine/core"
+import { Stack, Text } from "@mantine/core"
 import Link from "next/link"
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 
 const CreatedItem: React.FC<Props> = ({ project }) => {
   return (
-    <article className="w-full">
+    <Stack component="article" gap="xs">
       <div className="flex flex-row flex-nowrap items-start gap-x-1 md:gap-x-2">
         <div className="flex-1">
           <Text
@@ -31,11 +31,10 @@ const CreatedItem: React.FC<Props> = ({ project }) => {
           />
         </div>
       </div>
-      <Space h="xs" />
       <div className="flex flex-row items-center">
         <ItemBadge status={project.status} />
       </div>
-    </article>
+    </Stack>
   )
 }
 

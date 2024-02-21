@@ -4,7 +4,7 @@ import { getProjectPageUrl } from "@/features/projects/utils/url"
 import Author from "@/features/users/dashboard/components/ProjectItem/Author"
 import ItemBadge from "@/features/users/dashboard/components/ProjectItem/ItemBadge"
 import JoinedAction from "@/features/users/dashboard/components/ProjectItem/JoinedAction"
-import { Space, Text } from "@mantine/core"
+import { Stack, Text } from "@mantine/core"
 import Link from "next/link"
 
 type Props = {
@@ -13,9 +13,8 @@ type Props = {
 
 const JoinedItem: React.FC<Props> = ({ project }) => {
   return (
-    <article className="w-full">
+    <Stack component="article" gap="xs">
       <Author id={project.authorId} name={project.author.userName} />
-      <Space h="xs" />
       <div className="flex flex-row flex-nowrap items-start gap-x-3 md:gap-x-6">
         <div className="flex-1">
           <Text
@@ -31,11 +30,10 @@ const JoinedItem: React.FC<Props> = ({ project }) => {
           <JoinedAction project={project} />
         </div>
       </div>
-      <Space h="xs" />
       <div className="flex flex-row items-center">
         <ItemBadge status={project.status} />
       </div>
-    </article>
+    </Stack>
   )
 }
 
