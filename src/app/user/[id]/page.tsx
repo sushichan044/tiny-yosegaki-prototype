@@ -1,7 +1,12 @@
 import type { Metadata } from "next"
 
-import { getUserForMetaData, getUserFromId } from "@/features/users/db"
-import { Container, Title } from "@mantine/core"
+import UserAvatar from "@/features/users/dashboard/components/UserAvatar"
+import UserTwitterLink from "@/features/users/dashboard/components/UserTwitterLink"
+import {
+  getUserForMetaData,
+  getUserWithoutTwitterId,
+} from "@/features/users/db"
+import { Center, Container,  Stack, Title } from "@mantine/core"
 import { notFound } from "next/navigation"
 
 type UserParams = { params: { id: string } }
@@ -28,7 +33,7 @@ export const generateMetadata = async ({
 
 export default async function Page({ params }: UserParams) {
   const { id } = params
-  const { data } = await getUserFromId(id)
+  const { data } = await getUserWithoutTwitterId(id)
   if (!data) {
     notFound()
   }
@@ -36,9 +41,17 @@ export default async function Page({ params }: UserParams) {
   return (
     <main className="flex-1 bg-white">
       <Container className="my-6 md:my-12" size="md">
-        <div>
-          <Title order={1}>{data.userName}</Title>
-        </div>
+        <Stack gap="lg">
+          <Center>
+            <Stack align="center" gap="xs">
+              <UserAvatar size="lg" userId={id} userName={data.userName} />
+              <Title order={1} size="h2">
+                {data.userName}
+              </Title>
+              <UserTwitterLink userId={id} userName={data.userName} />
+            </Stack>
+          </Center>
+        </Stack>
       </Container>
     </main>
   )

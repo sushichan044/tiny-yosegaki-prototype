@@ -2,7 +2,8 @@ import type { Metadata } from "next"
 
 import NewProjectForm from "@/features/projects/components/NewProjectForm"
 import { getUserFromSession } from "@/features/users/db"
-import { Container, Title } from "@mantine/core"
+import { Alert, Container, Stack, Title } from "@mantine/core"
+import { IconAlertCircle } from "@tabler/icons-react"
 import { redirect } from "next/navigation"
 
 export const metadata: Metadata = {
@@ -17,10 +18,13 @@ export default async function Page() {
 
   return (
     <Container size="sm">
-      <div>
+      <Stack gap="lg">
         <Title order={1}>新しい寄せ書き企画を立てる</Title>
-        <NewProjectForm user={data} />
-      </div>
+        <Alert color="nayuta" icon={<IconAlertCircle />} title="おわび">
+          開発版では新規企画の作成ができません。申し訳ありません。
+        </Alert>
+        <NewProjectForm isDisabledFeature user={data} />
+      </Stack>
     </Container>
   )
 }
