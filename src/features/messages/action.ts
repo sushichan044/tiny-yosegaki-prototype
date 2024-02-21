@@ -11,6 +11,7 @@ import {
   messages,
 } from "@/db/schema/messages"
 import { __deleteMessage } from "@/features/messages/db"
+import { isValidUUID } from "@/utils/uuid"
 import { revalidateTag } from "next/cache"
 
 const getUserMessageForPostForm = async ({
@@ -130,12 +131,16 @@ const deleteMessage = async ({
 }
 
 const getMessagesForProject = async (projectId: string) => {
+  const validation = isValidUUID(projectId)
+  if (!validation.success) {
+    return []
+  }
   const res = await db.query.messages.findMany({
     orderBy(fields, { desc }) {
       return desc(fields.createdAt)
     },
     where(fields, { eq }) {
-      return eq(fields.projectId, projectId)
+      return eq(fields.projectId, validation.data)
     },
   })
   return res

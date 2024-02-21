@@ -13,7 +13,12 @@ import {
   ProjectUpdateSchema,
   projects,
 } from "@/db/schema/projects"
-import { __deleteProject, insertProject } from "@/features/projects/db"
+import {
+  __deleteProject,
+  getProjectForMetaData,
+  insertProject,
+} from "@/features/projects/db"
+import { isValidUUID } from "@/utils/uuid"
 import { eq } from "drizzle-orm"
 import { revalidateTag } from "next/cache"
 
@@ -104,10 +109,17 @@ const getProjectsForCard = async (
   return projects
 }
 
-const getProjectForProjectPage = async (projectId: string) => {
+const getProjectAction = async (projectId: string) => {
+  const validation = isValidUUID(projectId)
+  if (!validation.success) {
+    return {
+      data: null,
+    }
+  }
+
   const project = await db.query.projects.findFirst({
     where: (project, { eq }) => {
-      return eq(project.projectId, projectId)
+      return eq(project.projectId, validation.data)
     },
     with: {
       author: {
@@ -119,6 +131,15 @@ const getProjectForProjectPage = async (projectId: string) => {
     },
   })
   return { data: project ?? null }
+}
+
+const getProjectForMetadataAction = async (projectId: string) => {
+  const validation = isValidUUID(projectId)
+  if (!validation.success) {
+    return { data: null }
+  }
+
+  return await getProjectForMetaData(validation.data)
 }
 
 const checkProjectIsAvailable = async (projectId: string) => {
@@ -193,7 +214,8 @@ export {
   checkProjectIsAvailable,
   createNewProject,
   deleteProject,
-  getProjectForProjectPage,
+  getProjectAction,
+  getProjectForMetadataAction,
   // getProjectForManagePage,
   getProjectsForCard,
   updateProject,

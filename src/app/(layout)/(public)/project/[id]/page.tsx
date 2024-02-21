@@ -1,8 +1,10 @@
 import type { Metadata } from "next"
 
 import ManyMessages from "@/features/messages/components/ManyMessages"
-import { getProjectForProjectPage } from "@/features/projects/action"
-import { getProjectForMetaData } from "@/features/projects/db"
+import {
+  getProjectAction,
+  getProjectForMetadataAction,
+} from "@/features/projects/action"
 import { getUserAvatarUrl } from "@/features/users/avatar/url"
 import UserTwitterLink from "@/features/users/dashboard/components/UserTwitterLink"
 import {
@@ -33,7 +35,7 @@ type ProjectParams = { params: { id: string } }
 export const generateMetadata = async ({
   params: { id },
 }: ProjectParams): Promise<Metadata> => {
-  const { data } = await getProjectForMetaData(id)
+  const { data } = await getProjectForMetadataAction(id)
 
   return {
     description: data?.projectDescription,
@@ -44,7 +46,7 @@ export const generateMetadata = async ({
 const SpaceUnderTitle = () => <Space h="xl" />
 
 export default async function Page({ params }: ProjectParams) {
-  const { data } = await getProjectForProjectPage(params.id)
+  const { data } = await getProjectAction(params.id)
   if (!data) {
     notFound()
   }

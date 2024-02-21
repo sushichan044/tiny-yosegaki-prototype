@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
 
+import {
+  getUserForMetaDataAction,
+  getUserWithoutTwitterIdAction,
+} from "@/features/users/action"
 import UserAvatar from "@/features/users/dashboard/components/UserAvatar"
 import UserTwitterLink from "@/features/users/dashboard/components/UserTwitterLink"
-import {
-  getUserForMetaData,
-  getUserWithoutTwitterId,
-} from "@/features/users/db"
 import { Center, Stack, Title } from "@mantine/core"
 import { notFound } from "next/navigation"
 
@@ -23,7 +23,7 @@ type UserParams = { params: { id: string } }
 export const generateMetadata = async ({
   params: { id },
 }: UserParams): Promise<Metadata> => {
-  const { data } = await getUserForMetaData(id)
+  const { data } = await getUserForMetaDataAction(id)
 
   return {
     description: `${data?.userName}さんのプロフィールです。`,
@@ -32,8 +32,8 @@ export const generateMetadata = async ({
 }
 
 export default async function Page({ params }: UserParams) {
-  const { id } = params
-  const { data } = await getUserWithoutTwitterId(id)
+  const { id: userId } = params
+  const { data } = await getUserWithoutTwitterIdAction(userId)
   if (!data) {
     notFound()
   }
@@ -42,11 +42,11 @@ export default async function Page({ params }: UserParams) {
     <Stack gap="lg">
       <Center>
         <Stack align="center" gap="xs">
-          <UserAvatar size="lg" userId={id} userName={data.userName} />
+          <UserAvatar size="lg" userId={userId} userName={data.userName} />
           <Title order={1} size="h2">
             {data.userName}
           </Title>
-          <UserTwitterLink userId={id} userName={data.userName} />
+          <UserTwitterLink userId={userId} userName={data.userName} />
         </Stack>
       </Center>
     </Stack>
