@@ -2,6 +2,10 @@ import type { NextRequest } from "next/server"
 
 import { updateSession } from "@/lib/supabase/middleware"
 
+/**
+ * This example is best practice for handling session data in Next.js middleware.
+ * @see https://github.com/vercel/nextjs-subscription-payments/blob/main/middleware.ts
+ */
 export async function middleware(request: NextRequest) {
   return await updateSession(request)
 }
