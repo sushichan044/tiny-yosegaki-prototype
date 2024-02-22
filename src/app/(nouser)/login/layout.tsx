@@ -6,7 +6,11 @@ export default function Layout({
   children: React.ReactNode
 }>) {
   return (
-    <Container className="my-6 md:my-12 flex-1" component="main" size="lg">
+    <Container
+      className="my-6 md:my-12 flex-1 bg-nakuru-50"
+      component="main"
+      size="lg"
+    >
       {children}
     </Container>
   )

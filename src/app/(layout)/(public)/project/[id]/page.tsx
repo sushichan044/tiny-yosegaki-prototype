@@ -42,7 +42,7 @@ export const generateMetadata = async ({
   }
 }
 
-const SpaceUnderTitle = () => <Space h="lg" />
+const SpaceUnderTitle = () => <Space h="xl" />
 
 const AboutProject = ({
   data,
@@ -122,12 +122,13 @@ export default async function Page({ params }: ProjectParams) {
 
   return (
     <>
-      <article>
-        <Container className="my-6 md:my-12" component="section" size="md">
+      <article className="my-6 md:my-12">
+        <Container component="section" size="md">
           <Title className="text-center" order={1} size="h2">
             {data.projectName}
           </Title>
         </Container>
+        <SpaceUnderTitle />
         <Container className="md:hidden" component="section" p={0} size="lg">
           <AboutProject data={data} isMobile />
         </Container>
@@ -143,7 +144,7 @@ export default async function Page({ params }: ProjectParams) {
               <Title order={2} size="md">
                 投稿されたメッセージ
               </Title>
-              <SpaceUnderTitle />
+              <Space h="xs" />
               <Suspense fallback={<Skeleton />}>
                 <ManyMessages projectId={params.id} />
               </Suspense>
