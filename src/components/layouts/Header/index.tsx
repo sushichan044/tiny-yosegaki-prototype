@@ -34,7 +34,7 @@ const Header: React.FC<Props> = ({ showUserHeader }) => {
             stroke={1}
             style={{ color: "var(--mantine-color-nakuru-5)" }}
           />
-          <Text component={Link} fw={600} href="/" lh={1}>
+          <Text component={Link} fw="bold" href="/" lh={1}>
             {SITE_NAME}
           </Text>
         </p>

@@ -57,7 +57,7 @@ const UserMenu: React.FC<Props> = ({
       </MenuTarget>
       <MenuDropdown>
         <MenuLabel>
-          <Text c="#2c2c2c" fw={600}>
+          <Text c="#2c2c2c" fw="bold">
             {userName}
           </Text>
           <Text size="sm">@{twitterId}</Text>
