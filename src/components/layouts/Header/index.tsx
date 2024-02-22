@@ -28,16 +28,16 @@ const Header: React.FC<Props> = ({ showUserHeader }) => {
         classNames={{ root: "py-2" }}
         size="lg"
       >
-        <p className={styles.titleWrapper()}>
+        <Link className={styles.titleWrapper()} href="/">
           <IconWriting
             size={32}
             stroke={1}
             style={{ color: "var(--mantine-color-nakuru-5)" }}
           />
-          <Text component={Link} fw="bold" href="/" lh={1}>
+          <Text fw="bold" lh={1}>
             {SITE_NAME}
           </Text>
-        </p>
+        </Link>
         {showUserHeader && (
           <Suspense
             fallback={
