@@ -1,3 +1,4 @@
+import type { CardProps } from "@mantine/core"
 import type { Metadata } from "next"
 
 import ManyMessages from "@/features/messages/components/ManyMessages"
@@ -12,9 +13,11 @@ import {
   ActionIcon,
   Avatar,
   Button,
+  Card,
+  CardSection,
   Container,
+  Divider,
   Group,
-  Paper,
   Skeleton,
   Space,
   Text,
@@ -96,22 +99,27 @@ const AboutProject = ({
   }
   isMobile: boolean
 }) => {
-  const paperProps = {
+  const cardProps = {
     className: isMobile ? "md:hidden" : "max-md:hidden",
-    p: "md",
+    pb: "md",
+    pt: "sm",
+    px: "md",
     radius: isMobile ? undefined : "md",
     withBorder: !isMobile,
-  }
+  } as const satisfies CardProps
 
   return (
-    <Paper {...paperProps}>
+    <Card {...cardProps}>
       <div className="flex items-center flex-row flex-nowrap justify-between">
-        <Title fw="bold" order={2} size="1rem">
+        <Title c="#2e2e2e" fw="bold" order={2} size="1rem">
           企画について
         </Title>
         <ManageIcon authorId={data.authorId} projectId={data.projectId} />
       </div>
-      <Space h="lg" />
+      <CardSection>
+        <Divider my="sm" />
+      </CardSection>
+      {/* <Space h="lg" /> */}
       <div className="flex flex-row flex-nowrap items-center gap-x-2">
         {/* <Link href={`/user/${data.authorId}`}> */}
         <Avatar
@@ -143,7 +151,7 @@ const AboutProject = ({
       >
         寄せ書きに参加する
       </Button>
-    </Paper>
+    </Card>
   )
 }
 

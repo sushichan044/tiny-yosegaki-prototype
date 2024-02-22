@@ -21,6 +21,7 @@ const UserTwitterLink: React.FC<Props> = async ({ userId, userName }) => {
         color="black"
         component={Link}
         href={`https://x.com/${twitterId}`}
+        size={20}
         target="_blank"
         variant="white"
       >
