@@ -2,6 +2,13 @@
 import "./src/env.mjs"
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  experimental: {
+    serverComponentsExternalPackages: [
+      "@supabase/ssr",
+      "@supabase/supabase-js",
+    ],
+  },
+}
 
 export default nextConfig

@@ -1,68 +1,9 @@
-import { env } from "@/env.mjs"
-import { type CookieOptions, createServerClient } from "@supabase/ssr"
-import { type NextRequest, NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
+
+import { updateSession } from "@/lib/supabase/middleware"
 
 export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  })
-
-  const supabase = createServerClient(
-    env.NEXT_PUBLIC_SUPABASE_URL,
-    env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-    {
-      cookies: {
-        get(name: string) {
-          return request.cookies.get(name)?.value
-        },
-        remove(name: string, options: CookieOptions) {
-          request.cookies.set({
-            name,
-            value: "",
-            ...options,
-          })
-          response = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
-          })
-          response.cookies.set({
-            name,
-            value: "",
-            ...options,
-          })
-        },
-        set(name: string, value: string, options: CookieOptions) {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          const { httpOnly, secure, ...rest } = options
-          request.cookies.set({
-            name,
-            value,
-            ...options,
-          })
-          response = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
-          })
-          response.cookies.set({
-            httpOnly: true,
-            name,
-            secure: true,
-            value,
-            ...rest,
-          })
-        },
-      },
-    },
-  )
-
-  // await supabase.auth.getSession()
-  await supabase.auth.getUser()
-
-  return response
+  return await updateSession(request)
 }
 
 export const config = {
