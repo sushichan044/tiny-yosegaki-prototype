@@ -11,6 +11,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import {
   Checkbox,
   RingProgress,
+  Select,
+  Space,
   Text,
   TextInput,
   Textarea,
@@ -147,6 +149,12 @@ const MessageFormInput: React.FC<Props> = ({ message, projectId, user }) => {
             />
           )}
         />
+        <Select
+          comboboxProps={{ size: "sm" }}
+          disabled
+          label="使用する字体(準備中)"
+        />
+        <Space h="md" />
         <RHFSubmitButton control={control}>
           メッセージを{isNewMessage ? "投稿" : "編集"}する
         </RHFSubmitButton>

@@ -45,7 +45,7 @@ export default async function Page({ params }: ProjectParams) {
   }
 
   return (
-    <Container size="md">
+    <Container size="sm">
       <Stack gap="lg">
         <Title order={1} size="h2">
           寄せ書きメッセージの投稿 / 編集
