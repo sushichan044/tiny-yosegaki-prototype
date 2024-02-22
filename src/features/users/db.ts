@@ -11,11 +11,14 @@ import {
 } from "@/db/schema/users"
 import { getCachedUserFromId } from "@/features/users/next"
 import { createActionClient } from "@/lib/supabase/client/action"
+import { createServerClient } from "@/lib/supabase/client/component"
+import { declareLet } from "@/utils/declareLet"
 import { eq } from "drizzle-orm"
 import { cookies } from "next/headers"
 import "server-only"
 
 type GetUserFromSupabaseFunction = (options?: {
+  client?: "action" | "component"
   useCache?: boolean
 }) => Promise<{ data: UserSelect | null }>
 type GetUserFromIdFunction = (
@@ -28,8 +31,16 @@ type GetUserFromIdFunction = (
  * @param userId - The ID of the user to retrieve.
  * @returns An object containing the retrieved user data, or null if the user is not found.
  */
-const getLatestUserFromSupabase: GetUserFromSupabaseFunction = async () => {
-  const supabase = createActionClient(cookies())
+const getLatestUserFromSupabase: GetUserFromSupabaseFunction = async (
+  options,
+) => {
+  const supabase = declareLet(() => {
+    if (options?.client === "component") {
+      return createServerClient(cookies())
+    }
+    return createActionClient(cookies())
+  })
+
   const {
     data: { user: SupaBaseUser },
     error,
@@ -57,7 +68,12 @@ const getLatestUserFromSupabase: GetUserFromSupabaseFunction = async () => {
  */
 const getUserFromSession: GetUserFromSupabaseFunction = async (options) => {
   const useCache = options?.useCache ?? false
-  const supabase = createActionClient(cookies())
+  const supabase = declareLet(() => {
+    if (options?.client === "component") {
+      return createServerClient(cookies())
+    }
+    return createActionClient(cookies())
+  })
   const {
     data: { session },
     error,

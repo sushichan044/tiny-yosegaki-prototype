@@ -22,6 +22,10 @@ export function createServerClient(cookieStore: ReturnType<typeof cookies>) {
         get(name: string) {
           return cookieStore.get(name)?.value
         },
+        set() {
+          console.warn("Do not set cookies from component")
+          return
+        },
       },
     },
   )
