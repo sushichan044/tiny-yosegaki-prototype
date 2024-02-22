@@ -21,7 +21,7 @@ export default function Home() {
           <Container component="section" size="lg">
             <Title
               c="nakuru.6"
-              className={NOTO_SANS_JP.className}
+              // className={NOTO_SANS_JP.className}
               order={1}
               size="h2"
             >
