@@ -1,4 +1,6 @@
 import { getMessagesForProject } from "@/features/messages/action"
+import MessageCard from "@/features/messages/components/MessageCard"
+import { SimpleGrid } from "@mantine/core"
 import React from "react"
 
 type Props = {
@@ -10,11 +12,18 @@ const ManyMessages: React.FC<Props> = async ({ projectId }) => {
   const messages = await getMessagesForProject(projectId)
 
   return (
-    <div>
-      <div className="h-[40vh]">a</div>
-      <div className="h-[40vh]">b</div>
-      <div className="h-[40vh]">c</div>
-    </div>
+    <SimpleGrid
+      cols={{
+        base: 1,
+        sm: 2,
+      }}
+      spacing="md"
+      verticalSpacing="md"
+    >
+      {messages.map((message) => (
+        <MessageCard key={message.messageId} message={message} />
+      ))}
+    </SimpleGrid>
   )
 }
 

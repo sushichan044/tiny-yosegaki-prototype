@@ -6,7 +6,7 @@ import {
 } from "@/features/users/action"
 import UserAvatar from "@/features/users/dashboard/components/UserAvatar"
 import UserTwitterLink from "@/features/users/dashboard/components/UserTwitterLink"
-import { Center, Stack, Title } from "@mantine/core"
+import { Center, Container, Stack, Title } from "@mantine/core"
 import { notFound } from "next/navigation"
 
 type UserParams = { params: { id: string } }
@@ -39,16 +39,18 @@ export default async function Page({ params }: UserParams) {
   }
 
   return (
-    <Stack gap="lg">
-      <Center>
-        <Stack align="center" gap="xs">
-          <UserAvatar size="lg" userId={userId} userName={data.userName} />
-          <Title order={1} size="h2">
-            {data.userName}
-          </Title>
-          <UserTwitterLink userId={userId} userName={data.userName} />
-        </Stack>
-      </Center>
-    </Stack>
+    <Container className="my-6 md:my-12" size="lg">
+      <Stack gap="lg">
+        <Center>
+          <Stack align="center" gap="xs">
+            <UserAvatar size="lg" userId={userId} userName={data.userName} />
+            <Title order={1} size="h2">
+              {data.userName}
+            </Title>
+            <UserTwitterLink userId={userId} userName={data.userName} />
+          </Stack>
+        </Center>
+      </Stack>
+    </Container>
   )
 }

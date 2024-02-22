@@ -10,9 +10,11 @@ export default function Layout() {
   return (
     <>
       <Header showUserHeader={false} />
-      <Container className="my-6 md:my-12 flex-1" component="main" size="lg">
-        <h1>404 not found</h1>
-      </Container>
+      <main className="flex-1 bg-nakuru-50">
+        <Container className="my-6 md:my-12" size="lg">
+          <h1>404 not found</h1>
+        </Container>
+      </main>
       <Footer />
     </>
   )
