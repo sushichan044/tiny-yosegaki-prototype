@@ -113,18 +113,18 @@ const AboutProject = ({
       </div>
       <Space h="lg" />
       <div className="flex flex-row flex-nowrap items-center gap-x-2">
-        <Link href={`/user/${data.authorId}`}>
-          <Avatar
-            alt="企画者のアバター"
-            size={36}
-            src={getUserAvatarUrl(data.authorId)}
-          />
-        </Link>
-        <Link href={`/user/${data.authorId}`}>
-          <Text c="#2c2c2c" fw="bold" size="sm">
-            {data.author.userName}
-          </Text>
-        </Link>
+        {/* <Link href={`/user/${data.authorId}`}> */}
+        <Avatar
+          alt="企画者のアバター"
+          size={36}
+          src={getUserAvatarUrl(data.authorId)}
+        />
+        {/* </Link> */}
+        {/* <Link href={`/user/${data.authorId}`}> */}
+        <Text c="#2c2c2c" fw="bold" size="sm">
+          {data.author.userName}
+        </Text>
+        {/* </Link> */}
         <UserTwitterLink
           userId={data.authorId}
           userName={data.author.userName}

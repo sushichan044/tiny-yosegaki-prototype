@@ -17,7 +17,7 @@ import {
   IconBook,
   IconPencil,
   IconSettings,
-  IconUserCircle,
+  // IconUserCircle,
 } from "@tabler/icons-react"
 import Link from "next/link"
 
@@ -63,14 +63,14 @@ const UserMenu: React.FC<Props> = ({
           <Text size="sm">@{twitterId}</Text>
           <Text size="xs">X(旧Twitter)でログイン中</Text>
         </MenuLabel>
-        <MenuDivider />
+        {/* <MenuDivider />
         <MenuItem
           component={Link}
           href={`/user/${userId}`}
           leftSection={<IconUserCircle stroke={ICON_STROKE_WIDTH} />}
         >
           プロフィール
-        </MenuItem>
+        </MenuItem> */}
         <MenuDivider />
         <MenuItem
           component={Link}

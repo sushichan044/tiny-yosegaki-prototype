@@ -2,7 +2,7 @@ import type { getMessagesForProject } from "@/features/messages/action"
 
 import UserAvatar from "@/features/users/dashboard/components/UserAvatar"
 import { Group, Paper, Space, Text } from "@mantine/core"
-import Link from "next/link"
+// import Link from "next/link"
 
 type Props = {
   message: Awaited<ReturnType<typeof getMessagesForProject>>[number]
@@ -18,9 +18,9 @@ const MessageCard: React.FC<Props> = ({ message }) => {
           userId={message.authorId}
         />
         <Text
-          component={Link}
+          // component={Link}
           fw="bold"
-          href={`/user/${message.authorId}`}
+          // href={`/user/${message.authorId}`}
           size="sm"
         >
           {message.displayName}
