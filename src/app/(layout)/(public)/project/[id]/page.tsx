@@ -7,7 +7,9 @@ import {
 } from "@/features/projects/action"
 import { getUserAvatarUrl } from "@/features/users/avatar/url"
 import UserTwitterLink from "@/features/users/dashboard/components/UserTwitterLink"
+import { getUserFromSession } from "@/features/users/db"
 import {
+  ActionIcon,
   Avatar,
   Button,
   Container,
@@ -17,7 +19,9 @@ import {
   Space,
   Text,
   Title,
+  Tooltip,
 } from "@mantine/core"
+import { IconPencil } from "@tabler/icons-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Suspense } from "react"
@@ -43,6 +47,32 @@ export const generateMetadata = async ({
 }
 
 const SpaceUnderTitle = () => <Space h="xl" />
+
+const ManageIcon = async ({
+  authorId,
+  projectId,
+}: {
+  authorId: string
+  projectId: string
+}) => {
+  const { data } = await getUserFromSession()
+  if (!data || data.userId !== authorId) {
+    return null
+  }
+  return (
+    <Tooltip label="企画を編集する" withArrow>
+      <ActionIcon
+        color="gray"
+        component={Link}
+        href={`/project/${projectId}/manage`}
+        size={20}
+        variant="subtle"
+      >
+        <IconPencil stroke={1.5} />
+      </ActionIcon>
+    </Tooltip>
+  )
+}
 
 const AboutProject = ({
   data,
@@ -75,9 +105,12 @@ const AboutProject = ({
 
   return (
     <Paper {...paperProps}>
-      <Title order={2} size="md">
-        企画について
-      </Title>
+      <div className="flex items-center flex-row flex-nowrap justify-between">
+        <Title fw="bold" order={2} size="1rem">
+          企画について
+        </Title>
+        <ManageIcon authorId={data.authorId} projectId={data.projectId} />
+      </div>
       <Space h="lg" />
       <div className="flex flex-row flex-nowrap items-center gap-x-2">
         <Link href={`/user/${data.authorId}`}>
@@ -98,7 +131,7 @@ const AboutProject = ({
         />
       </div>
       <Space h="xs" />
-      <Text c="gray" size="sm">
+      <Text c="gray" className="whitespace-pre-wrap" size="sm">
         {data.projectDescription}
       </Text>
       <Space h="lg" />
@@ -108,7 +141,7 @@ const AboutProject = ({
         fullWidth
         href={`/project/${data.projectId}/post`}
       >
-        企画に参加する
+        寄せ書きに参加する
       </Button>
     </Paper>
   )

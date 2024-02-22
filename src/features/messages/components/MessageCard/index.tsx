@@ -27,7 +27,7 @@ const MessageCard: React.FC<Props> = ({ message }) => {
         </Text>
       </Group>
       <Space h="lg" />
-      {message.content}
+      <Text className="whitespace-pre-wrap">{message.content}</Text>
     </Paper>
   )
 }
