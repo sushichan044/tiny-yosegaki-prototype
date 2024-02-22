@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default async function Page() {
   const { data } = await getLatestUserFromSupabase()
   if (!data) {
-    redirect("/login")
+    redirect("/auth/401")
   }
   const projects = await getCreatedProjectsOfUser(data.userId)
 

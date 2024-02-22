@@ -13,7 +13,7 @@ export default async function Page() {
   // do not use getUserFromSession because this is a critical page
   const { data } = await getLatestUserFromSupabase()
   if (!data) {
-    redirect("/login")
+    redirect("/auth/401")
   }
 
   return (

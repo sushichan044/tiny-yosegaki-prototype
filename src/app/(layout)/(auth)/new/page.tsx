@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 import NewProjectForm from "@/features/projects/components/NewProjectForm"
-import { getUserFromSession } from "@/features/users/db"
+import { getLatestUserFromSupabase } from "@/features/users/db"
 import { Alert, Container, Stack, Title } from "@mantine/core"
 import { IconAlertCircle } from "@tabler/icons-react"
 import { redirect } from "next/navigation"
@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-  const { data } = await getUserFromSession()
+  const { data } = await getLatestUserFromSupabase()
   if (!data) {
-    redirect("/login")
+    redirect("/auth/401")
   }
 
   return (
