@@ -39,11 +39,13 @@ const uploadNewUserIconFromTwitter = async (
       error: string
     }
 > => {
-  const icon = await fetch(
-    getProfileImageUrl(iconSrc, {
-      variant: "original",
-    }),
-  )
+  // FIXME
+  // const icon = await fetch(
+  //   getProfileImageUrl(iconSrc, {
+  //     variant: "original",
+  //   }),
+  // )
+  const icon = await fetch(iconSrc)
   const arrayBuffer = await icon.arrayBuffer()
 
   const iconPng = await convertToPng(arrayBuffer)
