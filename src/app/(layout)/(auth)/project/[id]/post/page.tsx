@@ -4,7 +4,7 @@ import MessageForm from "@/features/messages/components/MessageForm"
 import { checkProjectIsAvailable } from "@/features/projects/action"
 import { getProjectForMetaData } from "@/features/projects/db"
 import { getLatestUserFromSupabase } from "@/features/users/db"
-import { Container, Stack, Title } from "@mantine/core"
+import { Container, Stack, Text, Title } from "@mantine/core"
 import { notFound, redirect } from "next/navigation"
 
 type ProjectParams = { params: { id: string } }
@@ -50,13 +50,24 @@ export default async function Page({ params }: ProjectParams) {
         <Title order={1} size="h2">
           寄せ書きメッセージの投稿 / 編集
         </Title>
-        <MessageForm
-          projectId={projectId}
-          user={{
-            userId: userData.userId,
-            userName: userData.userName,
-          }}
-        />
+        <div>
+          <Title order={2} size="h3">
+            企画名
+          </Title>
+          <Text>{projectData.projectName}</Text>
+        </div>
+        <div>
+          <Title order={2} size="h3">
+            入力フォーム
+          </Title>
+          <MessageForm
+            projectId={projectId}
+            user={{
+              userId: userData.userId,
+              userName: userData.userName,
+            }}
+          />
+        </div>
       </Stack>
     </Container>
   )
