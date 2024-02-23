@@ -26,6 +26,7 @@ const getUserMessageForPostForm = async ({
       content: true,
       displayName: true,
       hasAttachment: true,
+      messageId: true,
     },
     where: (message, { and, eq }) => {
       return and(eq(message.projectId, projectId), eq(message.authorId, userId))
@@ -44,6 +45,9 @@ type InsertMessageFunction = (
 ) => Promise<
   | {
       error: null
+      result: {
+        insertedId: string
+      }[]
       success: true
     }
   | {
@@ -65,7 +69,11 @@ const upsertMessage: InsertMessageFunction = async (
 
   if (!isNew) {
     try {
-      await db.update(messages).set(res.data)
+      const result = await db
+        .update(messages)
+        .set(res.data)
+        .returning({ insertedId: messages.messageId })
+      return { error: null, result: result, success: true }
     } catch (err) {
       console.error("upsertMessage", err)
       return {
@@ -73,14 +81,18 @@ const upsertMessage: InsertMessageFunction = async (
         success: false,
       }
     }
-    return { error: null, success: true }
   }
 
   const dbRes = await db.transaction(async (tx) => {
+    let insRes
     try {
-      await tx.insert(messages).values(res.data).onConflictDoNothing({
-        target: messages.messageId,
-      })
+      insRes = await tx
+        .insert(messages)
+        .values(res.data)
+        .onConflictDoNothing({
+          target: messages.messageId,
+        })
+        .returning({ insertedId: messages.messageId })
     } catch (err) {
       console.error("upsertMessage", err)
       tx.rollback()
@@ -110,7 +122,7 @@ const upsertMessage: InsertMessageFunction = async (
         success: false as const,
       }
     }
-    return { error: null, success: true as const }
+    return { error: null, result: insRes, success: true as const }
   })
   revalidateTag(USER_JOINED_PROJECTS_CACHE_TAG)
   return dbRes

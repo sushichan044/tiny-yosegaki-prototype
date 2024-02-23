@@ -27,6 +27,7 @@ type Props = {
         content: string
         displayName: string
         hasAttachment: boolean
+        messageId: string
       }
     | undefined
   >
@@ -41,32 +42,37 @@ const MessageFormInput: React.FC<Props> = ({ message, projectId, user }) => {
   const currentMessage = use(message)
   const isNewMessage = currentMessage === undefined
 
-  const { control, handleSubmit } = useForm<MessageInsert>({
+  const { control, handleSubmit, setValue } = useForm<MessageInsert>({
     defaultValues: {
       authorId: user.userId,
       content: currentMessage?.content ?? "",
       displayName: currentMessage?.displayName ?? user.userName,
       hasAttachment: currentMessage?.hasAttachment ?? false,
+      messageId: currentMessage?.messageId ?? undefined,
       projectId: projectId,
     },
     mode: "onTouched",
     resolver: zodResolver(MessageInsertSchema),
   })
 
+
   const onSubmit: SubmitHandler<MessageInsert> = async (data) => {
-    const { error, success } = await upsertMessage(data, {
+    console.debug(data)
+    const result = await upsertMessage(data, {
       isNew: currentMessage === undefined,
     })
-    if (success) {
+    if (result.success) {
       notifications.show({
         color: "nakuru",
         message: "メッセージを投稿・編集しました。",
         title: "成功",
       })
+      const inserted = result.result?.[0].insertedId
+      setValue("messageId", inserted)
     } else {
       notifications.show({
         color: "nayuta",
-        message: error,
+        message: result.error,
         title: "メッセージの投稿・編集に失敗しました。",
       })
     }
