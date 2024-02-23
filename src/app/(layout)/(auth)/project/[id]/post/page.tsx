@@ -31,7 +31,7 @@ export default async function Page({ params }: ProjectParams) {
   const projectId = params.id
   const { data: userData } = await getLatestUserFromSupabase()
   if (!userData) {
-    return redirect(`/login?next=/project/${projectId}/post`)
+    return redirect("/auth/401")
   }
 
   const { data: projectData, exists } = await checkProjectIsAvailable(projectId)
