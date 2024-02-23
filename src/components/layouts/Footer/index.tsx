@@ -1,4 +1,4 @@
-import { Container } from "@mantine/core"
+import { Anchor, Container } from "@mantine/core"
 import { tv } from "tailwind-variants"
 
 const styles = tv({
@@ -11,7 +11,9 @@ const Footer = () => {
   return (
     <footer className={styles.wrapper()}>
       <Container classNames={{ root: "py-4" }} size="lg">
-        Footer
+        <Anchor c="gray" href="/contact">
+          お問い合わせ
+        </Anchor>
       </Container>
     </footer>
   )

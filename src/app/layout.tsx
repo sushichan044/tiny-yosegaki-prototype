@@ -4,6 +4,7 @@ import Favicons from "@/components/layouts/meta/Favicons"
 // css
 import { SITE_NAME } from "@/consts"
 import { env } from "@/env.mjs"
+import { FONT_VARIABLE_CLASS } from "@/lib/font"
 import "@/styles/globals.scss"
 // import { FONT_VARIABLE_CLASS } from "@/lib/font"
 import { theme } from "@/theme"
@@ -40,7 +41,7 @@ export default function RootLayout({
         <ColorSchemeScript />
         <Favicons />
       </head>
-      <body>
+      <body className={FONT_VARIABLE_CLASS}>
         <NextTopLoader color="#37a0d1" height={2} showSpinner={false} />
         <MantineProvider theme={theme}>
           <ModalsProvider>

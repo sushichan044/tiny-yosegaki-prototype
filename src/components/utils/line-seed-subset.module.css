@@ -1,0 +1,13 @@
+.root {
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  font-family:
+    var(--font-line-seed-jp-subset),
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    Meiryo,
+    sans-serif,
+    "Segoe UI Emoji";
+}

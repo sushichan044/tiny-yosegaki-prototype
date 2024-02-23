@@ -40,7 +40,14 @@ const NOTO_SANS_JP = Noto_Sans_JP({
   weight: ["300", "500", "700"],
 })
 
-const fonts = [NOTO_SANS_JP]
+const LINE_SEED_JP_SUBSET = localFont({
+  adjustFontFallback: false,
+  display: "swap",
+  src: "../assets/line-seed-jp-yosegaki.woff2",
+  variable: "--font-line-seed-jp-subset",
+})
+
+const fonts = [LINE_SEED_JP_SUBSET]
 const FONT_VARIABLE_CLASS = fonts.map((font) => font.variable).join(" ")
 
-export { FONT_VARIABLE_CLASS, LINE_SEED_JP, NOTO_SANS_JP }
+export { FONT_VARIABLE_CLASS, LINE_SEED_JP, LINE_SEED_JP_SUBSET, NOTO_SANS_JP }
