@@ -12,6 +12,7 @@ import {
 } from "@/db/schema/messages"
 import { __deleteMessage } from "@/features/messages/db"
 import { isValidUUID } from "@/utils/uuid"
+import { eq } from "drizzle-orm"
 import { revalidateTag } from "next/cache"
 
 const getUserMessageForPostForm = async ({
@@ -68,10 +69,18 @@ const upsertMessage: InsertMessageFunction = async (
   }
 
   if (!isNew) {
+    const { messageId, ...rest } = res.data
+    if (!messageId) {
+      return {
+        error: "メッセージIDが不正です。",
+        success: false,
+      }
+    }
     try {
       const result = await db
         .update(messages)
-        .set(res.data)
+        .set(rest)
+        .where(eq(messages.messageId, messageId))
         .returning({ insertedId: messages.messageId })
       return { error: null, result: result, success: true }
     } catch (err) {
