@@ -3,10 +3,16 @@ import { getLatestUserFromSupabase } from "@/features/users/db"
 import { Center, Stack, Title } from "@mantine/core"
 import { redirect } from "next/navigation"
 
-const LoginCheck = async () => {
+type Props = {
+  next?: string | undefined
+}
+
+const LoginCheck = async ({ next }: Props) => {
+  const redirectTo = next ?? "/project"
+
   const { data } = await getLatestUserFromSupabase({ client: "component" })
   if (data) {
-    redirect("/project")
+    redirect(redirectTo)
   }
 
   return (
@@ -16,7 +22,7 @@ const LoginCheck = async () => {
           ログイン
         </Title>
       </Center>
-      <SignIn redirectTo="/project" />
+      <SignIn redirectTo={redirectTo} />
     </Stack>
   )
 }
