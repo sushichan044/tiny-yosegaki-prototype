@@ -9,8 +9,6 @@ export const ALL_OPENED_PROJECTS_CACHE_TAG = "all-opened-projects"
 
 export const revalidateProjectWithId = (projectId: string) => {
   revalidatePath(`/project/${projectId}`)
-  revalidatePath(`/project/${projectId}/post`)
-  revalidatePath(`/project/${projectId}/edit`)
 }
 
 export const revalidateAll = () => revalidatePath("/", "layout")
