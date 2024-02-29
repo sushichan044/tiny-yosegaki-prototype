@@ -89,9 +89,9 @@ const getProjectsForCard = async (
     },
     limit: options?.limit,
     offset: options?.offset,
-    where: (project, { eq }) => {
-      return eq(project.status, "open")
-    },
+    // where: (project, { eq }) => {
+    //   return eq(project.status, "open")
+    // },
     with: {
       author: {
         columns: {
