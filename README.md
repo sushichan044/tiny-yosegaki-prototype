@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# ちいさなよせがき(仮)
 
-First, run the development server:
+このリポジトリは、2024年2月1日から23日にかけて制作した、
+「ちいさなよせがき」というWebアプリのプロトタイプです。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<https://yellbox.vercel.app>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+得られたフィードバックをもとに、2024年7月末までのリリースを目指して開発を続けています。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 使用した技術
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Next.js App Router
+  - やや未成熟な面がありますが、プロトタイプということで思い切って採用しました。
+  - Server Actionを多用する構成にしましたが、<br />結果的に嬉しい面と苦しい面が両方見えてよかったです。
+  - 主にキャッシュやランタイムの制約の問題から本リリースでは採用を見送ります。
+- React Hook Forms
+  - いつものやつです
+- Tailwind CSS
+  - これはいつも通り
+  - [tailwind-variants](https://github.com/nextui-org/tailwind-variants)最高
+- Mantine UI
+  - 恥ずかしながら今までUIコンポーネントライブラリを使わず気合の実装をしていましたが、今回初めて使ってみました。
+  - 全体的に使用感が良く、カラーパレットのカスタマイズがかなり簡単で良かったです。
+  - 一方でレイアウト用コンポーネントについては若干思っていたのと違うところがありました。レイアウトはやっぱりTailwind使ったほうが速いですね。
+- Drizzle ORM
+  - 最高です一生使います
+- Supabase
+  - 認証、DB、オブジェクトストレージとして採用しました。
+  - やや苦しい面が見えたので、本リリースでは大幅な構成変更が予定されています。
+- Vercel
+  - デプロイ先として採用しました。
+  - 本リリースでは、Cloudflare Pages を使いたいです。
