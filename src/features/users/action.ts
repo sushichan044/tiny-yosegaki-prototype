@@ -86,7 +86,7 @@ const uploadUserAvatar = async ({
     return { data: null, error: res.error.message }
   }
   revalidatePath("/settings", "layout")
-  return { data: res.data.path, error: null }
+  return { data: res?.data.path, error: null }
 }
 
 const signOutUser = async (options?: {
