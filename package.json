@@ -71,7 +71,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.50.1",
     "server-only": "^0.0.1",
-    "sharp": "^0.33.2",
+    "sharp": "0.32.6",
     "tailwind-merge": "^2.2.1",
     "tailwind-variants": "^0.2.0",
     "twitter-text": "^3.1.0",
