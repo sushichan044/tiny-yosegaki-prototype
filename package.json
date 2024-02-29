@@ -45,7 +45,6 @@
     "@mantine/modals": "^7.5.3",
     "@mantine/notifications": "^7.5.3",
     "@mantine/nprogress": "^7.5.3",
-    "@radix-ui/react-slot": "^1.0.2",
     "@supabase/ssr": "^0.1.0",
     "@supabase/storage-js": "^2.5.5",
     "@supabase/supabase-js": "^2.39.7",
@@ -59,7 +58,6 @@
     "drizzle-zod": "^0.5.1",
     "embla-carousel-react": "^8.0.0-rc23",
     "framer-motion": "^11.0.5",
-    "hono": "^3.12.12",
     "next": "14.1.0",
     "nextjs-toploader": "^1.6.6",
     "pg": "^8.11.3",
@@ -75,8 +73,6 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.9.0",
-    "@cloudflare/workers-types": "^4.20240208.0",
     "@eslint/eslintrc": "^3.0.1",
     "@eslint/js": "^8.56.0",
     "@testing-library/jest-dom": "^6.4.2",
@@ -100,7 +96,6 @@
     "eslint-config-next": "14.1.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-next-on-pages": "^1.9.0",
     "eslint-plugin-perfectionist": "^2.5.0",
     "eslint-plugin-tailwindcss": "^3.14.2",
     "globals": "^14.0.0",
