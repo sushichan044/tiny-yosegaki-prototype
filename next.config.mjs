@@ -6,6 +6,7 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: [
       "@supabase/ssr",
+      "@supabase/storage-js",
       "@supabase/supabase-js",
     ],
   },
