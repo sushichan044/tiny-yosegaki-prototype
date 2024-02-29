@@ -1,6 +1,7 @@
 import type { CardProps } from "@mantine/core"
 import type { Metadata } from "next"
 
+import LinkButton from "@/components/ui/LinkButton"
 import ManyMessages from "@/features/messages/components/ManyMessages"
 import {
   getProjectAction,
@@ -143,14 +144,25 @@ const AboutProject = ({
         {data.projectDescription}
       </Text>
       <Space h="lg" />
-      <Button
-        color="nakuru"
-        component={Link}
-        fullWidth
-        href={`/project/${data.projectId}/post`}
-      >
-        寄せ書きに参加する
-      </Button>
+      {data.status === "open" ? (
+        <LinkButton href={`/project/${data.projectId}/post`}>
+          寄せ書きに参加する
+        </LinkButton>
+      ) : (
+        <Tooltip
+          label={
+            data.status === "closed"
+              ? "この企画は受付が終了しています。"
+              : "この企画まだ準備中です。"
+          }
+          position="bottom"
+          withArrow
+        >
+          <Button color="nakuru" disabled>
+            {data.status === "closed" ? "受付終了" : "準備中"}
+          </Button>
+        </Tooltip>
+      )}
     </Card>
   )
 }

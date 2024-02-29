@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 
+import LinkButton from "@/components/ui/LinkButton"
 import MessageForm from "@/features/messages/components/MessageForm"
 import { checkProjectIsAvailable } from "@/features/projects/action"
 import { getProjectForMetaData } from "@/features/projects/db"
 import { getLatestUserFromSupabase } from "@/features/users/db"
-import { Container, Stack, Text, Title } from "@mantine/core"
+import { Alert, Center, Container, Stack, Text, Title } from "@mantine/core"
+import { IconAlertTriangle } from "@tabler/icons-react"
 import { notFound, redirect } from "next/navigation"
 
 type ProjectParams = { params: { id: string } }
@@ -39,9 +41,36 @@ export default async function Page({ params }: ProjectParams) {
     notFound()
   }
   if (projectData.status !== "open") {
-    // navigate to project not available page
-    console.debug("project not available")
-    notFound()
+    return (
+      <Container size="sm">
+        <Stack gap="lg">
+          <Title order={1} size="h2">
+            寄せ書きメッセージの投稿 / 編集
+          </Title>
+          <div>
+            <Title order={2} size="h3">
+              企画名
+            </Title>
+            <Text>{projectData.projectName}</Text>
+          </div>
+          <div>
+            <Alert
+              color="nayuta"
+              icon={<IconAlertTriangle />}
+              title="受付終了"
+              variant="light"
+            >
+              この企画は参加受付が終了しています。
+            </Alert>
+          </div>
+          <Center>
+            <LinkButton href={`/project/${projectId}`}>
+              企画ページへ戻る
+            </LinkButton>
+          </Center>
+        </Stack>
+      </Container>
+    )
   }
 
   return (
